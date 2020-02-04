@@ -12,7 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 public class MainCreateProjectController {
-	private Main main;
+	private Main main = Main.getIstance();
 
 	ObservableList<String> DriveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 

@@ -6,7 +6,7 @@ import WorkineThor.Main;
 import javafx.fxml.FXML;
 
 public class MainBackHomeController {
-	private Main main;
+	private Main main = Main.getIstance();
 
 	@FXML
 	private void goHome() throws IOException {

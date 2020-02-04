@@ -9,51 +9,61 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	private static Stage primaryStage;
-	public static BorderPane mainLayout;
-
+	//singleton instance
+	private static Main instance = null;
+	
+	private Stage primaryStage;
+	private BorderPane mainLayout;
+	
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage primaryStage) throws IOException { 
+		
+		//active Main instance(thread)
+		instance = this;
+		
+		//setup primaryStage
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("WorkineThor");
+		
 		showMainView();
-		showMainItems();
-		showHomeScene();
-
-	}
-
-	public static void showMainItems() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/MainCreateProjectItems.fxml"));
-		BorderPane mainItems = loader.load();
-		mainLayout.setCenter(mainItems);
-
-	}
-
-	public void showMainView() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/MainView.fxml"));
-		mainLayout = loader.load();
-
-	}
-
-	public static void showHomeScene() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("homePage/HomePage.fxml"));
-		BorderPane homePage = loader.load();
-		mainLayout.setCenter(homePage);
+		
+		//add scene mainLayout to window
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		showHomeScene();
+		
+		System.out.println(this);
+	}
+	
+	//load navigation bar
+	public void showMainView() throws IOException {
+		mainLayout = FXMLLoader.load(Main.class.getResource("view/MainView.fxml"));
 	}
 
-	public static void showCreateProjectNext() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/CreateProjectNext.fxml"));
-		BorderPane mainItems = loader.load();
-		mainLayout.setCenter(mainItems);
+	//load create project scene
+	public void showMainItems() throws IOException {
+		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml")));
+	}
+	
+	//load home page scene
+	public void showHomeScene() throws IOException {
+		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("homePage/HomePage.fxml")));
 	}
 
+	//load create project next step
+	public void showCreateProjectNext() throws IOException {
+		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/CreateProjectNext.fxml")));
+	}
+
+	//get singleton instance
+	public static Main getIstance() {
+		if(instance == null)
+			instance = new Main();
+		return instance;
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

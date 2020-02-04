@@ -8,7 +8,7 @@
    <top>
       <ToolBar prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#goHome" prefHeight="15.0" prefWidth="57.0" text="Home" />
+          <Button mnemonicParsing="false" onAction="#goHome" prefHeight="31.0" prefWidth="65.0" text="Home" />
         </items>
       </ToolBar>
    </top>
