@@ -1,0 +1,5 @@
+Functional requirements
+1. The system shall allow all members of the group to read the files uploaded to the job folder
+2. The system shall send an e-mail notification 10 min before the scheduled event
+3. The system shall allow the modification of the uploaded files only to those who own the writing
+rights

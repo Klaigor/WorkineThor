@@ -1,0 +1,4 @@
+User Stories
+1. As a user, i would like to have a research method to find a group, so that i can help out.
+2. As a group member, i would like to have a whiteboard to write/draw in real-time, so that i can quickly expose my ideas.
+3. As a group member, i would like to send voice messages and media to my group, so that i can easily update them on my work.

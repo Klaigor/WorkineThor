@@ -1,0 +1,8 @@
+1. As a member of working group, I want to share files from my device or the cloud with my working group,
+   So that we can work together on the same file.
+
+2. As a member of a working group, I want to be able to have online meetings with my working group,
+   So that we can discuss the developing of the project.
+
+3. As a leader of a working group, I want to manage people capabilities inside the working group online space,
+   So that every one can do only want I want to do and see only what I want them to see.

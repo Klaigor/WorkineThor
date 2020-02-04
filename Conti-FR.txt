@@ -1,0 +1,6 @@
+1. The system shall provide a workflow monitorig method.
+
+2. The system shall allow group chat inside the working groups.
+
+3. The system shall provide the possibility for a user to create a new project with an associated
+   working group. 

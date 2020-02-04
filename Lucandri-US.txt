@@ -1,0 +1,4 @@
+User Stories
+1. As a admin, I want to create a new group, so I can share my work with other people
+2. As a user, I want to upload my file in to the working folder, so the other user can read it
+3. As a new user, I want a tutorial to discover the features, so I can easily use the app

@@ -1,0 +1,4 @@
+Functional Requirements
+1. The system shall provide a detailed request form that must be filled out by every user that wants to join a group.
+2. The system shall provide a real-time whiteboard with different functionalities.
+3. The system shall provide the group admin with functions that can modify a member read/write rights in the group.
