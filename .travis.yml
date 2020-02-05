@@ -4,10 +4,9 @@ addons:
  sonarcloud:
   organization: valeriolucandri
   token:
-   secure: 5fccba4800dd41a17edff58c61ae06939b7225d8
+   secure: 967d67467f3b336b9ab7d0181916f59ecefafaee
 
 jdk:
-  - jdk1.8.0_241
   - openjdk8
 
 script: 
