@@ -7,8 +7,8 @@ addons:
    secure: 5fccba4800dd41a17edff58c61ae06939b7225d8
 
 jdk:
+  - jdk1.8.0_241
   - openjdk8
-
 
 script: 
   - ant build
