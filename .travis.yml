@@ -4,17 +4,9 @@ addons:
   apt:
     packages:
       - ant
-
-addons:
- sonarcloud:
-  organization: valeriolucandri
-  token:
-   secure: 3e0e67545eda443e87fb555f42aae6b0587d772a
-
 jdk:
-  - openjdk8
+  - openjdk13
 
 script: 
   - ant build
-  - sonar-scanner
  
