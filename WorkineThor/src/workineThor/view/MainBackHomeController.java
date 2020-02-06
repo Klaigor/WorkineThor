@@ -12,5 +12,10 @@ public class MainBackHomeController {
 	private void goHome() throws IOException {
 		main.showHomeScene();
 	}
+	
+	@FXML
+	private void goCreate() throws IOException {
+		main.showMainItems();
+	}
 
 }
