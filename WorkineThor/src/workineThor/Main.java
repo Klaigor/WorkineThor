@@ -10,45 +10,58 @@ import javafx.stage.Stage;
 //import mega.MegaHandler;
 
 public class Main extends Application {
-	//singleton instance
+
+	// singleton instance of main window
 	private static Main instance = null;
 	
+	/**
+	 * NavBar that is always over the top of the view
+	 */
 	private BorderPane mainLayout;
 	private Stage primaryStage;
-	
+
 	@Override
-	public void start(Stage primaryStage) throws IOException { 
-		
-		//active Main instance(thread)
+	public void start(Stage primaryStage) throws IOException {
+
+		// active Main instance
 		instance = this;
-		
-		//setup primaryStage
+
+		// setup primaryStage
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("WorkineThor");
-		
-		//loads main view
-		mainLayout = FXMLLoader.load(Main.class.getResource("view/MainView.fxml"));
-		
-		//add scene mainLayout to window
+
+		// loads NavBar view
+		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
+
+		// add scene mainLayout to window
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		//load home screen(empty page)
-		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/HomePage.fxml")));
+
+		// load login screen
+		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/LoginView.fxml")));
 	}
 
-	//get singleton instance
+	/**
+	 * get singleton instance (dichiarare costruttore come private)
+	 * 
+	 * @return = istance of the main
+	 */
 	public static Main getIstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new Main();
 		return instance;
 	}
-	
-	public void setMainLayout(BorderPane layout) {
+
+	/**
+	 * method that sets next layout to be shown.
+	 * 
+	 * @param layout = next view to show.
+	 */
+	public void setLayoutCenter(BorderPane layout) {
 		mainLayout.setCenter(layout);
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

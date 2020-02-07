@@ -1,3 +1,6 @@
+/**
+ * Controller of the Create project first view.
+ */
 package workineThor.view;
 
 import java.io.IOException;
@@ -33,14 +36,18 @@ public class MainCreateProjectController {
 	private Button Next;
 
 	private static String projectName;
+
+	//private static Boolean Drive = true;
 	
 	@FXML
 	private void DriveBoxYes() {
 		if (DriveBox.isSelected()) {
 			DriveSelector.setDisable(false);
-			;
+		//	Drive = false;
+			
 		} else {
 			DriveSelector.setDisable(true);
+		//	Drive = true;
 		}
 	}
 
@@ -66,10 +73,15 @@ public class MainCreateProjectController {
 
 	@FXML
 	private void goNext() throws IOException {
-		main.setMainLayout(mainLayout);
+		main.setLayoutCenter(mainLayout);
 	}
 
 	public static String getProjectName() {
 		return projectName;
 	}
-}
+
+	//public static Boolean getDrive() {
+	//	return Drive;
+
+	}
+//}

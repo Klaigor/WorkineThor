@@ -1,5 +1,5 @@
 Command line:
-"travis encrypt a2da0a1f14fd686fbd86586ed102edd3c3ff25c7"
+"travis encrypt 3e0e67545eda443e87fb555f42aae6b0587d772a"
 
 
    ________                                 __
@@ -25,20 +25,18 @@ Command line:
 
      There is absolutely no warranty on any results obtained from TRAVIS.
 
-  #  Running on pop-os at Fri Feb  7 16:50:57 2020 (PID 9249)
-  #  Running in /home/valerio/ISPW/WorkineThor.git/trunk
+  #  Running on pop-os at Thu Feb  6 13:24:52 2020 (PID 11495)
+  #  Running in /home/valerio/Progetto ISPW/WorkineThor.git/trunk
   #  Code version: Jan 01 2019,  Compiled at Feb 12 2019, 01:11:32,  Compiler "8.2.0", GCC 8.2.0
   #  Target platform: Linux,  Compile flags: DEBUG_ARRAYS 
   #  Machine: int=4b, long=8b, addr=8b, 0xA0B0C0D0=D0,C0,B0,A0.
-  #  Home: /root,  Executable: /usr/bin/travis
+  #  Home: /home/valerio,  Executable: /usr/bin/travis
   #  Input from terminal,  Output to terminal
 
  >>> Please use a color scheme with dark background or specify "-nocolor"! <<<
 
-    No configuration file found.
-    Writing default configuration to /root/.travis.conf ...
+    Loading configuration from /home/valerio/.travis.conf ...
 
-[Renaming existing File input.txt to #2#input.txt ...OK.]
 Unknown parameter: "encrypt".
 
     List of supported command line options:
