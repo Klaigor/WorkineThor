@@ -26,7 +26,7 @@ public class Main extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("WorkineThor");
 		
-		//load main view
+		//loads main view
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/MainView.fxml"));
 		
 		//add scene mainLayout to window
