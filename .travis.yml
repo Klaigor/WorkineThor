@@ -1,12 +1,13 @@
 dist: xenial
 language: java
+install: ant deps
+jdk:
+  - oraclejdk8
+  - openjdk8
 addons:
   apt:
     packages:
       - ant
-jdk:
-  - openjdk13
-
 script: 
   - ant build
  
