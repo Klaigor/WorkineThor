@@ -11,9 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class MainCreateProjectController {
 	private Main main = Main.getIstance();
+	private BorderPane mainLayout = null;
 
 	ObservableList<String> DriveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
@@ -30,6 +32,8 @@ public class MainCreateProjectController {
 	@FXML
 	private Button Next;
 
+	private static String projectName;
+	
 	@FXML
 	private void DriveBoxYes() {
 		if (DriveBox.isSelected()) {
@@ -42,7 +46,7 @@ public class MainCreateProjectController {
 
 	@FXML
 	private void nextYes() {
-		String projectName = ProjectNameField.getText();
+		projectName = ProjectNameField.getText();
 		boolean isDisabled = (projectName.isEmpty() || projectName.trim().isEmpty());
 		Next.setDisable(isDisabled);
 	}
@@ -53,12 +57,19 @@ public class MainCreateProjectController {
 		DriveSelector.setDisable(true);
 		DriveSelector.setItems(DriveSelectorList);
 		DriveSelector.setValue("mmm");
-
+		try {
+			mainLayout = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
 	private void goNext() throws IOException {
-		main.showCreateProjectNext();
+		main.setMainLayout(mainLayout);
 	}
 
+	public static String getProjectName() {
+		return projectName;
+	}
 }

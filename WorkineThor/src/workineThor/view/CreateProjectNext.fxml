@@ -14,7 +14,7 @@
       <ListView fx:id="filelist" editable="true" prefHeight="200.0" prefWidth="581.0" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
-      <Label text="Label" BorderPane.alignment="CENTER">
+      <Label fx:id="title" text="Label" BorderPane.alignment="CENTER">
          <font>
             <Font size="25.0" />
          </font>

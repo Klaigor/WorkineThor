@@ -1,18 +1,18 @@
 package workineThor.view;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 
-import workineThor.Main;
+//import workineThor.Main;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 
 public class CreateProjectNextController {
-	private Main main = Main.getIstance();
+	//private Main main = Main.getIstance();
+	private String projectName = MainCreateProjectController.getProjectName();
 	
 	//array of file paths
 	private ArrayList<String> paths = new ArrayList<String>();
@@ -21,7 +21,13 @@ public class CreateProjectNextController {
 	private Button addfile;
 	@FXML
 	private ListView<String> filelist = new ListView<String>();
+	@FXML
+	private Label title;
 	
+	@FXML
+	private void initialize() {
+		title.setText(projectName);
+	}
 	//add files to project function
 	@FXML
 	private void addFileFunc() {
