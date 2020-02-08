@@ -13,7 +13,7 @@
         <pathelement location="../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_2.3.0.201603030809.jar"/>
     </path>
     <path id="JSON">
-	<pathelement location="ExternalJar/java-json.jar">
+	<pathelement location="ExternalJar/java-json.jar"/>
     </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
