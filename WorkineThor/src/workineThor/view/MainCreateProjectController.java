@@ -64,15 +64,16 @@ public class MainCreateProjectController {
 		DriveSelector.setDisable(true);
 		DriveSelector.setItems(DriveSelectorList);
 		DriveSelector.setValue("mmm");
+		
+	}
+
+	@FXML
+	private void goNext() throws IOException {
 		try {
 			mainLayout = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@FXML
-	private void goNext() throws IOException {
 		main.setLayoutCenter(mainLayout);
 	}
 

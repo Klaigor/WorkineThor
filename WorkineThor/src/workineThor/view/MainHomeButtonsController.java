@@ -21,7 +21,7 @@ public class MainHomeButtonsController {
 	}
 	@FXML
 	private void goCreate() throws IOException {
-		main.setMainLayout(mainLayout);
+		main.setLayoutCenter(mainLayout);
 	}
 
 }

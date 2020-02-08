@@ -3,12 +3,9 @@ package workineThor.view;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import workineThor.Main;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
 
 import javafx.fxml.FXMLLoader;

@@ -30,6 +30,7 @@ public class CreateProjectNextController {
 	@FXML
 	private void initialize() {
 		title.setText(projectName);
+		System.out.println("stronzo");
 	}
 
 	// add files to project function
