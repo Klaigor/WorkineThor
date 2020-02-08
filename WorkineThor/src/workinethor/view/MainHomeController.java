@@ -2,7 +2,7 @@
  * Home controler, Home should be the main page shown sfter login, 
  * containing the various bounderies for the possible use cases
  */
-package workineThor.view;
+package workinethor.view;
 /*
 import java.io.IOException;
 

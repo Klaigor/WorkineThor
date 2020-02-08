@@ -1,11 +1,11 @@
-package workineThor.view;
+package workinethor.view;
 
 import java.io.IOException;
 
-import workineThor.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
+import workinethor.Main;
 import javafx.scene.control.MenuButton;
 
 public class MainNavBarController {

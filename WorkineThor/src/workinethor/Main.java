@@ -1,4 +1,4 @@
-package workineThor;
+package workinethor;
 
 import java.io.IOException;
 

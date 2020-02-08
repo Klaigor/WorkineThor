@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workineThor.view.MainCreateProjectController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workinethor.view.MainCreateProjectController">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="427.0" text="Create Project" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>

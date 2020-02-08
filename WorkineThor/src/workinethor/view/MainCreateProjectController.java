@@ -1,11 +1,10 @@
 /**
  * Controller of the Create project first view.
  */
-package workineThor.view;
+package workinethor.view;
 
 import java.io.IOException;
 
-import workineThor.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,9 +14,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import workinethor.Main;
 
 public class MainCreateProjectController {
 	private Main main = Main.getIstance();
+	private BorderPane mainLayout = null;
 
 	ObservableList<String> DriveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
@@ -68,9 +69,11 @@ public class MainCreateProjectController {
 
 	@FXML
 	private void goNext() throws IOException {
-		BorderPane mainLayout = null;
+		try {
 			mainLayout = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
-		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		main.setLayoutCenter(mainLayout);
 	}
 
