@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-//import mega.MegaHandler;
 
 public class Main extends Application {
 
@@ -18,17 +17,17 @@ public class Main extends Application {
 	 * NavBar that is always over the top of the view
 	 */
 	private BorderPane mainLayout;
-	private Stage primaryStage;
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
+	public void start(Stage Stage) throws IOException {
 
 		// active Main instance
 		instance = this;
 
+		Stage primaryStage;
 		// setup primaryStage
-		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("WorkineThor");
+		primaryStage = Stage;
+		primaryStage.setTitle("WorkineThor");
 
 		// loads NavBar view
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
