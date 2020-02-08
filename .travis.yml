@@ -7,12 +7,6 @@ addons:
   apt:
     packages:
         - ant
-  sonarcloud:
-    organization: "stewiegit"
-    token:
-      secure: "e3ace505828f3a0c8cb8fee1252cd51f550943b8" # encrypted value of your token
 
 script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
   - ant build
