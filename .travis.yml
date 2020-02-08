@@ -10,7 +10,7 @@ addons:
   sonarcloud:
     organization: "klaigor"
     token:
-      secure: "cd61590bf81e438a881c45997839884d3818b955" # encrypted value of your token
+      secure: "4797b663a1464ae493713b92bd53925eec91bdbf" # encrypted value of your token
           
 script:
   - ant build
