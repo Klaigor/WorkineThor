@@ -2,8 +2,6 @@ package workineThor.view;
 
 import java.util.ArrayList;
 import java.io.File;
-
-//import workineThor.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,15 +12,14 @@ public class CreateProjectNextController {
 	
 	//private Main main = Main.getIstance();
 	private String projectName = MainCreateProjectController.getProjectName();
-	//private Boolean drive = MainCreateProjectController.getDrive();
 
 	// array of file paths
-	private ArrayList<String> paths = new ArrayList<String>();
+	private ArrayList<String> paths = new ArrayList();
 
 	@FXML
 	private Button addfile;
 	@FXML
-	private ListView<String> filelist = new ListView<String>();
+	private ListView<String> filelist = new ListView();
 	@FXML
 	private Label title;
 	@FXML
@@ -31,10 +28,11 @@ public class CreateProjectNextController {
 	@FXML
 	private void initialize() {
 		title.setText(projectName);
-		System.out.println("stronzo");
 	}
 
-	// add files to project function
+	/**
+	 * add files to project
+	 */
 	@FXML
 	private void addFileFunc() {
 		FileChooser fc = new FileChooser();
@@ -43,7 +41,8 @@ public class CreateProjectNextController {
 		if (selectedFile != null) {
 			filelist.getItems().add(selectedFile.getPath());
 			paths.add(selectedFile.getPath());
-		} else
+		} 
+		else
 			System.out.println("no file selected");
 	}
 
