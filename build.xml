@@ -9,8 +9,8 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    <path id="JavaFX SDK.libraryclasspath">
-        <pathelement location="../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_2.3.0.201603030809.jar"/>
+    <path id="JavaFX">
+        <pathelement location="ExternalJar/org.eclipse.fx.ide.css.jfx8_2.3.0.201603030809.jar"/>
     </path>
     <path id="JSON">
 	<pathelement location="ExternalJar/java-json.jar"/>
