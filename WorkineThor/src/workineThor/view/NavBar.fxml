@@ -7,24 +7,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workineThor.view.MainBackHomeController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workineThor.view.MainNavBarController">
    <top>
       <ToolBar prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <items>
-            <AnchorPane prefHeight="0.0" prefWidth="546.0">
+            <AnchorPane prefHeight="30.0" prefWidth="782.0">
                <children>
-                  <VBox layoutY="121.0" prefHeight="149.0" prefWidth="136.0">
+                  <VBox layoutY="121.0" prefHeight="149.0" prefWidth="176.0">
                      <children>
-                        <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" text="MenuButton">
+                        <MenuButton fx:id="MenuButton" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="176.0" text="Menu" textAlignment="CENTER">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#goHome" text="Home" />
                             <MenuItem mnemonicParsing="false" onAction="#goCreate" text="Create Project" />
                           </items>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
                         </MenuButton>
                      </children>
                   </VBox>
-                  <Button layoutX="470.0" layoutY="122.0" mnemonicParsing="false" onAction="#goLogin" text="Logout" />
+                  <Button layoutX="679.0" layoutY="118.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="34.0" prefWidth="96.0" style="-fx-background-color: #b51c1c;" text="Logout" textFill="WHITE" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </items>
