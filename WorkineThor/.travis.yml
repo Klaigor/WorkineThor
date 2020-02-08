@@ -1,0 +1,12 @@
+dist: xenial
+language: java
+addons:
+  apt:
+    packages:
+      - ant
+jdk:
+  - openjdk13
+
+script: 
+  - ant build
+ 

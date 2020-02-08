@@ -37,6 +37,7 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 
 		// load login screen
 		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/LoginView.fxml")));
@@ -60,6 +61,7 @@ public class Main extends Application {
 	 */
 	public void setLayoutCenter(BorderPane layout) {
 		mainLayout.setCenter(layout);
+		
 	}
 
 	public static void main(String[] args) {

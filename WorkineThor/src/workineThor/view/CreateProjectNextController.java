@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 
 public class CreateProjectNextController {
+	
 	//private Main main = Main.getIstance();
 	private String projectName = MainCreateProjectController.getProjectName();
 	//private Boolean drive = MainCreateProjectController.getDrive();

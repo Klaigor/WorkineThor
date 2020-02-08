@@ -28,7 +28,8 @@ import javafx.stage.Stage;
 public class LoginViewController {
 
 	private Main main = Main.getIstance(); // Reference The mainApp (which is the main window)
-
+	private BorderPane mainLayoutHome = null;
+	
 	String user = "JavaFX2";
 	String pw = "password";
 	String checkUser, checkPw;
@@ -60,6 +61,13 @@ public class LoginViewController {
 					// lblMessage.setText("Congratulations!");
 					System.out.println("mori");
 					// lblMessage.setTextFill(Color.GREEN);
+					try {
+						mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					main.setLayoutCenter(mainLayoutHome);
+					
 				} else {
 					// lblMessage.setText("Incorrect user or pw.");
 					// lblMessage.setTextFill(Color.RED);
