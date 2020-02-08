@@ -12,9 +12,13 @@
     <path id="JavaFX SDK.libraryclasspath">
         <pathelement location="../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_2.3.0.201603030809.jar"/>
     </path>
+    <path id="JSON">
+	<pathelement location="ExternalJar/java-json.jar">
+    </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
         <path refid="JavaFX SDK.libraryclasspath"/>
+	<path refid="JSON"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
