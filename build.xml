@@ -17,7 +17,7 @@
     </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
-        <path refid="JavaFX SDK.libraryclasspath"/>
+        <path refid="JavaFX"/>
 	<path refid="JSON"/>
     </path>
     <target name="init">
