@@ -2,6 +2,7 @@ dist: xenial
 language: java
 jdk:
  -openjdk8
+ -jdk1.8.0_241
  
 addons:
  apt:
