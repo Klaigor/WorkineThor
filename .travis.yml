@@ -4,14 +4,13 @@ jdk:
  -openjdk8
 
 addons:
-  apt:
-    packages:
-        - ant
   sonarcloud:
     organization: "klaigor"
     token:
       secure: "4797b663a1464ae493713b92bd53925eec91bdbf" # encrypted value of your token
-          
+  apt:
+    packages:
+        - ant       
 script:
   - ant build
   - sonar-scanner
