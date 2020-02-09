@@ -36,18 +36,15 @@ public class MainCreateProjectController {
 	private static String projectName;
 
 	@FXML
-	private void DriveBoxYes() {
-		if (driveBox.isSelected()) {
+	private void driveBoxYes() {
+		if (driveBox.isSelected())
 			driveSelector.setDisable(false);
-
-		} else {
-			driveSelector.setDisable(true);
-		}
+		driveSelector.setDisable(true);
 	}
 
 	@FXML
 	private void nextYes() {
-		String projectName = projectNameField.getText();
+		projectName = projectNameField.getText();
 		boolean isDisabled = (projectName.isEmpty() || projectName.trim().isEmpty());
 		next.setDisable(isDisabled);
 	}
