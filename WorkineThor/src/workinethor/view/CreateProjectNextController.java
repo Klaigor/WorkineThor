@@ -1,9 +1,10 @@
 package workinethor.view;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.File;
 
-//import workineThor.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,17 +13,17 @@ import javafx.stage.FileChooser;
 
 public class CreateProjectNextController {
 	
-	//private Main main = Main.getIstance();
 	private String projectName = MainCreateProjectController.getProjectName();
-	//private Boolean drive = MainCreateProjectController.getDrive();
 
 	// array of file paths
-	private ArrayList<String> paths = new ArrayList<String>();
+	private ArrayList<String> paths = new ArrayList<>();
+	
+	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
 
 	@FXML
 	private Button addfile;
 	@FXML
-	private ListView<String> filelist = new ListView<String>();
+	private ListView<String> filelist = new ListView<>();
 	@FXML
 	private Label title;
 	@FXML
@@ -31,7 +32,7 @@ public class CreateProjectNextController {
 	@FXML
 	private void initialize() {
 		title.setText(projectName);
-		System.out.println("stronzo");
+		logger.log(Level.INFO,"ProjectNext initialized");
 	}
 
 	// add files to project function
@@ -43,8 +44,9 @@ public class CreateProjectNextController {
 		if (selectedFile != null) {
 			filelist.getItems().add(selectedFile.getPath());
 			paths.add(selectedFile.getPath());
-		} else
-			System.out.println("no file selected");
+		} 
+		else
+			logger.log(Level.WARNING,"No file selected");
 	}
 
 	// returns the i-th file path
