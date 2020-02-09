@@ -10,9 +10,6 @@ import workinethor.Main;
 
 public class MainBackHomeController {
 	private BorderPane mainLayout = null;
-//	private BorderPane mainLayoutHome = null;
-//	private BorderPane mainLayoutItems = null;
-//	private BorderPane mainLayoutLogin = null;
 	
 	@FXML
 	private void goHome(Node mainLayoutHome) throws IOException {

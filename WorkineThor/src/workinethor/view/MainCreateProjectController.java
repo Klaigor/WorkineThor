@@ -17,59 +17,55 @@ import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainCreateProjectController {
-	private BorderPane mainLayout = null;
-	private BorderPane mainLayoutNext = null;
 
-	ObservableList<String> DriveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
+	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
 	// project information
 	@FXML
-	private TextField ProjectNameField;
+	private TextField projectNameField;
 
 	@FXML
-	private ChoiceBox<String> DriveSelector;
+	private ChoiceBox<String> driveSelector;
 
 	@FXML
-	private CheckBox DriveBox;
+	private CheckBox driveBox;
 
 	@FXML
-	private Button Next;
+	private Button next;
 
 	private static String projectName;
 
-	//private static Boolean Drive = true;
-	
 	@FXML
 	private void DriveBoxYes() {
-		if (DriveBox.isSelected()) {
-			DriveSelector.setDisable(false);
-		//	Drive = false;
-			
+		if (driveBox.isSelected()) {
+			driveSelector.setDisable(false);
+
 		} else {
-			DriveSelector.setDisable(true);
-		//	Drive = true;
+			driveSelector.setDisable(true);
 		}
 	}
 
 	@FXML
 	private void nextYes() {
-		projectName = ProjectNameField.getText();
+		String projectName = projectNameField.getText();
 		boolean isDisabled = (projectName.isEmpty() || projectName.trim().isEmpty());
-		Next.setDisable(isDisabled);
+		next.setDisable(isDisabled);
 	}
 
 	@FXML
 	private void initialize() {
-		Next.setDisable(true);
-		DriveSelector.setDisable(true);
-		DriveSelector.setItems(DriveSelectorList);
-		DriveSelector.setValue("mmm");
-		
+		next.setDisable(true);
+		driveSelector.setDisable(true);
+		driveSelector.setItems(driveSelectorList);
+		driveSelector.setValue("mmm");
+
 	}
 
 	@FXML
 	private void goNext() throws IOException {
+		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
+		BorderPane mainLayoutNext = null;
 		try {
 			mainLayoutNext = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
 		} catch (IOException e) {
@@ -81,9 +77,4 @@ public class MainCreateProjectController {
 	public static String getProjectName() {
 		return projectName;
 	}
-
-	//public static Boolean getDrive() {
-	//	return Drive;
-
-	}
-//}
+}
