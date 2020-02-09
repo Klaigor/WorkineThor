@@ -34,7 +34,7 @@ public class MainBackHomeController {
 			e.printStackTrace();
 		}
 		mainLayout.setCenter(mainLayoutItems);
-		System.out.println("porcoDio");
+		
 	}
 	@FXML
 	private void goLogin(Node mainLayoutLogin) throws IOException {
