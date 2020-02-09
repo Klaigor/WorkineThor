@@ -24,7 +24,7 @@ public class Main extends Application {
 		primaryStage.setTitle("WorkineThor");
 
 		// loads NavBar view
-		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
+		startMainLayout();
 		
 		// add scene mainLayout to window
 		Scene scene = new Scene(mainLayout);
@@ -38,6 +38,10 @@ public class Main extends Application {
 	
 	public static BorderPane getMainLayout() {
 		return mainLayout;
+	}
+	
+	public static void startMainLayout() throws IOException {
+		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
 	}
 	
 }
