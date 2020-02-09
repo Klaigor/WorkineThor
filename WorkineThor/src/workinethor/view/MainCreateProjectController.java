@@ -40,7 +40,7 @@ public class MainCreateProjectController {
 	//changed for code smells
 	@FXML
 	private void driveBoxYes() {
-		checked = driveBox.isSelected();
+		checked = !driveBox.isSelected();
 		driveSelector.setDisable(checked);
 	}
 
