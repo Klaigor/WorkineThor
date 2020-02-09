@@ -13,7 +13,7 @@ import workinethor.Main;
 
 public class LoginViewController {
 
-	private Main main = Main.getIstance(); // Reference The mainApp (which is the main window)
+	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane mainLayoutHome = null;
 
 	String user = "JavaFX2";
@@ -45,7 +45,7 @@ public class LoginViewController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					main.setLayoutCenter(mainLayoutHome);
+					mainLayout.setCenter(mainLayoutHome);
 
 				} else {
 

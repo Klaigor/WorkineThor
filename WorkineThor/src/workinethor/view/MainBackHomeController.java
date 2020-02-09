@@ -8,38 +8,41 @@ import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainBackHomeController {
-	private Main main = Main.getIstance();
+	private BorderPane mainLayout = null;
 	private BorderPane mainLayoutHome = null;
 	private BorderPane mainLayoutItems = null;
 	private BorderPane mainLayoutLogin = null;
 	
 	@FXML
 	private void goHome() throws IOException {
+		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutHome = FXMLLoader.load(MainBackHomeController.class.getResource("HomePage.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		main.setLayoutCenter(mainLayoutHome);
+		mainLayout.setCenter(mainLayoutHome);
 	}
 	
 	@FXML
 	private void goCreate() throws IOException {
+		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutItems = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		main.setLayoutCenter(mainLayoutItems);
+		mainLayout.setCenter(mainLayoutItems);
 	}
 	@FXML
 	private void goLogin() throws IOException {
+		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutLogin = FXMLLoader.load(Main.class.getResource("view/LoginView.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		main.setLayoutCenter(mainLayoutLogin);
+		mainLayout.setCenter(mainLayoutLogin);
 	}
 
 }

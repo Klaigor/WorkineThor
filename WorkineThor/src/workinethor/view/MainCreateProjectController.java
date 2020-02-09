@@ -17,8 +17,8 @@ import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainCreateProjectController {
-	private Main main = Main.getIstance();
 	private BorderPane mainLayout = null;
+	private BorderPane mainLayoutNext = null;
 
 	ObservableList<String> DriveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
@@ -69,12 +69,13 @@ public class MainCreateProjectController {
 
 	@FXML
 	private void goNext() throws IOException {
+		mainLayout = Main.getMainLayout();
 		try {
-			mainLayout = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
+			mainLayoutNext = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		main.setLayoutCenter(mainLayout);
+		mainLayout.setCenter(mainLayoutNext);
 	}
 
 	public static String getProjectName() {

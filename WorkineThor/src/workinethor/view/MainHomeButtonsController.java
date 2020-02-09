@@ -8,20 +8,21 @@ import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainHomeButtonsController {
-	private Main main = Main.getIstance();
 	private BorderPane mainLayout = null;
+	private BorderPane mainLayoutProject = null;
 
 	@FXML
 	private void initialize() {
 		try {
-			mainLayout = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
+			mainLayoutProject = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	@FXML
 	private void goCreate() throws IOException {
-		main.setLayoutCenter(mainLayout);
+		mainLayout = Main.getMainLayout();
+		mainLayout.setCenter(mainLayoutProject);
 	}
 
 }
