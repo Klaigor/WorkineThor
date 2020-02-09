@@ -53,8 +53,9 @@ public class CreateProjectNextController {
 	public String readPath(int i) {
 		if (i > 0 && i < paths.size()) {
 			return paths.get(i);
-		} else {
-			System.out.println("out of bounds\n");
+		} 
+		else {
+			logger.log(Level.SEVERE,"Out of bounds");
 			return null;
 		}
 	}
