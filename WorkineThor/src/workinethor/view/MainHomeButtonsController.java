@@ -8,7 +8,6 @@ import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainHomeButtonsController {
-	private BorderPane mainLayout = null;
 	private BorderPane mainLayoutProject = null;
 
 	@FXML
@@ -19,8 +18,12 @@ public class MainHomeButtonsController {
 			e.printStackTrace();
 		}
 	}
+	
+	//modified for codeSmells
 	@FXML
 	private void goCreate() throws IOException {
+		BorderPane mainLayout = null;
+		
 		mainLayout = Main.getMainLayout();
 		mainLayout.setCenter(mainLayoutProject);
 	}
