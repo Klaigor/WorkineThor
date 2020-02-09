@@ -4,17 +4,18 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
 public class MainBackHomeController {
 	private BorderPane mainLayout = null;
-	private BorderPane mainLayoutHome = null;
-	private BorderPane mainLayoutItems = null;
-	private BorderPane mainLayoutLogin = null;
+//	private BorderPane mainLayoutHome = null;
+//	private BorderPane mainLayoutItems = null;
+//	private BorderPane mainLayoutLogin = null;
 	
 	@FXML
-	private void goHome() throws IOException {
+	private void goHome(Node mainLayoutHome) throws IOException {
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutHome = FXMLLoader.load(MainBackHomeController.class.getResource("HomePage.fxml"));
@@ -25,7 +26,7 @@ public class MainBackHomeController {
 	}
 	
 	@FXML
-	private void goCreate() throws IOException {
+	private void goCreate(Node mainLayoutItems) throws IOException {
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutItems = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
@@ -33,9 +34,10 @@ public class MainBackHomeController {
 			e.printStackTrace();
 		}
 		mainLayout.setCenter(mainLayoutItems);
+		System.out.println("porcoDio");
 	}
 	@FXML
-	private void goLogin() throws IOException {
+	private void goLogin(Node mainLayoutLogin) throws IOException {
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutLogin = FXMLLoader.load(Main.class.getResource("view/LoginView.fxml"));

@@ -36,7 +36,8 @@ public class LoginViewController {
 		// Action for loginBtn
 		loginBtn.setOnAction(new EventHandler<ActionEvent>() {
 
-			public void handle(ActionEvent event) {
+			@Override
+			public void handle(ActionEvent event) { // "event" is not used
 				checkUser = userName.getText().toString();
 				checkPw = password.getText().toString();
 				if (checkUser.equals(user) && checkPw.equals(pw)) {
@@ -46,9 +47,6 @@ public class LoginViewController {
 						e.printStackTrace();
 					}
 					mainLayout.setCenter(mainLayoutHome);
-
-				} else {
-
 				}
 				userName.setText("");
 				password.setText("");
