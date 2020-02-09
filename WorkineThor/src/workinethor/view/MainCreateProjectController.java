@@ -35,17 +35,13 @@ public class MainCreateProjectController {
 
 	private static String projectName;
 
+	private boolean checked = false;
+
+	//changed for code smells
 	@FXML
 	private void driveBoxYes() {
-		driveSelectorControl();
-	}
-	
-	//added to resolve codeSmells
-	private void driveSelectorControl() {
-		if (driveBox.isSelected())
-			driveSelector.setDisable(false);
-		else
-			driveSelector.setDisable(true);
+		checked = driveBox.isSelected();
+		driveSelector.setDisable(checked);
 	}
 
 	@FXML
