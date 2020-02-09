@@ -9,12 +9,10 @@ import workinethor.Main;
 
 public class MainNavBarController {
 	private BorderPane mainLayout = null;
-	private BorderPane mainLayoutHome = null;
-	private BorderPane mainLayoutItems = null;
-	private BorderPane mainLayoutLogin = null;
-	
+
 	@FXML
 	private void goHome() throws IOException {
+		BorderPane mainLayoutHome = null;
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
@@ -26,6 +24,7 @@ public class MainNavBarController {
 
 	@FXML
 	private void goCreate() throws IOException {
+		BorderPane mainLayoutItems = null;
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutItems = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
@@ -36,8 +35,9 @@ public class MainNavBarController {
 	}
 
 	// logout from account
-	@FXML 
+	@FXML
 	private void goLogin() throws IOException {
+		BorderPane mainLayoutLogin = null;
 		mainLayout = Main.getMainLayout();
 		try {
 			mainLayoutLogin = FXMLLoader.load(Main.class.getResource("view/LoginView.fxml"));
