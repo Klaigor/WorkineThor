@@ -37,15 +37,21 @@ public class MainCreateProjectController {
 
 	@FXML
 	private void driveBoxYes() {
+		driveSelectorControl();
+	}
+	
+	//added to resolve codeSmells
+	private void driveSelectorControl() {
 		if (driveBox.isSelected())
 			driveSelector.setDisable(false);
-		driveSelector.setDisable(true);
+		else
+			driveSelector.setDisable(true);
 	}
 
 	@FXML
 	private void nextYes() {
-		projectName = projectNameField.getText();
-		boolean isDisabled = (projectName.isEmpty() || projectName.trim().isEmpty());
+		String textFieldValue = projectNameField.getText();
+		boolean isDisabled = (textFieldValue.isEmpty() || textFieldValue.trim().isEmpty());
 		next.setDisable(isDisabled);
 	}
 
@@ -55,7 +61,6 @@ public class MainCreateProjectController {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("mmm");
-
 	}
 
 	@FXML
