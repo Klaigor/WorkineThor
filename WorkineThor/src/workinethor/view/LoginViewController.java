@@ -3,6 +3,7 @@ package workinethor.view;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,12 @@ public class LoginViewController {
 						e.printStackTrace();
 					}
 					mainLayout.setCenter(mainLayoutHome);
+				} else { // Add the alert window when the password or the username are not correct
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText(null);
+					alert.setContentText("Username or Password is not correct!");
+					alert.show();
+
 				}
 				userName.setText("");
 				password.setText("");

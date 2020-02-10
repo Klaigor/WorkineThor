@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +36,7 @@ import mega.MegaHandler;
 public class MainCreateProjectController {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
+	ObservableList<String> memberListSelector = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
 	// project information
 	@FXML
@@ -51,11 +54,11 @@ public class MainCreateProjectController {
 	private static String projectName;
 	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
 
-	//changed for code smells
+	// changed for code smells
 	@FXML
 	private void driveBoxYes() {
 		boolean checked = false;
-		
+
 		checked = !driveBox.isSelected();
 		driveSelector.setDisable(checked);
 	}
@@ -73,83 +76,91 @@ public class MainCreateProjectController {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("mmm");
-		
-		//changeListener -> allows us to capture event on choicebox
+
+		// changeListener -> allows us to capture event on choicebox
 		ChangeListener<String> myListener = new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String value, String newValue) {
-				if(newValue == "Mega")
+				if (newValue == "Mega")
 					megaLogin();
 			}
 		};
-		
-		//added listener to choiceBox
+
+		// added listener to choiceBox
 		driveSelector.getSelectionModel().selectedItemProperty().addListener(myListener);
 	}
 
-	//method to create the megaLoginPage
+	// method to create the megaLoginPage
 	private void megaLogin() {
 		Stage loginWindow = new Stage();
 		loginWindow.setTitle("Mega Login");
-		
+
 		AnchorPane background = new AnchorPane();
-		
+
 		Label email = new Label("Email");
 		Label password = new Label("Password");
-		email.setTranslateX(50); email.setTranslateY(120);
-		password.setTranslateX(50); password.setTranslateY(200);
-		
+		email.setTranslateX(50);
+		email.setTranslateY(120);
+		password.setTranslateX(50);
+		password.setTranslateY(200);
+
 		TextField emailTextField = new TextField();
-		TextField passwordTextField = new TextField();
-		emailTextField.setTranslateX(150); emailTextField.setTranslateY(120);
-		passwordTextField.setTranslateX(150); passwordTextField.setTranslateY(200);
-		
+		PasswordField passwordTextField = new PasswordField();
+		emailTextField.setTranslateX(150);
+		emailTextField.setTranslateY(120);
+		passwordTextField.setTranslateX(150);
+		passwordTextField.setTranslateY(200);
+
 		Button loginButton = new Button();
-		loginButton.setTranslateX(150); loginButton.setTranslateY(280);
+		loginButton.setTranslateX(150);
+		loginButton.setTranslateY(280);
 		loginButton.setText("Login");
-		
+		loginButton.setDefaultButton(true);
+
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event){
-				//check if email and pass are correct
+			public void handle(ActionEvent event) {
+				// check if email and pass are correct
 				int ret = 0;
 				MegaHandler mh = new MegaHandler(emailTextField.getText(), passwordTextField.getText());
 				try {
 					ret = mh.login();
-				}catch(IOException e) {}
-				
+				} catch (IOException e) {
+				}
+
 				logger.log(Level.INFO, mh.get_user());
-				
-				if(ret == 0)
+
+				if (ret == 0)
 					logger.log(Level.WARNING, "invalid email or password");
 				loginWindow.close();
 			}
 		});
-		
+
 		Image megaLogo = new Image("Images/mega.png", 220, 90, true, false);
 		ImageView logoView = new ImageView(megaLogo);
-		logoView.setTranslateX(80); logoView.setTranslateY(10);
-		
+		logoView.setTranslateX(80);
+		logoView.setTranslateY(10);
+
 		background.getChildren().add(email);
 		background.getChildren().add(password);
 		background.getChildren().add(emailTextField);
 		background.getChildren().add(passwordTextField);
 		background.getChildren().add(loginButton);
 		background.getChildren().add(logoView);
-		
-		Scene loginScene = new Scene(background,450,450);
+
+		Scene loginScene = new Scene(background, 450, 450);
 		loginWindow.setScene(loginScene);
 		loginWindow.setResizable(false);
 		loginWindow.initModality(Modality.APPLICATION_MODAL);
-		
+
 		loginWindow.show();
 	}
-	
+
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
-		
+
 		BorderPane mainLayoutNext = null;
 		try {
 			mainLayoutNext = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
@@ -157,7 +168,47 @@ public class MainCreateProjectController {
 			e.printStackTrace();
 		}
 		mainLayout.setCenter(mainLayoutNext);
-		
+	}
+
+	// method that create the add member view
+	@FXML
+	private void addMember() {
+		ObservableList<String> memberListSelector = FXCollections.observableArrayList("culo", "cane");
+		Stage addMemberWindow = new Stage();
+		addMemberWindow.setTitle("Add Member");
+
+		AnchorPane background = new AnchorPane();
+
+		TextField searchField = new TextField();
+		searchField.setPromptText("Search here!");
+		searchField.setTranslateX(101);
+		searchField.setTranslateY(52);
+		searchField.setPrefSize(250, 26);
+
+		searchField.setOnKeyTyped(event -> {
+			
+		});
+
+		Image searchLogo = new Image("Images/search--v2.png", 36, 36, true, false);
+		ImageView logoView = new ImageView(searchLogo);
+		logoView.setTranslateX(50);
+		logoView.setTranslateY(47);
+
+		ListView<String> memberList = new ListView<String>();
+		memberList.setTranslateY(96);
+		memberList.setPrefSize(400, 500);
+		memberList.setItems(memberListSelector);
+
+		background.getChildren().add(logoView);
+		background.getChildren().add(searchField);
+		background.getChildren().add(memberList);
+
+		Scene loginScene = new Scene(background, 400, 600);
+		addMemberWindow.setScene(loginScene);
+		addMemberWindow.setResizable(false);
+		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
+
+		addMemberWindow.show();
 	}
 
 	public static String getProjectName() {
