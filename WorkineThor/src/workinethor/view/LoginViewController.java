@@ -30,11 +30,18 @@ public class LoginViewController {
 
 	@FXML
 	private Button loginBtn;
+	
+	@FXML 
+	private Button signupBtn;
 
 	@FXML
 	public void initialize() {
 
-		// Action for loginBtn
+		/**
+		 * sets action for login button
+		 * for now is a mock function thata checks pswd and usr vs two local variables
+		 * 
+		 */
 		loginBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -59,7 +66,40 @@ public class LoginViewController {
 				password.setText("");
 			}
 		});
+		
+		
+		/**
+		 * sets action for login button
+		 * for now is a mock function thata checks pswd and usr vs two local variables
+		 * 
+		 */
+		
+/**		
+		signupBtn.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) { // "event" is not used
+				checkUser = userName.getText().toString();
+				checkPw = password.getText().toString();
+				if (checkUser.equals(user) && checkPw.equals(pw)) {
+					try {
+						mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					mainLayout.setCenter(mainLayoutHome);
+				} else { // Add the alert window when the password or the username are not correct
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setHeaderText(null);
+					alert.setContentText("Username or Password is not correct!");
+					alert.show();
+
+				}
+				userName.setText("");
+				password.setText("");
+			}
+		});
+*/
 	}
 
 }

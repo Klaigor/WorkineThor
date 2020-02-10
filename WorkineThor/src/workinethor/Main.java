@@ -44,4 +44,7 @@ public class Main extends Application {
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
 	}
 	
+	public static void main(String[] args) {
+		launch(args);
+	}	
 }
