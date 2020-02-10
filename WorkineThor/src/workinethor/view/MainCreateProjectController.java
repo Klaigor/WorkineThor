@@ -3,7 +3,11 @@
  */
 package workinethor.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +35,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 import workinethor.Main;
-import mega.MegaHandler;
 
 public class MainCreateProjectController {
 
@@ -52,7 +55,8 @@ public class MainCreateProjectController {
 	private Button next;
 
 	private static String projectName;
-	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
+	private static boolean loginSuccess = false;
+	private Logger logger = Logger.getLogger(MainCreateProjectController.class.getName());
 
 	// changed for code smells
 	@FXML
@@ -77,7 +81,7 @@ public class MainCreateProjectController {
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("mmm");
 
-		// changeListener -> allows us to capture event on choicebox
+		//changeListener -> allows us to capture event on choiceBox
 		ChangeListener<String> myListener = new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String value, String newValue) {
@@ -121,17 +125,11 @@ public class MainCreateProjectController {
 			@Override
 			public void handle(ActionEvent event) {
 				// check if email and pass are correct
-				int ret = 0;
-				MegaHandler mh = new MegaHandler(emailTextField.getText(), passwordTextField.getText());
-				try {
-					ret = mh.login();
-				} catch (IOException e) {
+				boolean ret = verifyMegaLogin(emailTextField.getText(), passwordTextField.getText());
+				if(!ret) {
+					logger.log(Level.WARNING, "Wrong email or password");
 				}
-
-				logger.log(Level.INFO, mh.get_user());
-
-				if (ret == 0)
-					logger.log(Level.WARNING, "invalid email or password");
+				loginSuccess = ret;
 				loginWindow.close();
 			}
 		});
@@ -156,6 +154,32 @@ public class MainCreateProjectController {
 		loginWindow.show();
 	}
 
+	//verify megaLogin method
+	private boolean verifyMegaLogin(String email, String password) {
+		boolean success = false;
+		String tempEmail = "";
+		String tempPassword = "";
+		URL loginUrl = getClass().getResource("/File/login.txt");
+		try {
+			Scanner x  = new Scanner(new File(loginUrl.getPath()));
+			x.useDelimiter("[,\n]");
+			
+			while(x.hasNext() && !success) {
+				tempEmail = x.next();
+				tempPassword = x.next();
+				
+				if(tempEmail.trim().equals(email.trim()) && tempPassword.trim().equals(password.trim()))
+					success = true;
+			}
+			x.close();
+			
+		}catch(FileNotFoundException e) {
+			logger.log(Level.WARNING, "file not found");
+		}
+		
+		return success;
+	}
+	
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
 		BorderPane mainLayout = null;
@@ -214,4 +238,9 @@ public class MainCreateProjectController {
 	public static String getProjectName() {
 		return projectName;
 	}
+	
+	public static boolean getLoginSuccess() {
+		return loginSuccess;
+	}
+	
 }

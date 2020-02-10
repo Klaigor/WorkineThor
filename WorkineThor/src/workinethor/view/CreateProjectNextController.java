@@ -14,7 +14,8 @@ import javafx.stage.FileChooser;
 public class CreateProjectNextController {
 	
 	private String projectName = MainCreateProjectController.getProjectName();
-
+	private boolean loginSuccess = MainCreateProjectController.getLoginSuccess();
+	
 	// array of file paths
 	private ArrayList<String> paths = new ArrayList<>();
 	
@@ -33,6 +34,10 @@ public class CreateProjectNextController {
 	private void initialize() {
 		title.setText(projectName);
 		logger.log(Level.INFO,"ProjectNext initialized");
+		
+		//disables button if megaLogin failed
+		if(!loginSuccess)
+			addFileDrive.setDisable(true);
 	}
 
 	// add files to project function
