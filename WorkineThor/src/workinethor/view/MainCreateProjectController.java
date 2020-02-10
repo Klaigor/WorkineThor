@@ -129,7 +129,7 @@ public class MainCreateProjectController {
 				if(!ret) {
 					logger.log(Level.WARNING, "Wrong email or password");
 				}
-				loginSuccess = ret;
+				setLoginSuccessVariable(ret);
 				loginWindow.close();
 			}
 		});
@@ -152,6 +152,10 @@ public class MainCreateProjectController {
 		loginWindow.initModality(Modality.APPLICATION_MODAL);
 
 		loginWindow.show();
+	}
+	
+	private static void setLoginSuccessVariable(boolean value) {
+		loginSuccess = value;
 	}
 
 	//verify megaLogin method
