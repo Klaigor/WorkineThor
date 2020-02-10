@@ -4,6 +4,8 @@
 package workinethor.view;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +27,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+
 import workinethor.Main;
+import mega.MegaHandler;
 
 public class MainCreateProjectController {
 
@@ -45,6 +49,7 @@ public class MainCreateProjectController {
 	private Button next;
 
 	private static String projectName;
+	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
 
 	//changed for code smells
 	@FXML
@@ -94,9 +99,9 @@ public class MainCreateProjectController {
 		email.setTranslateX(50); email.setTranslateY(120);
 		password.setTranslateX(50); password.setTranslateY(200);
 		
-		TextField userTextField = new TextField();
+		TextField emailTextField = new TextField();
 		TextField passwordTextField = new TextField();
-		userTextField.setTranslateX(150); userTextField.setTranslateY(120);
+		emailTextField.setTranslateX(150); emailTextField.setTranslateY(120);
 		passwordTextField.setTranslateX(150); passwordTextField.setTranslateY(200);
 		
 		Button loginButton = new Button();
@@ -105,8 +110,18 @@ public class MainCreateProjectController {
 		
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent event){
 				//check if email and pass are correct
+				int ret = 0;
+				MegaHandler mh = new MegaHandler(emailTextField.getText(), passwordTextField.getText());
+				try {
+					ret = mh.login();
+				}catch(IOException e) {}
+				
+				logger.log(Level.INFO, mh.get_user());
+				
+				if(ret == 0)
+					logger.log(Level.WARNING, "invalid email or password");
 				loginWindow.close();
 			}
 		});
@@ -117,7 +132,7 @@ public class MainCreateProjectController {
 		
 		background.getChildren().add(email);
 		background.getChildren().add(password);
-		background.getChildren().add(userTextField);
+		background.getChildren().add(emailTextField);
 		background.getChildren().add(passwordTextField);
 		background.getChildren().add(loginButton);
 		background.getChildren().add(logoView);
