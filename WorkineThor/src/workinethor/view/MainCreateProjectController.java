@@ -186,6 +186,7 @@ public class MainCreateProjectController {
 	
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
+		projectName = projectNameField.getText();
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
 
