@@ -21,7 +21,7 @@ public class DBhandle {
 	 * by the Singleton pattern
 	 * @return
 	 */
-	private DBhandle() {};
+	private DBhandle() {}
 	
 	
 	/**
@@ -34,7 +34,7 @@ public class DBhandle {
             dbHandleInstance = new DBhandle(); 
   
         return dbHandleInstance;
-	};
+	}
 	
 	
 	/**

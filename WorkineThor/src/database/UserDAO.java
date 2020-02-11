@@ -11,7 +11,6 @@ import java.sql.SQLException;
 
 public class UserDAO {
 	
-	private Connection dbConnection;
 	private DBhandle dbHandler = DBhandle.getDBhandleInstance(); 
 	private PreparedStatement pst;
 	
@@ -24,14 +23,13 @@ public class UserDAO {
 	public void signup(String username, String password) throws SQLException {
 		String insert = "INSERT INTO users(username,password)"+"VALUES (?,?)";
 		
-		dbConnection = dbHandler.getConnection();
+		Connection dbConnection = dbHandler.getConnection();
 		
 		try {
 			
 			pst = dbConnection.prepareStatement(insert);
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
