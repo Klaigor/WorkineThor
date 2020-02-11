@@ -34,13 +34,5 @@ public class CreateProjectController {
 		return newProject.getDriveName();
 	}
 	
-	/*
-	public void addMember(ProjectBean bean) {
-		newProject.addMember(user);
-	}*/
 	
-	/*
-	public void addFile(ProjectBean bean) {
-		newProject.addFile(file);
-	}*/
 }

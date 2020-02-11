@@ -8,9 +8,7 @@ import controller.CreateProjectController;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -95,11 +93,10 @@ public class CreateProjectNextController {
 	//add drive file to project function(needs to be handled by addFileController)
 	@FXML
 	private void addFileDriveFunc() {
+		String URI = "http://mega.nz/fm/nSJlAKrb";
 		try {
-			Desktop.getDesktop().browse(new URI("http://mega.nz/fm/nSJlAKrb"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
+			Desktop.getDesktop().browse(new URI(URI));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -115,7 +112,7 @@ public class CreateProjectNextController {
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100); fileURL.setTranslateY(50);
 		
-		ListView<String> selectedFiles = new ListView<String>();
+		ListView<String> selectedFiles = new ListView<>();
 		selectedFiles.setTranslateY(200);
 		selectedFiles.setOrientation(Orientation.VERTICAL);
         selectedFiles.setPrefSize(450, 200);

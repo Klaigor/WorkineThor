@@ -60,8 +60,6 @@ public class MainCreateProjectController {
 	@FXML
 	private Button next;
 
-	//private static String projectName;
-	//private static boolean loginSuccess = false;
 	private Logger logger = Logger.getLogger(MainCreateProjectController.class.getName());
 
 	// changed for code smells
@@ -85,6 +83,7 @@ public class MainCreateProjectController {
 		next.setDisable(true);
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
+		driveSelector.setValue("");
 
 		//changeListener -> allows us to capture event on choiceBox
 		ChangeListener<String> myListener = new ChangeListener<String>() {
@@ -134,7 +133,6 @@ public class MainCreateProjectController {
 				if(!ret) {
 					logger.log(Level.WARNING, "Wrong email or password");
 				}
-				setLoginSuccessVariable(ret);
 				loginWindow.close();
 			}
 		});
@@ -159,10 +157,6 @@ public class MainCreateProjectController {
 		loginWindow.show();
 	}
 	
-	private static void setLoginSuccessVariable(boolean value) {
-		//loginSuccess = value;
-	}
-
 	//verify megaLogin method(andrebbe tolta? ma dove la metto??)
 	private boolean verifyMegaLogin(String email, String password) {
 		boolean success = false;
