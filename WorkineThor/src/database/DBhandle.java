@@ -43,7 +43,7 @@ public class DBhandle {
 	 * @return
 	 */
 	public Connection  getConnection() {
-		String connectionString = "jdbc:mysql://" + this.dbHost+ ":" + this.dbPort+"/"+ this.dbName; ;
+		String connectionString = "jdbc:mysql://" + this.dbHost+ ":" + this.dbPort+"/"+ this.dbName;
 		
 		try {
 			

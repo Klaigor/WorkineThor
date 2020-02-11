@@ -1,36 +1,28 @@
+/**
+ * controller of the Login and Signup use cases
+ */
 package controller;
 
-import database.DBhandle;
-import workinethor.view.LoginViewController;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import bean.UserBean;
+import database.UserDAO;
+
 
 public class LoginController {
 
-	private Connection dbConnection;
-	private DBhandle dbHandler = DBhandle.getDBhandleInstance(); 
-	private PreparedStatement pst;
-	
-	
-	public void signup() {
-		String insert = "INSERT INTO users(username,password)"+"VALUES (?,?)";
+	/**
+	 * takes a {@link UserBean} instance and sends it to the {@link UserDAO}
+	 * to make an insert query 
+	 * @param user
+	 * @throws SQLException
+	 */
+	public void signup (UserBean user) throws SQLException {
+		UserDAO usrDAO = new UserDAO();
+		usrDAO.signup(user.getUsername(), user.getPassword());
 		
-		dbConnection = dbHandler.getConnection();
-		
-		try {
-			
-			pst = dbConnection.prepareStatement(insert);
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	/*	
-		pst.setString(1, );
-		pst.setString(2, );
-	*/	
-		
+		System.out.println("porocdio?2");
 	}
 }
+
+
