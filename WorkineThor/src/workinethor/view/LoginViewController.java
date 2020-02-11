@@ -16,7 +16,8 @@ public class LoginViewController {
 
 	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane mainLayoutHome = null;
-
+	private BorderPane signupLayout = null;
+	
 	String user = "JavaFX2";
 	String pw = "password";
 	String checkUser;
@@ -69,37 +70,41 @@ public class LoginViewController {
 		
 		
 		/**
-		 * sets action for login button
-		 * for now is a mock function thata checks pswd and usr vs two local variables
+		 * sets action for signup button
+		 * opens a dialog where you can SignUp 
 		 * 
 		 */
-		
-/**		
+	
 		signupBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) { // "event" is not used
-				checkUser = userName.getText().toString();
-				checkPw = password.getText().toString();
-				if (checkUser.equals(user) && checkPw.equals(pw)) {
 					try {
-						mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+						signupLayout = FXMLLoader.load(MainNavBarController.class.getResource("SignupView.fxml"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					mainLayout.setCenter(mainLayoutHome);
-				} else { // Add the alert window when the password or the username are not correct
-					Alert alert = new Alert(Alert.AlertType.ERROR);
-					alert.setHeaderText(null);
-					alert.setContentText("Username or Password is not correct!");
-					alert.show();
-
-				}
-				userName.setText("");
-				password.setText("");
-			}
+					mainLayout.setCenter(signupLayout);
+			}	
 		});
-*/
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

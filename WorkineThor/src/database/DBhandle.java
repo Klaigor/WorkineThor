@@ -13,8 +13,35 @@ public class DBhandle {
 	private String dbPasswd = "password";
 	private String dbName = "workinethor";
 	private Connection dbConnection;
+	private static DBhandle dbHandleInstance = null;
 	
 	
+	/**
+	 * class constructor made private as stated 
+	 * by the Singleton pattern
+	 * @return
+	 */
+	private DBhandle() {};
+	
+	
+	/**
+	 * Method that let the other objects acces the Singleton 
+	 * instance DBhandle
+	 * @return
+	 */
+	public static DBhandle getDBhandleInstance() {
+		if (dbHandleInstance == null) 
+            dbHandleInstance = new DBhandle(); 
+  
+        return dbHandleInstance;
+	};
+	
+	
+	/**
+	 * Method that Returns the connection to the DB
+	 * referred by DBhandle
+	 * @return
+	 */
 	public Connection  getConnection() {
 		String connectionString = "jdbc:mysql://" + this.dbHost+ ":" + this.dbPort+"/"+ this.dbName; ;
 		
@@ -29,10 +56,4 @@ public class DBhandle {
 		return dbConnection;
 		
 	}
-	 
-/**
-	public static void main (String args[]) throws ClassNotFoundException, SQLException {
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workinethor", "root", "password");
-		System.out.println("dio");
-	}**/
 }

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class LoginController {
 
 	private Connection dbConnection;
-	private DBhandle dbHandler = new DBhandle(); 
+	private DBhandle dbHandler = DBhandle.getDBhandleInstance(); 
 	private PreparedStatement pst;
 	
 	
@@ -18,5 +18,19 @@ public class LoginController {
 		String insert = "INSERT INTO users(username,password)"+"VALUES (?,?)";
 		
 		dbConnection = dbHandler.getConnection();
+		
+		try {
+			
+			pst = dbConnection.prepareStatement(insert);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	/*	
+		pst.setString(1, );
+		pst.setString(2, );
+	*/	
+		
 	}
 }

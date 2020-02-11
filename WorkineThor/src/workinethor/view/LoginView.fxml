@@ -51,12 +51,12 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <Label prefHeight="36.0" prefWidth="134.0" text="want to became a user?" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Label prefHeight="36.0" prefWidth="158.0" text="want to became a user?" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
-                        <Insets left="40.0" />
+                        <Insets left="15.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="signupBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="200.0" />
                      </GridPane.margin>
