@@ -24,6 +24,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,7 +40,6 @@ import workinethor.Main;
 public class MainCreateProjectController {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
-	ObservableList<String> memberListSelector = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
 	// project information
 	@FXML
@@ -192,7 +192,7 @@ public class MainCreateProjectController {
 
 		BorderPane mainLayoutNext = null;
 		try {
-			mainLayoutNext = FXMLLoader.load(MainBackHomeController.class.getResource("CreateProjectNext.fxml"));
+			mainLayoutNext = FXMLLoader.load(MainNavBarController.class.getResource("CreateProjectNext.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -202,31 +202,34 @@ public class MainCreateProjectController {
 	// method that create the add member view
 	@FXML
 	private void addMember() {
-		ObservableList<String> memberListSelector = FXCollections.observableArrayList("culo", "cane");
+		ObservableList<String> memberListSelector = FXCollections.observableArrayList("culo", "anatra"); //lista di "membri"
 		Stage addMemberWindow = new Stage();
 		addMemberWindow.setTitle("Add Member");
 
 		AnchorPane background = new AnchorPane();
 
-		TextField searchField = new TextField();
+		TextField searchField = new TextField(); //creazione barra di ricerca
 		searchField.setPromptText("Search here!");
 		searchField.setTranslateX(101);
 		searchField.setTranslateY(52);
 		searchField.setPrefSize(250, 26);
-
-		searchField.setOnKeyTyped(event -> {
-			
-		});
 
 		Image searchLogo = new Image("Images/search--v2.png", 36, 36, true, false);
 		ImageView logoView = new ImageView(searchLogo);
 		logoView.setTranslateX(50);
 		logoView.setTranslateY(47);
 
-		ListView<String> memberList = new ListView<String>();
+		ListView<String> memberList = new ListView<>(memberListSelector); //visualizzazione membri in una list view
 		memberList.setTranslateY(96);
 		memberList.setPrefSize(400, 500);
 		memberList.setItems(memberListSelector);
+		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		
+		searchField.setOnKeyTyped(event -> { //algoritmo di sorting per cercare i membri nella lista in base ai caratteri 
+			String search = searchField.getText().toString();
+			if (search != null && search.equals(memberListSelector)) {
+			}
+		});
 
 		background.getChildren().add(logoView);
 		background.getChildren().add(searchField);
