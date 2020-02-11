@@ -3,6 +3,9 @@ package workinethor.view;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import controller.CreateProjectController;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +28,8 @@ import javafx.stage.Stage;
 
 public class CreateProjectNextController {
 	
-	private String projectName = MainCreateProjectController.getProjectName();
-	private boolean loginSuccess = MainCreateProjectController.getLoginSuccess();
+	//get singleton instance
+	private CreateProjectController control = CreateProjectController.getInstace();
 	
 	// array of file paths
 	private ArrayList<String> paths = new ArrayList<>();
@@ -45,7 +48,7 @@ public class CreateProjectNextController {
 
 	@FXML
 	private void initialize() {
-		title.setText(projectName);
+		title.setText(control.getProjectName());
 		
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -54,12 +57,17 @@ public class CreateProjectNextController {
 			}
 		});
 		
-		//disables button if megaLogin failed
-		if(!loginSuccess)
+		//disable button if driveActive is false
+		if(!control.getDriveActive())
 			addFileDrive.setDisable(true);
+		
+		//only for info(can be deleted)
+		logger.log(Level.INFO, "Project:" + control.getProjectName()+ 
+				" Drive:"+ control.getDriveName()+ 
+				" DriveActive" +control.getDriveActive());
 	}
 
-	//add files to project function
+	//add files to project function(needs to handled by the addFileController)
 	@FXML
 	private void addFileFunc() {
 		FileChooser fc = new FileChooser();
@@ -73,7 +81,7 @@ public class CreateProjectNextController {
 			logger.log(Level.WARNING,"No file selected");
 	}
 
-	// returns the i-th file path
+	// returns the i-th file path(needs to be deleted)
 	public String readPath(int i) {
 		if (i > 0 && i < paths.size()) {
 			return paths.get(i);
@@ -84,7 +92,7 @@ public class CreateProjectNextController {
 		}
 	}
 	
-	//add drive file to project function
+	//add drive file to project function(needs to be handled by addFileController)
 	@FXML
 	private void addFileDriveFunc() {
 		try {
@@ -134,7 +142,7 @@ public class CreateProjectNextController {
 		megaPage.show();
 	}
 	
-	// returns the i-th file url
+	// returns the i-th file url(needs to be deleted)
 	public String readURL(int i) {
 		if (i > 0 && i < urls.size()) {
 			return urls.get(i);

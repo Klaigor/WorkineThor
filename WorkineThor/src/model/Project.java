@@ -6,19 +6,41 @@ import java.util.ArrayList;
 public class Project {
 
 	private String projectName;
+	private String driveName;
+	private boolean usesDrive;
 	private ArrayList<User> members;
 	private ArrayList<File> files;
 	private ArrayList<String> schedule;
 	
+	//default constructor
 	public Project() {
-		this("");
+		this("", false, "");
 	}
 	
-	public Project(String projectName) {
+	//non-default constructor
+	public Project(String projectName, boolean usesDrive, String driveName) {
 		this.projectName = projectName;
+		this.usesDrive = usesDrive;
+		this.driveName = driveName;
 		members = new ArrayList<>();
 		files = new ArrayList<>();
 		schedule = new ArrayList<>();
+	}
+	
+	public String getDriveName() {
+		return driveName;
+	}
+	
+	public void setDriveName(String driveName) {
+		this.driveName = driveName;
+	}
+	
+	public boolean getDriveActive() {
+		return usesDrive;
+	}
+	
+	public void setDriveActive(boolean choice) {
+		usesDrive = choice;
 	}
 	
 	public void setProjectName(String projectName) {

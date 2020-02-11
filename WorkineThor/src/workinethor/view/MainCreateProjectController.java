@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import bean.ProjectBean;
+import controller.CreateProjectController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +43,10 @@ public class MainCreateProjectController {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
+	//createProject bean and controller
+	private ProjectBean bean = new ProjectBean();
+	private CreateProjectController projectController = CreateProjectController.getInstace();
+	
 	// project information
 	@FXML
 	private TextField projectNameField;
@@ -54,8 +60,8 @@ public class MainCreateProjectController {
 	@FXML
 	private Button next;
 
-	private static String projectName;
-	private static boolean loginSuccess = false;
+	//private static String projectName;
+	//private static boolean loginSuccess = false;
 	private Logger logger = Logger.getLogger(MainCreateProjectController.class.getName());
 
 	// changed for code smells
@@ -79,7 +85,6 @@ public class MainCreateProjectController {
 		next.setDisable(true);
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
-		driveSelector.setValue("mmm");
 
 		//changeListener -> allows us to capture event on choiceBox
 		ChangeListener<String> myListener = new ChangeListener<String>() {
@@ -155,10 +160,10 @@ public class MainCreateProjectController {
 	}
 	
 	private static void setLoginSuccessVariable(boolean value) {
-		loginSuccess = value;
+		//loginSuccess = value;
 	}
 
-	//verify megaLogin method
+	//verify megaLogin method(andrebbe tolta? ma dove la metto??)
 	private boolean verifyMegaLogin(String email, String password) {
 		boolean success = false;
 		String tempEmail = "";
@@ -186,9 +191,18 @@ public class MainCreateProjectController {
 	
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
-		projectName = projectNameField.getText();
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
+		
+		//pass createProject values to the bean class
+		bean.setProjectName(projectNameField.getText());
+		if(driveBox.isSelected() && driveSelector.getValue() != "") {
+			bean.setDriveIsActive(true);
+			bean.setDriveName(driveSelector.getValue());
+		}
+		
+		//pass bean to controller so that i can instantiate a new project(model)
+		projectController.createProject(bean);
 
 		BorderPane mainLayoutNext = null;
 		try {
@@ -241,14 +255,6 @@ public class MainCreateProjectController {
 		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
 
 		addMemberWindow.show();
-	}
-
-	public static String getProjectName() {
-		return projectName;
-	}
-	
-	public static boolean getLoginSuccess() {
-		return loginSuccess;
 	}
 	
 }
