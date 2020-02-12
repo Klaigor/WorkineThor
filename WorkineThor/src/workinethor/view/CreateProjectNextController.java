@@ -1,6 +1,5 @@
 package workinethor.view;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,10 +33,6 @@ public class CreateProjectNextController {
 	
 	//addFile bean
 	private FileBean fileBean = new FileBean();
-	
-	// array of file paths
-	private ArrayList<String> paths = new ArrayList<>();
-	private ArrayList<String> urls = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
 
@@ -82,6 +77,7 @@ public class CreateProjectNextController {
 			fileBean.setFilePath(selectedFile.getPath());
 			fileBean.setFileName(selectedFile.getName());
 			control.addFile(fileBean);
+			control.getProject().showFiles();
 		} 
 		else
 			logger.log(Level.WARNING,"No file selected");
@@ -109,9 +105,11 @@ public class CreateProjectNextController {
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				if(fileURL.getText().contains("https:"))
 				filelist.getItems().add(fileURL.getText());
 				fileBean.setFilePath(fileURL.getText());
 				control.addFile(fileBean);
+				control.getProject().showFiles();
 			}
 		});
 		

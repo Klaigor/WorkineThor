@@ -2,9 +2,13 @@ package model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Project {
 
+	private Logger logger =  Logger.getLogger(Project.class.getName());
+	
 	private String projectName;
 	private String driveName;
 	private boolean usesDrive;
@@ -67,6 +71,12 @@ public class Project {
 	public void removeFile(File file) {
 		int indexOfFile = files.indexOf(file);
 		files.remove(indexOfFile);
+	}
+	
+	public void showFiles() {
+		for(File file: files) {
+			logger.log(Level.INFO, file.getPath());
+		}
 	}
 	
 	public void addScheduleAction(String action) {
