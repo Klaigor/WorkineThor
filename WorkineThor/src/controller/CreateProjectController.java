@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+
+import bean.FileBean;
 import bean.ProjectBean;
 import model.Project;
 
@@ -22,6 +25,11 @@ public class CreateProjectController {
 		newProject = new Project(bean.getProjectName(), bean.getDriveIsActive(), bean.getDriveName());
 	}
 	
+	public void addFile(FileBean bean) {
+		File file = new File(bean.getFilePath());
+		newProject.addFile(file);
+	}
+	
 	public String getProjectName() {
 		return newProject.getProjectName();
 	}
@@ -32,6 +40,10 @@ public class CreateProjectController {
 	
 	public String getDriveName() {
 		return newProject.getDriveName();
+	}
+	
+	public Project getProject() {
+		return newProject;
 	}
 	
 	

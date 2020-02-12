@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import bean.FileBean;
 import controller.CreateProjectController;
 
 import java.io.File;
@@ -30,6 +31,9 @@ public class CreateProjectNextController {
 	
 	//get singleton instance
 	private CreateProjectController control = CreateProjectController.getInstace();
+	
+	//addFile bean
+	private FileBean fileBean = new FileBean();
 	
 	// array of file paths
 	private ArrayList<String> paths = new ArrayList<>();
@@ -75,21 +79,12 @@ public class CreateProjectNextController {
 
 		if (selectedFile != null) {
 			filelist.getItems().add(selectedFile.getPath());
-			paths.add(selectedFile.getPath());
+			fileBean.setFilePath(selectedFile.getPath());
+			fileBean.setFileName(selectedFile.getName());
+			control.addFile(fileBean);
 		} 
 		else
 			logger.log(Level.WARNING,"No file selected");
-	}
-
-	// returns the i-th file path(needs to be deleted)
-	public String readPath(int i) {
-		if (i > 0 && i < paths.size()) {
-			return paths.get(i);
-		} 
-		else {
-			logger.log(Level.SEVERE,"Out of bounds");
-			return null;
-		}
 	}
 	
 	//add drive file to project function(needs to be handled by addFileController)
@@ -115,7 +110,19 @@ public class CreateProjectNextController {
 			@Override
 			public void handle(ActionEvent event) {
 				filelist.getItems().add(fileURL.getText());
-				urls.add(fileURL.getText());
+				fileBean.setFilePath(fileURL.getText());
+				control.addFile(fileBean);
+			}
+		});
+		
+		Button exitButton = new Button();
+		exitButton.setText("Done");
+		exitButton.setTranslateX(120); exitButton.setTranslateY(100);
+		
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override 
+			public void handle(ActionEvent event) {
+				megaPage.close();
 			}
 		});
 		
@@ -143,6 +150,7 @@ public class CreateProjectNextController {
 		background.getChildren().add(fileNameLabel);
 		background.getChildren().add(fileURL);
 		background.getChildren().add(loadFileButton);
+		background.getChildren().add(exitButton);
 		background.getChildren().add(megaWebPage);
 		
 		Scene megaScene = new Scene(background, 1024, 800);
@@ -150,14 +158,4 @@ public class CreateProjectNextController {
 		megaPage.show();
 	}
 	
-	// returns the i-th file url(needs to be deleted)
-	public String readURL(int i) {
-		if (i > 0 && i < urls.size()) {
-			return urls.get(i);
-		} 
-		else {
-			logger.log(Level.SEVERE,"Out of bounds");
-			return null;
-		}
-	}	
 }
