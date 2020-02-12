@@ -6,6 +6,7 @@ package controller;
 import java.sql.SQLException;
 import bean.UserBean;
 import database.UserDAO;
+import model.Session;
 import model.User;
 
 public class LoginController {
@@ -19,6 +20,12 @@ public class LoginController {
 	public void signup (UserBean user) throws SQLException {
 		UserDAO usrDAO = new UserDAO();
 		usrDAO.insert(user);
+		User usr = new User();
+		usr.setPassword(user.getPassword());
+		usr.setUsername(user.getUsername());
+		
+		Session session = Session.getSession();
+		session.setUser(usr);
 	}
 	
 	
@@ -34,6 +41,13 @@ public class LoginController {
 		}
 		
 		if(result.getUsername().equals(user.getUsername()) & result.getPassword().equals(user.getPassword())) {
+
+			User usr = new User();
+			usr.setPassword(result.getPassword());
+			usr.setUsername(result.getUsername());
+			
+			Session session = Session.getSession();
+			session.setUser(usr);
 			
 			return true;
 		}
