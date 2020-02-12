@@ -4,10 +4,9 @@
 package controller;
 
 import java.sql.SQLException;
-
 import bean.UserBean;
 import database.UserDAO;
-
+import model.User;
 
 public class LoginController {
 
@@ -19,9 +18,26 @@ public class LoginController {
 	 */
 	public void signup (UserBean user) throws SQLException {
 		UserDAO usrDAO = new UserDAO();
-		usrDAO.signup(user.getUsername(), user.getPassword());
+		usrDAO.insert(user);
+	}
+	
+	
+	/*
+	 * takes in input a UserBean and check if the user-name and password match with one in the DB
+	 * if it finds a match returns true otherwise false
+	 */
+	public boolean signin (UserBean user) throws SQLException {
+		UserDAO usrDAO = new UserDAO();
+		UserBean result = usrDAO.getUser(user);
+
+		if (result.getUsername().equals("")) {
+		}
 		
-		System.out.println("porocdio?2");
+		if(result.getUsername().equals(user.getUsername()) & result.getPassword().equals(user.getPassword())) {
+			
+			return true;
+		}
+		else return false;
 	}
 }
 

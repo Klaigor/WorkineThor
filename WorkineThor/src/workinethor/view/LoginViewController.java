@@ -6,6 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import bean.UserBean;
+import controller.LoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -15,13 +19,9 @@ import workinethor.Main;
 public class LoginViewController {
 
 	private BorderPane mainLayout = Main.getMainLayout();
-	private BorderPane mainLayoutHome = null;
+	private BorderPane homeLayout = null;
 	private BorderPane signupLayout = null;
 	
-	String user = "JavaFX2";
-	String pw = "password";
-	String checkUser;
-	String checkPw;
 
 	@FXML
 	private TextField userName;
@@ -47,15 +47,32 @@ public class LoginViewController {
 
 			@Override
 			public void handle(ActionEvent event) { // "event" is not used
-				checkUser = userName.getText().toString();
-				checkPw = password.getText().toString();
-				if (checkUser.equals(user) && checkPw.equals(pw)) {
+				boolean res = false;
+				UserBean user = new UserBean();
+				user.setPassword(password.getText().toString());
+				user.setUsername(userName.getText().toString());
+				
+				LoginController control = new LoginController();  
+					
 					try {
-						mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
-					} catch (IOException e) {
+						res = control.signin(user);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					mainLayout.setCenter(mainLayoutHome);
+									
+				if (res) {						
+						try {
+							
+							homeLayout = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+						
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		
+					mainLayout.setCenter(homeLayout);
+					
 				} else { // Add the alert window when the password or the username are not correct
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setHeaderText(null);
