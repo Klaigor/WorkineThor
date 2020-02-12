@@ -4,11 +4,13 @@
 package workinethor.view;
 
 import java.io.IOException;
+import java.util.stream.IntStream;
 
 import bean.ProjectBean;
 import controller.CreateProjectController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -100,13 +102,13 @@ public class MainCreateProjectController {
 	// method that create the add member view
 	@FXML
 	private void addMember() {
-		ObservableList<String> memberListSelector = FXCollections.observableArrayList("culo", "anatra"); //lista di "membri"
+		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); //Create a member list
 		Stage addMemberWindow = new Stage();
 		addMemberWindow.setTitle("Add Member");
 
 		AnchorPane background = new AnchorPane();
 
-		TextField searchField = new TextField(); //creazione barra di ricerca
+		TextField searchField = new TextField(); //create a search field
 		searchField.setPromptText("Search here!");
 		searchField.setTranslateX(101);
 		searchField.setTranslateY(52);
@@ -117,18 +119,28 @@ public class MainCreateProjectController {
 		logoView.setTranslateX(50);
 		logoView.setTranslateY(47);
 
-		ListView<String> memberList = new ListView<>(memberListSelector); //visualizzazione membri in una list view
+		ListView<String> memberList = new ListView<>(memberListSelector); //Create a list view where I can visualize the list
 		memberList.setTranslateY(96);
 		memberList.setPrefSize(400, 500);
 		memberList.setItems(memberListSelector);
 		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		
-		searchField.setOnKeyTyped(event -> { //algoritmo di sorting per cercare i membri nella lista in base ai caratteri 
-			String search = searchField.getText().toString();
-			if (search != null && search.equals(memberListSelector)) {
-			}
-		});
+		memberListSelector.add("A");
+		memberListSelector.add("B");
+		memberListSelector.add("EA0");
 
+		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); //create a filtered member list
+		
+		searchField.textProperty().addListener(obs->{ //Compare if in the list there are some equals with the filtered list
+	        String filter = searchField.getText(); 
+	        if(filter == null || filter.length() == 0) {
+	            filteredData.setPredicate(s -> true);
+	        }
+	        else {
+	            filteredData.setPredicate(s -> s.contains(filter));
+	        }
+	        memberList.setItems(filteredData); //show filtered list
+	    });
+		
 		background.getChildren().add(logoView);
 		background.getChildren().add(searchField);
 		background.getChildren().add(memberList);
@@ -140,5 +152,6 @@ public class MainCreateProjectController {
 
 		addMemberWindow.show();
 	}
+	
 	
 }
