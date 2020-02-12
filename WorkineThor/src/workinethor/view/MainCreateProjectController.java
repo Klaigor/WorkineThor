@@ -3,29 +3,19 @@
  */
 package workinethor.view;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import bean.ProjectBean;
 import controller.CreateProjectController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -34,8 +24,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 import workinethor.Main;
 
@@ -60,8 +48,6 @@ public class MainCreateProjectController {
 	@FXML
 	private Button next;
 
-	private Logger logger = Logger.getLogger(MainCreateProjectController.class.getName());
-
 	// changed for code smells
 	@FXML
 	private void driveBoxYes() {
@@ -84,105 +70,9 @@ public class MainCreateProjectController {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
-
-		//changeListener -> allows us to capture event on choiceBox
-		ChangeListener<String> myListener = new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> ov, String value, String newValue) {
-				if (newValue == "Mega")
-					megaLogin();
-			}
-		};
-
-		// added listener to choiceBox
-		driveSelector.getSelectionModel().selectedItemProperty().addListener(myListener);
-	}
-
-	// method to create the megaLoginPage
-	private void megaLogin() {
-		Stage loginWindow = new Stage();
-		loginWindow.setTitle("Mega Login");
-
-		AnchorPane background = new AnchorPane();
-
-		Label email = new Label("Email");
-		Label password = new Label("Password");
-		email.setTranslateX(50);
-		email.setTranslateY(120);
-		password.setTranslateX(50);
-		password.setTranslateY(200);
-
-		TextField emailTextField = new TextField();
-		PasswordField passwordTextField = new PasswordField();
-		emailTextField.setTranslateX(150);
-		emailTextField.setTranslateY(120);
-		passwordTextField.setTranslateX(150);
-		passwordTextField.setTranslateY(200);
-
-		Button loginButton = new Button();
-		loginButton.setTranslateX(150);
-		loginButton.setTranslateY(280);
-		loginButton.setText("Login");
-		loginButton.setDefaultButton(true);
-
-		loginButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// check if email and pass are correct
-				boolean ret = verifyMegaLogin(emailTextField.getText(), passwordTextField.getText());
-				if(!ret) {
-					logger.log(Level.WARNING, "Wrong email or password");
-				}
-				loginWindow.close();
-			}
-		});
-
-		Image megaLogo = new Image("Images/mega.png", 220, 90, true, false);
-		ImageView logoView = new ImageView(megaLogo);
-		logoView.setTranslateX(80);
-		logoView.setTranslateY(10);
-
-		background.getChildren().add(email);
-		background.getChildren().add(password);
-		background.getChildren().add(emailTextField);
-		background.getChildren().add(passwordTextField);
-		background.getChildren().add(loginButton);
-		background.getChildren().add(logoView);
-
-		Scene loginScene = new Scene(background, 450, 450);
-		loginWindow.setScene(loginScene);
-		loginWindow.setResizable(false);
-		loginWindow.initModality(Modality.APPLICATION_MODAL);
-
-		loginWindow.show();
-	}
-	
-	//verify megaLogin method(andrebbe tolta? ma dove la metto??)
-	private boolean verifyMegaLogin(String email, String password) {
-		boolean success = false;
-		String tempEmail = "";
-		String tempPassword = "";
-		URL loginUrl = getClass().getResource("/File/login.txt");
-		try {
-			Scanner x  = new Scanner(new File(loginUrl.getPath()));
-			x.useDelimiter("[,\n]");
-			
-			while(x.hasNext() && !success) {
-				tempEmail = x.next();
-				tempPassword = x.next();
-				
-				if(tempEmail.trim().equals(email.trim()) && tempPassword.trim().equals(password.trim()))
-					success = true;
-			}
-			x.close();
-			
-		}catch(FileNotFoundException e) {
-			logger.log(Level.WARNING, "file not found");
-		}
 		
-		return success;
 	}
-	
+
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
 		BorderPane mainLayout = null;

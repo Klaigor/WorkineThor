@@ -6,20 +6,22 @@ import java.util.logging.Logger;
 
 import controller.CreateProjectController;
 
-import java.awt.Desktop;
 import java.io.File;
-import java.net.URI;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -93,13 +95,6 @@ public class CreateProjectNextController {
 	//add drive file to project function(needs to be handled by addFileController)
 	@FXML
 	private void addFileDriveFunc() {
-		String URI = "http://mega.nz/fm/nSJlAKrb";
-		try {
-			Desktop.getDesktop().browse(new URI(URI));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		Stage megaPage = new Stage();
 		megaPage.setTitle("megaFiles");
 		megaPage.initModality(Modality.APPLICATION_MODAL);
@@ -112,11 +107,6 @@ public class CreateProjectNextController {
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100); fileURL.setTranslateY(50);
 		
-		ListView<String> selectedFiles = new ListView<>();
-		selectedFiles.setTranslateY(200);
-		selectedFiles.setOrientation(Orientation.VERTICAL);
-        selectedFiles.setPrefSize(450, 200);
-		
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
 		loadFileButton.setTranslateX(60); loadFileButton.setTranslateY(100);
@@ -124,17 +114,38 @@ public class CreateProjectNextController {
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				selectedFiles.getItems().add(fileURL.getText());
+				filelist.getItems().add(fileURL.getText());
 				urls.add(fileURL.getText());
 			}
 		});
 		
+		WebView megaWebPage = new WebView();
+		WebEngine megaEngine = megaWebPage.getEngine();
+		
+
+		switch(control.getDriveName()) {
+		case "Mega": megaEngine.load("https://mega.nz");break;
+		case "Google Drive": megaEngine.load("https://drive.google.com/");break;
+		case "DropBox": megaEngine.load("https://dropbox.com/");break;
+		}
+		
+		megaEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
+				if(newState == State.SUCCEEDED) {
+					logger.log(Level.INFO, "Page loaded");
+				}
+			}
+		});
+			
+		megaWebPage.setTranslateY(150);
+		megaWebPage.setPrefSize(1024, 800);
+		
 		background.getChildren().add(fileNameLabel);
 		background.getChildren().add(fileURL);
-		background.getChildren().add(selectedFiles);
 		background.getChildren().add(loadFileButton);
+		background.getChildren().add(megaWebPage);
 		
-		Scene megaScene = new Scene(background, 450, 450);
+		Scene megaScene = new Scene(background, 1024, 800);
 		megaPage.setScene(megaScene);
 		megaPage.show();
 	}
