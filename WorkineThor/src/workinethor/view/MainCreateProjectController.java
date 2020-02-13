@@ -126,7 +126,7 @@ public class MainCreateProjectController {
 		memberList.setTranslateY(96);
 		memberList.setPrefSize(400, 500);
 		memberList.setItems(memberListSelector);
-		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		memberList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		memberListSelector.addAll(result);
 
 		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
