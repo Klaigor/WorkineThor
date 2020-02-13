@@ -43,7 +43,6 @@ public class UserDAO {
 
 		pst.executeUpdate();
 		return true;
-
 	}
 
 	public UserBean getUser(UserBean userIN) throws SQLException {
@@ -97,6 +96,26 @@ public class UserDAO {
 				allUsers.addAll(rs.getString("username"));
 		}
 		return allUsers;
+	}
+	
+	public boolean deleteUser(UserBean user) throws SQLException {
+		String insert = "DELETE FROM users WHERE username=? and password=?";
+
+		Connection dbConnection = dbHandler.getConnection();
+
+		try {
+
+			pst = dbConnection.prepareStatement(insert);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		pst.setString(1, user.getUsername());
+		pst.setString(2, user.getPassword());
+
+		pst.executeUpdate();
+		return true;
 	}
 
 }

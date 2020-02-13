@@ -39,6 +39,7 @@ public class LoginController{
 		UserBean result = usrDAO.getUser(user);
 
 		if (result.getUsername().equals("")) {
+			return false;
 		}
 
 		if (result.getUsername().equals(user.getUsername()) & result.getPassword().equals(user.getPassword())) {
@@ -51,8 +52,8 @@ public class LoginController{
 			session.setUser(usr);
 
 			return true;
-		} else
-			return false;
+		}else return false;
+		
 	}
 
 }
