@@ -27,13 +27,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class CreateProjectNextController {
-	
-	//get singleton instance
+
+	// get singleton instance
 	private CreateProjectController control = CreateProjectController.getInstace();
-	
-	//addFile bean
+
+	// addFile bean
 	private FileBean fileBean = new FileBean();
-	
+
 	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
 
 	@FXML
@@ -48,25 +48,24 @@ public class CreateProjectNextController {
 	@FXML
 	private void initialize() {
 		title.setText(control.getProjectName());
-		
+
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				addFileDriveFunc();
 			}
 		});
-		
-		//disable button if driveActive is false
-		if(!control.getDriveActive())
+
+		// disable button if driveActive is false
+		if (!control.getDriveActive())
 			addFileDrive.setDisable(true);
-		
-		//only for info(can be deleted)
-		logger.log(Level.INFO, "Project:" + control.getProjectName()+ 
-				" Drive:"+ control.getDriveName()+ 
-				" DriveActive" +control.getDriveActive());
+
+		// only for info(can be deleted)
+		logger.log(Level.INFO, "Project:" + control.getProjectName() + " Drive:" + control.getDriveName()
+				+ " DriveActive" + control.getDriveActive());
 	}
 
-	//add files to project function(needs to handled by the addFileController)
+	// add files to project function(needs to handled by the addFileController)
 	@FXML
 	private void addFileFunc() {
 		FileChooser fc = new FileChooser();
@@ -78,82 +77,90 @@ public class CreateProjectNextController {
 			fileBean.setFileName(selectedFile.getName());
 			control.addFile(fileBean);
 			control.getProject().showFiles();
-		} 
-		else
-			logger.log(Level.WARNING,"No file selected");
+		} else
+			logger.log(Level.WARNING, "No file selected");
 	}
-	
-	//add drive file to project function(needs to be handled by addFileController)
+
+	// add drive file to project function(needs to be handled by addFileController)
 	@FXML
 	private void addFileDriveFunc() {
 		Stage megaPage = new Stage();
 		megaPage.setTitle("megaFiles");
 		megaPage.initModality(Modality.APPLICATION_MODAL);
 		megaPage.setResizable(false);
-		
+
 		AnchorPane background = new AnchorPane();
 		Label fileNameLabel = new Label("Insert URL");
-		fileNameLabel.setTranslateX(20); fileNameLabel.setTranslateY(50);
-		
+		fileNameLabel.setTranslateX(20);
+		fileNameLabel.setTranslateY(50);
+
 		TextField fileURL = new TextField();
-		fileURL.setTranslateX(100); fileURL.setTranslateY(50);
-		
+		fileURL.setTranslateX(100);
+		fileURL.setTranslateY(50);
+
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
-		loadFileButton.setTranslateX(60); loadFileButton.setTranslateY(100);
-		
+		loadFileButton.setTranslateX(60);
+		loadFileButton.setTranslateY(100);
+
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if(fileURL.getText().contains("https:"))
-				filelist.getItems().add(fileURL.getText());
+				if (fileURL.getText().contains("https:"))
+					filelist.getItems().add(fileURL.getText());
 				fileBean.setFilePath(fileURL.getText());
 				control.addFile(fileBean);
 				control.getProject().showFiles();
 			}
 		});
-		
+
 		Button exitButton = new Button();
 		exitButton.setText("Done");
-		exitButton.setTranslateX(120); exitButton.setTranslateY(100);
-		
+		exitButton.setTranslateX(120);
+		exitButton.setTranslateY(100);
+
 		exitButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override 
+			@Override
 			public void handle(ActionEvent event) {
 				megaPage.close();
 			}
 		});
-		
+
 		WebView megaWebPage = new WebView();
 		WebEngine megaEngine = megaWebPage.getEngine();
-		
 
-		switch(control.getDriveName()) {
-		case "Mega": megaEngine.load("https://mega.nz");break;
-		case "Google Drive": megaEngine.load("https://drive.google.com/");break;
-		case "DropBox": megaEngine.load("https://dropbox.com/");break;
+		switch (control.getDriveName()) {
+		case "Mega":
+			megaEngine.load("https://mega.nz");
+			break;
+		case "Google Drive":
+			megaEngine.load("https://drive.google.com/");
+			break;
+		case "default":
+			megaEngine.load("https://dropbox.com/");
+			break;
 		}
-		
+
 		megaEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
-				if(newState == State.SUCCEEDED) {
+				if (newState == State.SUCCEEDED) {
 					logger.log(Level.INFO, "Page loaded");
 				}
 			}
 		});
-			
+
 		megaWebPage.setTranslateY(150);
 		megaWebPage.setPrefSize(1024, 800);
-		
+
 		background.getChildren().add(fileNameLabel);
 		background.getChildren().add(fileURL);
 		background.getChildren().add(loadFileButton);
 		background.getChildren().add(exitButton);
 		background.getChildren().add(megaWebPage);
-		
+
 		Scene megaScene = new Scene(background, 1024, 800);
 		megaPage.setScene(megaScene);
 		megaPage.show();
 	}
-	
+
 }

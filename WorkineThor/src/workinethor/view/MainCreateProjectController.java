@@ -4,10 +4,12 @@
 package workinethor.view;
 
 import java.io.IOException;
-import java.util.stream.IntStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import bean.ProjectBean;
 import controller.CreateProjectController;
+import database.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,10 +35,10 @@ public class MainCreateProjectController {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
-	//createProject bean and controller
+	// createProject bean and controller
 	private ProjectBean bean = new ProjectBean();
 	private CreateProjectController projectController = CreateProjectController.getInstace();
-	
+
 	// project information
 	@FXML
 	private TextField projectNameField;
@@ -72,22 +74,22 @@ public class MainCreateProjectController {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
-		
+
 	}
 
 	@FXML
 	private void goNext() throws IOException, InterruptedException {
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
-		
-		//pass createProject values to the bean class
+
+		// pass createProject values to the bean class
 		bean.setProjectName(projectNameField.getText());
-		if(driveBox.isSelected() && driveSelector.getValue() != "") {
+		if (driveBox.isSelected() && driveSelector.getValue() != "") {
 			bean.setDriveIsActive(true);
 			bean.setDriveName(driveSelector.getValue());
 		}
-		
-		//pass bean to controller so that i can instantiate a new project(model)
+
+		// pass bean to controller so that i can instantiate a new project(model)
 		projectController.createProject(bean);
 
 		BorderPane mainLayoutNext = null;
@@ -101,14 +103,16 @@ public class MainCreateProjectController {
 
 	// method that create the add member view
 	@FXML
-	private void addMember() {
-		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); //Create a member list
+	private void addMember() throws SQLException {
+		UserDAO usrDAO = new UserDAO();
+		ObservableList<String> result = usrDAO.getAllUsers();
+		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
 		Stage addMemberWindow = new Stage();
 		addMemberWindow.setTitle("Add Member");
 
 		AnchorPane background = new AnchorPane();
 
-		TextField searchField = new TextField(); //create a search field
+		TextField searchField = new TextField(); // create a search field
 		searchField.setPromptText("Search here!");
 		searchField.setTranslateX(101);
 		searchField.setTranslateY(52);
@@ -119,28 +123,27 @@ public class MainCreateProjectController {
 		logoView.setTranslateX(50);
 		logoView.setTranslateY(47);
 
-		ListView<String> memberList = new ListView<>(memberListSelector); //Create a list view where I can visualize the list
+		ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
+																			// the list
 		memberList.setTranslateY(96);
 		memberList.setPrefSize(400, 500);
 		memberList.setItems(memberListSelector);
 		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		memberListSelector.add("A");
-		memberListSelector.add("B");
-		memberListSelector.add("EA0");
+		memberListSelector.addAll(result);
 
-		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); //create a filtered member list
-		
-		searchField.textProperty().addListener(obs->{ //Compare if in the list there are some equals with the filtered list
-	        String filter = searchField.getText(); 
-	        if(filter == null || filter.length() == 0) {
-	            filteredData.setPredicate(s -> true);
-	        }
-	        else {
-	            filteredData.setPredicate(s -> s.contains(filter));
-	        }
-	        memberList.setItems(filteredData); //show filtered list
-	    });
-		
+		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
+																								// member list
+		searchField.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
+														// filtered list
+			String filter = searchField.getText();
+			if (filter == null || filter.length() == 0) {
+				filteredData.setPredicate(s -> true);
+			} else {
+				filteredData.setPredicate(s -> s.contains(filter));
+			}
+			memberList.setItems(filteredData); // show filtered list
+		});
+
 		background.getChildren().add(logoView);
 		background.getChildren().add(searchField);
 		background.getChildren().add(memberList);
@@ -152,6 +155,5 @@ public class MainCreateProjectController {
 
 		addMemberWindow.show();
 	}
-	
-	
+
 }
