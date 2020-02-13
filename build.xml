@@ -15,10 +15,14 @@
     <path id="JSON">
 	<pathelement location="ExternalJar/java-json.jar"/>
     </path>
+    <path id="JUnit">
+	<pathelement location="ExternalJar/junit.jar"/>
+    </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
         <path refid="JavaFX"/>
 	<path refid="JSON"/>
+    	<path refid="JUnit"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
