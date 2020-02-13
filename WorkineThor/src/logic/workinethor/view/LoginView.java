@@ -1,4 +1,4 @@
-package logic.workinethor.view;
+package workinethor.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,13 +8,13 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import logic.bean.UserBean;
-import logic.controller.LoginController;
+import bean.UserBean;
+import controller.LoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import logic.workinethor.Main;
+import workinethor.Main;
 
 public class LoginView {
 
@@ -82,6 +82,8 @@ public class LoginView {
 				}
 				userName.setText("");
 				password.setText("");
+				
+				NavBarView.getToolbar().setVisible(true);
 			}
 		});
 		
@@ -102,6 +104,7 @@ public class LoginView {
 						e.printStackTrace();
 					}
 					mainLayout.setCenter(signupLayout);
+					NavBarView.getToolbar().setVisible(true);
 			}	
 		});
 	}

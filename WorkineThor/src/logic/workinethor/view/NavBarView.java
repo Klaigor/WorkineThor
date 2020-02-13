@@ -1,15 +1,34 @@
-package logic.workinethor.view;
+package workinethor.view;
 
 import java.io.IOException;
 
+import org.omg.CORBA.INITIALIZE;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
-import logic.workinethor.Main;
+import workinethor.Main;
 
 public class NavBarView {
 	private BorderPane mainLayout = null;
 
+	@FXML
+	private ToolBar toolbar;
+	
+	private static ToolBar ret;
+	
+	
+	@FXML
+	private void initialize() {
+		toolbar.setVisible(false);
+		ret = toolbar;
+	}
+	
+	public static ToolBar getToolbar() {
+		return ret;
+	}
+	
 	@FXML
 	private void goHome() throws IOException {
 		BorderPane mainLayoutHome = null;
@@ -37,6 +56,7 @@ public class NavBarView {
 	// logout from account
 	@FXML
 	private void goLogin() throws IOException {
+		toolbar.setVisible(false);
 		BorderPane mainLayoutLogin = null;
 		mainLayout = Main.getMainLayout();
 		try {
