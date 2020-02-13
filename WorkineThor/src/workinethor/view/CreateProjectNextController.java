@@ -106,11 +106,12 @@ public class CreateProjectNextController {
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (fileURL.getText().contains("https:"))
+				if (fileURL.getText().contains("https:")) {
 					filelist.getItems().add(fileURL.getText());
-				fileBean.setFilePath(fileURL.getText());
-				control.addFile(fileBean);
-				control.getProject().showFiles();
+					fileBean.setFilePath(fileURL.getText());
+					control.addFile(fileBean);
+					control.getProject().showFiles();
+				}
 			}
 		});
 

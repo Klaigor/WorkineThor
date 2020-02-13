@@ -4,25 +4,41 @@ import java.io.File;
 
 import bean.FileBean;
 import bean.ProjectBean;
+import database.ProjectDAO;
 import model.Project;
+import model.Session;
 
-public class CreateProjectController {
+public class CreateProjectController{
 	
 	//singleton instance(only one controller)
 	private static CreateProjectController instance = null;
 	
 	private Project newProject;
 	
-	//singleton getInstance()
+	/**
+	 * private constructor
+	 */
+	private CreateProjectController() {}
+	
+	/**
+	 * method that returns active instance
+	 * @return CreateProjectController
+	 */
 	public static CreateProjectController getInstace() {
 		if(instance == null) 
 			instance = new CreateProjectController();
 		return instance;
 	}
 	
-	//creates new project
+	/**
+	 * method that creates a new project
+	 * @param bean
+	 */
 	public void createProject(ProjectBean bean) {
+		ProjectDAO projectDAO = new ProjectDAO();
 		newProject = new Project(bean.getProjectName(), bean.getDriveIsActive(), bean.getDriveName());
+		
+		projectDAO.addProjectToDB(newProject, Session.getSession());
 	}
 	
 	public void addFile(FileBean bean) {
@@ -45,6 +61,5 @@ public class CreateProjectController {
 	public Project getProject() {
 		return newProject;
 	}
-	
 	
 }

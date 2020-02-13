@@ -17,7 +17,8 @@ public class UserDAO {
 
 	private DBhandle dbHandler = DBhandle.getDBhandleInstance();
 	private PreparedStatement pst;
-
+	private Connection dbConnection;
+	
 	/**
 	 * prepares the statement and then sends it to the DB
 	 * 
@@ -28,7 +29,7 @@ public class UserDAO {
 	public void insert(UserBean user) throws SQLException {
 		String insert = "INSERT INTO users(username,password)" + "VALUES (?,?)";
 
-		Connection dbConnection = dbHandler.getConnection();
+		dbConnection = dbHandler.getConnection();
 
 		try {
 
@@ -49,7 +50,7 @@ public class UserDAO {
 		UserBean userOut = new UserBean();
 		String getUser = "SELECT * from users where username=? and password=?";
 
-		Connection dbConnection = dbHandler.getConnection();
+		dbConnection = dbHandler.getConnection();
 
 		try {
 
@@ -76,7 +77,7 @@ public class UserDAO {
 	public ObservableList<String> getAllUsers() throws SQLException {
 		String getAllUsers = "SELECT * from users";
 		ObservableList<String> allUsers = FXCollections.observableArrayList();
-		Connection dbConnection = dbHandler.getConnection();
+		dbConnection = dbHandler.getConnection();
 
 		try {
 

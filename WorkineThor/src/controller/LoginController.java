@@ -9,7 +9,7 @@ import database.UserDAO;
 import model.Session;
 import model.User;
 
-public class LoginController {
+public class LoginController{
 
 	/**
 	 * takes a {@link UserBean} instance and sends it to the {@link UserDAO} to make
@@ -53,4 +53,5 @@ public class LoginController {
 		} else
 			return false;
 	}
+
 }

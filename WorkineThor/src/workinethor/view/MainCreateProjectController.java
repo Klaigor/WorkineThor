@@ -5,7 +5,6 @@ package workinethor.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import bean.ProjectBean;
 import controller.CreateProjectController;
@@ -28,14 +27,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import workinethor.Main;
 
 public class MainCreateProjectController {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
-	// createProject bean and controller
+	// createProject bean and controller 
 	private ProjectBean bean = new ProjectBean();
 	private CreateProjectController projectController = CreateProjectController.getInstace();
 
