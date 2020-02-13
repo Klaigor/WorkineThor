@@ -18,11 +18,15 @@
     <path id="JUnit">
 	<pathelement location="ExternalJar/junit.jar"/>
     </path>
+    <path id="JSQL">
+	<pathelement location="ExternalJar/mysql-connector-java-8.0.19.jar"/>
+    </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
         <path refid="JavaFX"/>
 	<path refid="JSON"/>
     	<path refid="JUnit"/>
+	<path refid="JSQL"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
