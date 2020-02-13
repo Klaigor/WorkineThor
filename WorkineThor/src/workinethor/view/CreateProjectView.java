@@ -29,7 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import workinethor.Main;
 
-public class MainCreateProjectController {
+public class CreateProjectView {
 
 	ObservableList<String> driveSelectorList = FXCollections.observableArrayList("Google Drive", "Mega", "DropBox");
 
@@ -92,7 +92,7 @@ public class MainCreateProjectController {
 
 		BorderPane mainLayoutNext = null;
 		try {
-			mainLayoutNext = FXMLLoader.load(MainNavBarController.class.getResource("CreateProjectNext.fxml"));
+			mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CreateProjectNext.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

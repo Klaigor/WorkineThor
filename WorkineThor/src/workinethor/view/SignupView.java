@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;	
 
-public class SignupViewController {
+public class SignupView {
 	
 	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane homeLayout = null;
@@ -58,7 +58,7 @@ public class SignupViewController {
 
 								
 				try {
-						homeLayout = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+						homeLayout = FXMLLoader.load(NavBarView.class.getResource("HomePage.fxml"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

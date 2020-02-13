@@ -26,7 +26,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class CreateProjectNextController {
+public class CPAddFileView {
 
 	// get singleton instance
 	private CreateProjectController control = CreateProjectController.getInstace();
@@ -34,7 +34,7 @@ public class CreateProjectNextController {
 	// addFile bean
 	private FileBean fileBean = new FileBean();
 
-	private Logger logger = Logger.getLogger(CreateProjectNextController.class.getName());
+	private Logger logger = Logger.getLogger(CPAddFileView.class.getName());
 
 	@FXML
 	private Button addfile;

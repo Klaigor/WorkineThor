@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
-public class LoginViewController {
+public class LoginView {
 
 	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane homeLayout = null;
@@ -64,7 +64,7 @@ public class LoginViewController {
 				if (res) {						
 						try {
 							
-							homeLayout = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+							homeLayout = FXMLLoader.load(NavBarView.class.getResource("HomePage.fxml"));
 						
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -97,7 +97,7 @@ public class LoginViewController {
 			@Override
 			public void handle(ActionEvent event) { // "event" is not used
 					try {
-						signupLayout = FXMLLoader.load(MainNavBarController.class.getResource("SignupView.fxml"));
+						signupLayout = FXMLLoader.load(NavBarView.class.getResource("SignupView.fxml"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

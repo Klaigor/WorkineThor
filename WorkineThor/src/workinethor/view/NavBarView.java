@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import workinethor.Main;
 
-public class MainNavBarController {
+public class NavBarView {
 	private BorderPane mainLayout = null;
 
 	@FXML
@@ -15,7 +15,7 @@ public class MainNavBarController {
 		BorderPane mainLayoutHome = null;
 		mainLayout = Main.getMainLayout();
 		try {
-			mainLayoutHome = FXMLLoader.load(MainNavBarController.class.getResource("HomePage.fxml"));
+			mainLayoutHome = FXMLLoader.load(NavBarView.class.getResource("HomePage.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
