@@ -34,16 +34,19 @@ public class CreateProjectController{
 	 * method that creates a new project
 	 * @param bean
 	 */
-	public void createProject(ProjectBean bean) {
+	public boolean createProject(ProjectBean bean) {
 		ProjectDAO projectDAO = new ProjectDAO();
 		newProject = new Project(bean.getProjectName(), bean.getDriveIsActive(), bean.getDriveName());
 		
 		projectDAO.addProjectToDB(newProject, Session.getSession());
+		
+		return true;
 	}
 	
-	public void addFile(FileBean bean) {
+	public boolean addFile(FileBean bean) {
 		File file = new File(bean.getFilePath());
 		newProject.addFile(file);
+		return true;
 	}
 	
 	public String getProjectName() {

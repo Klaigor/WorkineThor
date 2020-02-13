@@ -25,7 +25,7 @@ public class UserDAO {
 	 * @param password
 	 * @throws SQLException
 	 */
-	public void insert(UserBean user) throws SQLException {
+	public boolean insert(UserBean user) throws SQLException {
 		String insert = "INSERT INTO users(username,password)" + "VALUES (?,?)";
 
 		Connection dbConnection = dbHandler.getConnection();
@@ -42,6 +42,7 @@ public class UserDAO {
 		pst.setString(2, user.getPassword());
 
 		pst.executeUpdate();
+		return true;
 
 	}
 

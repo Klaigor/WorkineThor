@@ -21,7 +21,7 @@ public class ProjectDAO {
 	 * @param project
 	 * @param session
 	 */
-	public void addProjectToDB(Project project, Session session) {
+	public boolean addProjectToDB(Project project, Session session) {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
 		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
 		
@@ -38,5 +38,6 @@ public class ProjectDAO {
 		}
 		
 		logger.log(Level.INFO, "project:" + project.getProjectName() + " added");
+		return true;
 	}
 }

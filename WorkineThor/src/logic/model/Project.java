@@ -55,36 +55,43 @@ public class Project {
 		return projectName;
 	}
 	
-	public void addMember(User user) {
+	public boolean addMember(User user) {
 		members.add(user);
+		return true;
 	}
 	
-	public void removeMember(User user) {
+	public boolean removeMember(User user) {
 		int indexOfMember = members.indexOf(user);
 		members.remove(indexOfMember);
+		return true;
 	}
 	
-	public void addFile(File file) {
+	public boolean addFile(File file) {
 		files.add(file);
+		return true;
 	}
 	
-	public void removeFile(File file) {
+	public boolean removeFile(File file) {
 		int indexOfFile = files.indexOf(file);
 		files.remove(indexOfFile);
+		return true;
 	}
 	
-	public void showFiles() {
+	public boolean showFiles() {
 		for(File file: files) {
 			logger.log(Level.INFO, file.getPath());
 		}
+		return true;
 	}
 	
-	public void addScheduleAction(String action) {
+	public boolean addScheduleAction(String action) {
 		schedule.add(action);
+		return true;
 	}
 	
-	public void removeScheduleAction(String action) {
+	public boolean removeScheduleAction(String action) {
 		int indexOfAction = schedule.indexOf(action);
 		schedule.remove(indexOfAction);
+		return true;
 	}
 }

@@ -18,7 +18,7 @@ public class LoginController{
 	 * @param user
 	 * @throws SQLException
 	 */
-	public void signup(UserBean user) throws SQLException {
+	public boolean signup(UserBean user) throws SQLException {
 		UserDAO usrDAO = new UserDAO();
 		usrDAO.insert(user);
 		User usr = new User();
@@ -27,6 +27,7 @@ public class LoginController{
 
 		Session session = Session.getSession();
 		session.setUser(usr);
+		return true;
 	}
 
 	/*

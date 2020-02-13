@@ -27,7 +27,7 @@ public class FileDAO {
 	 * @throws SQLException
 	 */
 
-	public void insert(FileBean file, ProjectBean projectName) throws SQLException {
+	public boolean insert(FileBean file, ProjectBean projectName) throws SQLException {
 		String insert = "INSERT INTO file(path,nome,project)" + "VALUES (?,?,?)";
 
 		dbConnection = dbHandler.getConnection();
@@ -43,6 +43,7 @@ public class FileDAO {
 		pst.setString(3, projectName.getProjectName());
 
 		pst.executeUpdate();
+		return true;
 	}
 
 	public ObservableList<String> getAllFile() throws SQLException {
