@@ -45,8 +45,9 @@ public class CPAddFileView {
 	@FXML
 	private Button addFileDrive;
 
+	//changed for test
 	@FXML
-	private void initialize() {
+	private boolean initialize() {
 		title.setText(control.getProjectName());
 
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
@@ -63,11 +64,15 @@ public class CPAddFileView {
 		// only for info(can be deleted)
 		logger.log(Level.INFO, "Project:" + control.getProjectName() + " Drive:" + control.getDriveName()
 				+ " DriveActive" + control.getDriveActive());
+		
+		return true;
 	}
 
+	//changed for test
 	// add files to project function(needs to handled by the addFileController)
 	@FXML
-	private void addFileFunc() {
+	private boolean addFileFunc() {
+		boolean success = false;
 		FileChooser fc = new FileChooser();
 		File selectedFile = fc.showOpenDialog(null);
 
@@ -77,13 +82,19 @@ public class CPAddFileView {
 			fileBean.setFileName(selectedFile.getName());
 			control.addFile(fileBean);
 			control.getProject().showFiles();
-		} else
+			success = true;
+		} else {
 			logger.log(Level.WARNING, "No file selected");
+			success = false;
+		}
+		return success;
 	}
 
+	//changed for test
 	// add drive file to project function(needs to be handled by addFileController)
 	@FXML
-	private void addFileDriveFunc() {
+	private boolean addFileDriveFunc() {
+		boolean success = false;
 		Stage megaPage = new Stage();
 		megaPage.setTitle("megaFiles");
 		megaPage.initModality(Modality.APPLICATION_MODAL);
@@ -162,6 +173,8 @@ public class CPAddFileView {
 		Scene megaScene = new Scene(background, 1024, 800);
 		megaPage.setScene(megaScene);
 		megaPage.show();
+		
+		return true;
 	}
 
 }

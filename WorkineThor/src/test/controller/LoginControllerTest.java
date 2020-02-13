@@ -35,5 +35,4 @@ public class LoginControllerTest {
 	    public void testForException() {
 	        Object o = emptyList.get(0);
 	    }
-	}
 }

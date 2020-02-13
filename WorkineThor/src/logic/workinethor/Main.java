@@ -1,5 +1,7 @@
 package logic.workinethor;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -40,8 +42,12 @@ public class Main extends Application {
 		return mainLayout;
 	}
 	
-	public static void startMainLayout() throws IOException {
+	//changed for test
+	public static boolean startMainLayout() throws IOException {
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
+		if(mainLayout == null)
+			return false;
+		else return true;
 	}
 	
 	public static void main(String[] args) {

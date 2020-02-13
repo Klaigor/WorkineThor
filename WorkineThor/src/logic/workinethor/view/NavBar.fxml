@@ -11,7 +11,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.NavBarView">
    <top>
-      <ToolBar prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <ToolBar fx:id="toolbar" prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <items>
             <AnchorPane prefHeight="30.0" prefWidth="782.0">
                <children>

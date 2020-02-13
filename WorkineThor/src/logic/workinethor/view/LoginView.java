@@ -35,8 +35,9 @@ public class LoginView {
 	@FXML 
 	private Button signupBtn;
 
+	//changed for test
 	@FXML
-	public void initialize() {
+	public boolean initialize() {
 
 		/**
 		 * sets action for login button
@@ -82,6 +83,8 @@ public class LoginView {
 				}
 				userName.setText("");
 				password.setText("");
+				
+				NavBarView.getToolbar().setVisible(true);
 			}
 		});
 		
@@ -104,8 +107,8 @@ public class LoginView {
 					mainLayout.setCenter(signupLayout);
 			}	
 		});
+		return true;
 	}
-
 }
 
 

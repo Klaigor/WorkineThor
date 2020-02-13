@@ -63,6 +63,7 @@ public class SignupView {
 						e.printStackTrace();
 					}
 					mainLayout.setCenter(homeLayout);
+					NavBarView.getToolbar().setVisible(true);
 			}	
 		});
 	}

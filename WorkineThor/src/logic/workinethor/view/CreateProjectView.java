@@ -50,33 +50,39 @@ public class CreateProjectView {
 	@FXML
 	private Button next;
 
+	//changed for test
 	// changed for code smells
 	@FXML
-	private void driveBoxYes() {
+	private boolean driveBoxYes() {
 		boolean checked = false;
 
 		checked = !driveBox.isSelected();
 		driveSelector.setDisable(checked);
+		return true;
 	}
 
+	//changed for test
 	@FXML
-	private void nextYes() {
+	private boolean nextYes() {
 		String textFieldValue = projectNameField.getText();
 		boolean isDisabled = (textFieldValue.isEmpty() || textFieldValue.trim().isEmpty());
 		next.setDisable(isDisabled);
+		return true;
 	}
 
+	//changed for test
 	@FXML
-	private void initialize() {
+	private boolean initialize() {
 		next.setDisable(true);
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
-
+		return true;
 	}
 
+	//changed for test
 	@FXML
-	private void goNext() throws IOException, InterruptedException {
+	private boolean goNext() throws IOException, InterruptedException {
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
 
@@ -97,11 +103,13 @@ public class CreateProjectView {
 			e.printStackTrace();
 		}
 		mainLayout.setCenter(mainLayoutNext);
+		return true;
 	}
 
+	//changed for test
 	// method that create the add member view
 	@FXML
-	private void addMember() throws SQLException {
+	private boolean addMember() throws SQLException {
 		UserDAO usrDAO = new UserDAO();
 		ObservableList<String> result = usrDAO.getAllUsers();
 		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
@@ -152,6 +160,7 @@ public class CreateProjectView {
 		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
 
 		addMemberWindow.show();
+		return true;
 	}
 
 }
