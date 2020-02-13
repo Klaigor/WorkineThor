@@ -27,7 +27,7 @@ public class NavBarView {
 		BorderPane mainLayoutItems = null;
 		mainLayout = Main.getMainLayout();
 		try {
-			mainLayoutItems = FXMLLoader.load(Main.class.getResource("view/MainCreateProjectItems.fxml"));
+			mainLayoutItems = FXMLLoader.load(Main.class.getResource("view/CreateProject.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,7 +40,7 @@ public class NavBarView {
 		BorderPane mainLayoutLogin = null;
 		mainLayout = Main.getMainLayout();
 		try {
-			mainLayoutLogin = FXMLLoader.load(Main.class.getResource("view/LoginView.fxml"));
+			mainLayoutLogin = FXMLLoader.load(Main.class.getResource("view/Login.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

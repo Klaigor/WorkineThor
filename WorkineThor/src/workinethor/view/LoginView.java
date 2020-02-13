@@ -97,7 +97,7 @@ public class LoginView {
 			@Override
 			public void handle(ActionEvent event) { // "event" is not used
 					try {
-						signupLayout = FXMLLoader.load(NavBarView.class.getResource("SignupView.fxml"));
+						signupLayout = FXMLLoader.load(NavBarView.class.getResource("Signup.fxml"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

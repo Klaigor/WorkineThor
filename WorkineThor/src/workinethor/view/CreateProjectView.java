@@ -92,7 +92,7 @@ public class CreateProjectView {
 
 		BorderPane mainLayoutNext = null;
 		try {
-			mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CreateProjectNext.fxml"));
+			mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CPAddFile.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

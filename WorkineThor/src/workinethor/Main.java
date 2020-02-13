@@ -33,7 +33,7 @@ public class Main extends Application {
 		primaryStage.setResizable(false);
 
 		// load login screen
-		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/LoginView.fxml")));
+		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/Login.fxml")));
 	}
 	
 	public static BorderPane getMainLayout() {
