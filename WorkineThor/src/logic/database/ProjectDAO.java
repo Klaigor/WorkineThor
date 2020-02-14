@@ -3,7 +3,8 @@ package logic.database;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import com.mysql.cj.protocol.Resultset;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.logging.Level;
 
@@ -77,7 +78,7 @@ public class ProjectDAO {
 			statement = dbConnection.prepareStatement(sqlString);
 			statement.setString(1, user.getUsername());
 			
-			resultSet = statement.executeQuery(sqlString);
+			resultSet = statement.executeQuery();
 			
 			if(!resultSet.first()) {
 				tempProject.setProjectName("");
@@ -93,5 +94,29 @@ public class ProjectDAO {
 			}
 		} catch (SQLException e) {}
 		return tempProject;
+	}
+	
+	public ObservableList<String> getAllUserProjects(){
+		ObservableList<String> projectStrings = FXCollections.observableArrayList();
+		String sqlString = "SELECT * FROM projects";
+		
+		dbConnection = handle.getConnection();
+		
+		try {
+			statement = dbConnection.prepareStatement(sqlString);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			if(!resultSet.first()) {
+				
+			}
+			else {
+				projectStrings.addAll(resultSet.getString("project_name"));
+				while(resultSet.next()) {
+					projectStrings.addAll(resultSet.getString("project_name"));
+				}
+			}
+		} catch (SQLException e) {}
+		return projectStrings;
 	}
 }

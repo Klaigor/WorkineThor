@@ -1,7 +1,5 @@
 package logic.workinethor;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -16,10 +14,10 @@ public class Main extends Application {
 	 * NavBar that is always over the top of the view
 	 */
 	private static BorderPane mainLayout;
-
+	private boolean started = false;
+	
 	@Override
 	public void start(Stage stage) throws IOException {
-
 		Stage primaryStage;
 		// setup primaryStage
 		primaryStage = stage;
@@ -36,6 +34,8 @@ public class Main extends Application {
 
 		// load login screen
 		mainLayout.setCenter(FXMLLoader.load(Main.class.getResource("view/Login.fxml")));
+		
+		started = true;
 	}
 	
 	public static BorderPane getMainLayout() {
@@ -48,6 +48,10 @@ public class Main extends Application {
 		if(mainLayout == null)
 			return false;
 		else return true;
+	}
+	
+	public boolean hasStarted() {
+		return started;
 	}
 	
 	public static void main(String[] args) {
