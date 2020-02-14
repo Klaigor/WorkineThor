@@ -56,7 +56,7 @@
                         <Insets left="15.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button fx:id="signupBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="signupBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5" underline="true">
                      <GridPane.margin>
                         <Insets left="200.0" />
                      </GridPane.margin>
