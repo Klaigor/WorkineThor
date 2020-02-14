@@ -6,10 +6,9 @@ package logic.workinethor.view;
 
 import logic.database.ProjectDAO;
 import logic.model.Session;
+import logic.workinethor.Main;
 
 import java.util.ArrayList;
-
-import javax.swing.event.MenuDragMouseEvent;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,11 +20,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.util.Callback;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
 
 
 public class HomePageView {
@@ -34,42 +34,46 @@ public class HomePageView {
 	private BorderPane background;
 	
 	private Session activeSession = Session.getSession();
-	private AnchorPane items;
-	private Label loggedUserLabel;
-	private Label projectLabel;
-	private Popup popup;
-	private ArrayList<Label> allDutiesArrayList;
-	private ObservableList<String> userProjects;
-	private ListView<String> allProjectsListView;
-	private ProjectDAO projectDAO;
 	
 	@FXML
 	private void initialize() {
-		projectDAO = new ProjectDAO();
-		items = new AnchorPane();
 		
-		allDutiesArrayList = new ArrayList<>();
+		ProjectDAO projectDAO = new ProjectDAO();
+		AnchorPane items = new AnchorPane();
 		
-		popup = new Popup();
+		ArrayList<String> allDutiesArrayList = new ArrayList<>();
 		
-		loggedUserLabel = new Label();
+		Popup popup = new Popup();
+		popup.setAutoHide(true);
+		ListView<String> popupListView = new ListView<>();
+		popupListView.getItems().add("Duty1");
+		popupListView.getItems().add("Duty1");
+		popupListView.getItems().add("Duty1");
+		popupListView.getItems().add("Duty1");
+		popupListView.getItems().add("Duty1");
+		
+		popup.getContent().add(popupListView);
+		
+		popupListView.setStyle("-fx-background-color:yellow");
+		
+		Label loggedUserLabel = new Label();
 		loggedUserLabel.setText("Username: " + activeSession.getLoggedUser().getUsername());
 		loggedUserLabel.setFont(new Font("Arial", 24));
 		loggedUserLabel.setTranslateY(5);
 		
-		projectLabel = new Label();
+		Label projectLabel = new Label();
 		projectLabel.setText("Your Projects");
 		projectLabel.setFont(new Font("Arial", 24));
 		projectLabel.setTranslateY(50);
 		
-		userProjects = projectDAO.getAllUserProjects();
-		allProjectsListView = new ListView<String>(userProjects);
+		ObservableList<String> userProjects = projectDAO.getAllUserProjects(Session.getSession().getLoggedUser());
+		ListView<String> allProjectsListView = new ListView<String>(userProjects);
 		allProjectsListView.setTranslateY(100);
 		allProjectsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
 			@Override
 			public ListCell<String> call(ListView<String> param) {
 				
-				return new ListCell<String>() {
+				ListCell<String> cell = new ListCell<String>() {
 					@Override
 					protected void updateItem(String item, boolean empty) {
 						super.updateItem(item, empty);
@@ -79,6 +83,16 @@ public class HomePageView {
                         }
 					}
 				};
+				cell.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						if(event.isPrimaryButtonDown() && !cell.isEmpty()) {
+							popup.show(Main.getMainWindow());
+						}
+					}
+				});
+				
+				return cell;
 			}
 		});
 		
@@ -86,16 +100,7 @@ public class HomePageView {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if(oldValue != newValue) {
-				}
-			}
-		});
-		
-		allProjectsListView.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				if(event.isSecondaryButtonDown()) {
-					//apri popup
+					System.out.println(newValue);
 				}
 			}
 		});

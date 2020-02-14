@@ -96,14 +96,15 @@ public class ProjectDAO {
 		return tempProject;
 	}
 	
-	public ObservableList<String> getAllUserProjects(){
+	public ObservableList<String> getAllUserProjects(User user){
 		ObservableList<String> projectStrings = FXCollections.observableArrayList();
-		String sqlString = "SELECT * FROM projects";
+		String sqlString = "SELECT * FROM projects WHERE " + "user = ?";
 		
 		dbConnection = handle.getConnection();
 		
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
+			statement.setString(1, user.getUsername());
 			
 			ResultSet resultSet = statement.executeQuery();
 			
