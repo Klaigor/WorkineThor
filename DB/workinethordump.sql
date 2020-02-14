@@ -108,7 +108,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('carlo','conti'),('franco','franchi'),('luigi','mario'),('mario','mario');
+INSERT INTO `users` VALUES ('culo','cane'),('carlo','conti'),('franco','franchi'),('luigi','mario'),('mario','mario');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
