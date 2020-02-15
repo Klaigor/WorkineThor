@@ -14,11 +14,12 @@ public class Main extends Application {
 	 * NavBar that is always over the top of the view
 	 */
 	private static BorderPane mainLayout;
+	private static Stage primaryStage;
+	
 	private boolean started = false;
 	
 	@Override
 	public void start(Stage stage) throws IOException {
-		Stage primaryStage;
 		// setup primaryStage
 		primaryStage = stage;
 		primaryStage.setTitle("WorkineThor");
@@ -40,6 +41,10 @@ public class Main extends Application {
 	
 	public static BorderPane getMainLayout() {
 		return mainLayout;
+	}
+	
+	public static Stage getMainWindow() {
+		return primaryStage;
 	}
 	
 	//changed for test
