@@ -71,5 +71,18 @@ public class NavBarView {
 		mainLayout.setCenter(mainLayoutLogin);
 		return true;
 	}
+	
+		@FXML
+		private boolean goProject() throws IOException {
+			BorderPane mainLayoutProject = null;
+			mainLayout = Main.getMainLayout();
+			try {
+				mainLayoutProject = FXMLLoader.load(Main.class.getResource("view/BrowseProject.fxml"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			mainLayout.setCenter(mainLayoutProject);
+			return true;
+		}
 
 }

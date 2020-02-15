@@ -21,6 +21,7 @@
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#goHome" text="Home" />
                             <MenuItem mnemonicParsing="false" onAction="#goCreate" text="Create Project" />
+                            <MenuItem mnemonicParsing="false" onAction="#goProject" text="Browse Project" />
                           </items>
                            <font>
                               <Font size="18.0" />

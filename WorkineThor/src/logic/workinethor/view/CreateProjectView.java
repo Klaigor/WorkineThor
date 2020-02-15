@@ -1,5 +1,5 @@
 /**
- * Controller of the Create project first view.
+ * Graphic controller of the Create project first view.
  */
 package logic.workinethor.view;
 
@@ -9,9 +9,12 @@ import java.sql.SQLException;
 import logic.bean.ProjectBean;
 import logic.controller.CreateProjectController;
 import logic.database.UserDAO;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -132,10 +135,21 @@ public class CreateProjectView {
 		ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																			// the list
 		memberList.setTranslateY(96);
-		memberList.setPrefSize(400, 500);
+		memberList.setPrefSize(400, 450);
 		memberList.setItems(memberListSelector);
 		memberList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
+			String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
+			System.out.println(memberSelected);
+		});
+		
 		memberListSelector.addAll(result);
+		
+		Button doneButton = new Button();
+		doneButton.setText("Done");
+		doneButton.setPrefSize(70, 40);
+		doneButton.setTranslateY(553);
+		doneButton.setTranslateX(170);
 
 		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
 																								// member list
@@ -153,13 +167,23 @@ public class CreateProjectView {
 		background.getChildren().add(logoView);
 		background.getChildren().add(searchField);
 		background.getChildren().add(memberList);
+		background.getChildren().add(doneButton);
 
 		Scene loginScene = new Scene(background, 400, 600);
 		addMemberWindow.setScene(loginScene);
 		addMemberWindow.setResizable(false);
 		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
+		
+		doneButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addMemberWindow.close();
+			}
+			
+		});
 
 		addMemberWindow.show();
+		
 		return true;
 	}
 
