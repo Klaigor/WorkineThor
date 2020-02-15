@@ -22,10 +22,10 @@
 	<pathelement location="ExternalJar/mysql-connector-java-8.0.19.jar"/>
     </path>
     <path id="Tomcat">
-    <pathelement location="ExternalJar/tomcat-api.jar">
+    <pathelement location="ExternalJar/tomcat-api.jar"/>
     </path>
     <path id="TomcatServlet">
-    <pathelement location="ExternalJar/servlet-api.jar">
+    <pathelement location="ExternalJar/servlet-api.jar"/>
     </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
