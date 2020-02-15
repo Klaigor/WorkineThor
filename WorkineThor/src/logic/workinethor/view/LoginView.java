@@ -73,18 +73,17 @@ public class LoginView {
 						}
 		
 					mainLayout.setCenter(homeLayout);
+					NavBarView.getToolbar().setVisible(true);
 					
 				} else { // Add the alert window when the password or the username are not correct
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setHeaderText(null);
 					alert.setContentText("Username or Password is not correct!");
 					alert.show();
-
+					
 				}
 				userName.setText("");
 				password.setText("");
-				
-				NavBarView.getToolbar().setVisible(true);
 			}
 		});
 		
