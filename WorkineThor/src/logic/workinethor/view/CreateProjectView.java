@@ -141,6 +141,7 @@ public class CreateProjectView {
 		memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
 			String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
 			System.out.println(memberSelected);
+			//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
 			bean.setUserToAdd(memberSelected);
 			projectController.createProject(bean);
 		});

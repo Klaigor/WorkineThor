@@ -3,10 +3,21 @@ package logic.workinethor.view;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import org.json.JSONException;
+
 import logic.bean.FileBean;
 import logic.controller.CreateProjectController;
+import logic.mega.MegaHandler;
 
 import java.io.File;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -94,6 +105,9 @@ public class CPAddFileView {
 	// add drive file to project function(needs to be handled by addFileController)
 	@FXML
 	private boolean addFileDriveFunc() {
+		WebView megaWebPage = new WebView();
+		WebEngine megaEngine = megaWebPage.getEngine();
+		
 		boolean success = false;
 		Stage megaPage = new Stage();
 		megaPage.setTitle("megaFiles");
@@ -108,6 +122,14 @@ public class CPAddFileView {
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100);
 		fileURL.setTranslateY(50);
+		
+		Label nameLabel = new Label("File Name");
+		nameLabel.setTranslateX(300);
+		nameLabel.setTranslateY(50);
+		
+		TextField fileNameTextField = new TextField();
+		fileNameTextField.setTranslateX(380);
+		fileNameTextField.setTranslateY(50);
 
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
@@ -117,12 +139,22 @@ public class CPAddFileView {
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (fileURL.getText().contains("https:")) {
+				if (fileURL.getText().contains("https:") && fileURL.getText().length() < 50 && !fileNameTextField.getText().isEmpty()) {
 					filelist.getItems().add(fileURL.getText());
 					fileBean.setFilePath(fileURL.getText());
+					fileBean.setFileName(fileNameTextField.getText());
 					control.addFile(fileBean);
 					control.getProject().showFiles();
+					
+					//download del file
+					/*MegaHandler mHandler = new MegaHandler(megaEngine.getDocument().getElementById("username").getAttribute("username"), 
+															megaEngine.getDocument().getElementById("password").getAttribute("password"));
+					
+					try {
+						mHandler.download(fileURL.getText(), "C:\\");
+					} catch (Exception e) {}*/
 				}
+				else logger.log(Level.INFO, "Empty name field");
 			}
 		});
 
@@ -137,9 +169,6 @@ public class CPAddFileView {
 				megaPage.close();
 			}
 		});
-
-		WebView megaWebPage = new WebView();
-		WebEngine megaEngine = megaWebPage.getEngine();
 
 		switch (control.getDriveName()) {
 		case "Mega":
@@ -166,6 +195,8 @@ public class CPAddFileView {
 
 		background.getChildren().add(fileNameLabel);
 		background.getChildren().add(fileURL);
+		background.getChildren().add(nameLabel);
+		background.getChildren().add(fileNameTextField);
 		background.getChildren().add(loadFileButton);
 		background.getChildren().add(exitButton);
 		background.getChildren().add(megaWebPage);

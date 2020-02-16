@@ -5,6 +5,7 @@
 package logic.workinethor.view;
 
 import logic.database.ProjectDAO;
+import logic.model.Project;
 import logic.model.Session;
 import logic.workinethor.Main;
 

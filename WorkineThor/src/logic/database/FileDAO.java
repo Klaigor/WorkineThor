@@ -10,8 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import logic.bean.FileBean;
 import logic.bean.ProjectBean;
+import sun.reflect.generics.tree.ReturnType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import jdk.internal.org.objectweb.asm.Handle;
 
 public class FileDAO {
 	private DBhandle dbHandler = DBhandle.getDBhandleInstance();
@@ -47,7 +49,9 @@ public class FileDAO {
 	}
 
 	public ObservableList<String> getAllFile() throws SQLException {
+
 		String getAllFile = "SELECT * from files";
+		
 		ObservableList<String> allFile = FXCollections.observableArrayList();
 
 		dbConnection = dbHandler.getConnection();
@@ -71,5 +75,22 @@ public class FileDAO {
 				allFile.addAll(rs.getString("Project"));
 		}
 		return allFile;
+	}
+	
+	public boolean addFileToProject(FileBean fileBean, ProjectBean projectBean) {
+		String sqlString = "INSERT INTO files(path,name,project) VALUES (?,?,?)";
+		
+		dbConnection = dbHandler.getConnection();
+		
+		try {
+			pst = dbConnection.prepareStatement(sqlString);
+			pst.setString(1, fileBean.getFilePath());
+			pst.setString(2, fileBean.getFileName());
+			pst.setString(3, projectBean.getProjectName());
+			
+			pst.executeUpdate();
+		} catch (SQLException e) {}
+		
+		return true;
 	}
 }

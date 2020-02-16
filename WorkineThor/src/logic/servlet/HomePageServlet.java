@@ -1,6 +1,7 @@
 package logic.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import javafx.collections.ObservableList;
+import logic.database.ProjectDAO;
+import logic.model.Session;
 
 @WebServlet("/homepage")
 public class HomePageServlet extends HttpServlet{
@@ -20,6 +25,8 @@ public class HomePageServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		boolean result = false;
+		ProjectDAO projectDAO = new ProjectDAO();
+		
 		String username = "";
 		
 		Cookie cookies[] = request.getCookies();
@@ -31,8 +38,12 @@ public class HomePageServlet extends HttpServlet{
 		}
 		
 		if(result) {
+			ObservableList<String> projectList = projectDAO.getAllUserProjects(Session.getSession().getLoggedUser());
+			ArrayList<String> projects = new ArrayList<>(projectList);
+			
+			request.setAttribute("project_list", projects);
 			request.setAttribute("user", username);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("homepage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/homepage.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

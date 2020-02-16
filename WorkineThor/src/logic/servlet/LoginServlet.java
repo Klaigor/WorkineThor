@@ -45,8 +45,9 @@ public class LoginServlet extends HttpServlet{
 		Cookie cookie = new Cookie("result", String.valueOf(result));
 		response.addCookie(cookie);
 		
-		if(result)
+		if(result) {
 			response.sendRedirect("homepage");
+		}
 		else {
 			out.println("<html>"+
 						"<body>");

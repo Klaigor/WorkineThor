@@ -6,10 +6,10 @@
  */
 package logic.model;
 
+
 public class Session {
 	private static Session sessionInstance = null;
 	private User loggedUser = null;
-
 	
 	/**
 	 * constructor made private, to make this class a Singleton

@@ -1,9 +1,11 @@
 package logic.controller;
 
 import java.io.File;
+import java.nio.file.Files;
 
 import logic.bean.FileBean;
 import logic.bean.ProjectBean;
+import logic.database.FileDAO;
 import logic.database.ProjectDAO;
 import logic.model.Project;
 import logic.model.Session;
@@ -50,16 +52,19 @@ public class CreateProjectController {
 
 	public boolean existentProject(ProjectBean bean) {
 		ProjectDAO projectDAO = new ProjectDAO();
-		User user = new User();
-		existentProject = new Project(bean.getProjectName(), bean.getDriveIsActive(), bean.getDriveName());
-		projectDAO.getProjectFromDB(user);
+		existentProject = projectDAO.getProjectFromDB(bean);
 
 		return true;
 	}
 
 	public boolean addFile(FileBean bean) {
+		FileDAO fileDAO = new FileDAO();
+		ProjectBean projectBean = new ProjectBean();
 		File file = new File(bean.getFilePath());
 		newProject.addFile(file);
+		
+		projectBean.setProjectName(newProject.getProjectName());
+		fileDAO.addFileToProject(bean, projectBean);
 		return true;
 	}
 

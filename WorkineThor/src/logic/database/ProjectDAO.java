@@ -3,9 +3,13 @@ package logic.database;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+import com.sun.crypto.provider.RSACipher;
+import com.sun.javafx.geom.PickRay;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import java.sql.Connection;
@@ -69,8 +73,8 @@ public class ProjectDAO {
 		return true;
 	}
 
-	public Project getProjectFromDB(User user) {
-		Project tempProject = new Project();
+	public ArrayList<Project> getActiveUserProjectsFromDB() {
+		ArrayList<Project> tempProjects = new ArrayList<>();
 		String sqlString = "SELECT * FROM projects WHERE " + "user = ?";
 		ResultSet resultSet;
 
@@ -78,25 +82,29 @@ public class ProjectDAO {
 
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
-			statement.setString(1, user.getUsername());
+			statement.setString(1, Session.getSession().getLoggedUser().getUsername());
 
 			resultSet = statement.executeQuery();
-
-			if (!resultSet.first()) {
-				tempProject.setProjectName("");
-				tempProject.setDriveName("");
-				tempProject.setDriveActive(false);
-			} else {
-				tempProject.setProjectName(resultSet.getString("project_name"));
-				tempProject.setDriveName(resultSet.getString("drive_name"));
-				if (resultSet.getString("drive_name").isEmpty())
-					tempProject.setDriveActive(false);
-				else
-					tempProject.setDriveActive(true);
+			
+			if(!resultSet.first()) {}
+			else {
+				int i = 0;
+				Project temp;
+				do {
+					temp = new Project();
+					temp.setProjectName(resultSet.getString("project_name"));
+					temp.setDriveName(resultSet.getString("drive_name"));
+					if(resultSet.getString("user") != null) {
+						User user = new User();
+						user.setUsername(resultSet.getString("user"));
+						temp.addMember(user);
+					}
+					tempProjects.add(temp);
+				}while(resultSet.next());
 			}
 		} catch (SQLException e) {
 		}
-		return tempProject;
+		return tempProjects;
 	}
 
 	public ObservableList<String> getAllUserProjects(User user) {
@@ -146,6 +154,28 @@ public class ProjectDAO {
 		}
 		return projects;
 	}
+	
+	public ObservableList<String> getAllProjectUsers(ProjectBean bean){
+		String getAllUsers = "SELECT user FROM projects WHERE project_name = ? ";
+		ObservableList<String> users = FXCollections.observableArrayList();
+		
+		dbConnection = handle.getConnection();
+		
+		try {
+			statement = dbConnection.prepareStatement(getAllUsers);
+			statement.setString(1, bean.getProjectName());
+			
+			ResultSet rs = statement.executeQuery();
+			if(!rs.first()) {}
+			else {
+				users.addAll(rs.getString("user"));
+				while(rs.next())
+					users.addAll(rs.getString("user"));
+			}
+		} catch (SQLException e) {}
+		
+		return users;
+	}
 
 	public ObservableList<String> getAllUsersNotInProject(ProjectBean bean){
 		String getAllUsers = "SELECT DISTINCT user FROM projects WHERE project_name != ?";
@@ -168,5 +198,30 @@ public class ProjectDAO {
 			} catch (SQLException e) {			
 		}
 		return users;
+	}
+	
+	public Project getProjectFromDB(ProjectBean bean) {
+		String sqlString = "SELECT DISTINCT project_name, drive_name, user FROM projects WHERE project_name = ?";
+		Project temp = null;
+		
+		dbConnection = handle.getConnection();
+		
+		try {
+			statement = dbConnection.prepareStatement(sqlString);
+			statement.setString(1, bean.getProjectName());
+			
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.first()) {
+				temp = new Project();
+				temp.setProjectName(rs.getString("project_name"));
+				temp.setDriveName(rs.getString("drive_name"));
+				if(temp.getDriveName() != null)
+					temp.setDriveActive(true);
+				else 
+					temp.setDriveActive(false);
+			}
+		} catch (SQLException e) {}
+		return temp;
 	}
 }
