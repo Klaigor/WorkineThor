@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import logic.bean.ProjectBean;
 import logic.model.Project;
 import logic.model.Session;
 import logic.model.User;
@@ -124,7 +125,7 @@ public class ProjectDAO {
 	}
 
 	public ObservableList<String> getAllProjects() throws SQLException {
-		String getAllProjects = "SELECT * FROM projects";
+		String getAllProjects = "SELECT DISTINCT project_name FROM projects";
 		ObservableList<String> projects = FXCollections.observableArrayList();
 
 		dbConnection = handle.getConnection();
@@ -139,9 +140,33 @@ public class ProjectDAO {
 		if (!rs.first()) {
 
 		} else {
+			projects.addAll(rs.getString("project_name"));
 			while (rs.next())
 				projects.addAll(rs.getString("project_name"));
 		}
 		return projects;
+	}
+
+	public ObservableList<String> getAllUsersNotInProject(ProjectBean bean){
+		String getAllUsers = "SELECT DISTINCT user FROM projects WHERE project_name != ?";
+		ObservableList<String> users = FXCollections.observableArrayList();
+		
+		dbConnection = handle.getConnection();
+		
+		try {
+			statement = dbConnection.prepareStatement(getAllUsers);
+			statement.setString(1, bean.getProjectName());
+			
+			ResultSet rs = statement.executeQuery();
+			if(!rs.first()) {
+			}else{
+				users.addAll(rs.getString("user"));
+				while(rs.next())
+					users.addAll(rs.getString("user"));
+				}
+			
+			} catch (SQLException e) {			
+		}
+		return users;
 	}
 }

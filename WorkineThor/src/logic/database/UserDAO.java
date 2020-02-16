@@ -92,6 +92,7 @@ public class UserDAO {
 		if (!rs.first()) { // rs empty no user with the correct username
 
 		} else {
+			allUsers.addAll(rs.getString("username"));
 			while (rs.next())
 				allUsers.addAll(rs.getString("username"));
 		}

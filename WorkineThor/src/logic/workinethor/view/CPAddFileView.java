@@ -48,7 +48,7 @@ public class CPAddFileView {
 	//changed for test
 	@FXML
 	private boolean initialize() {
-		title.setText(control.getProjectName());
+		title.setText(control.getNewProjectName());
 
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -62,7 +62,7 @@ public class CPAddFileView {
 			addFileDrive.setDisable(true);
 
 		// only for info(can be deleted)
-		logger.log(Level.INFO, "Project:" + control.getProjectName() + " Drive:" + control.getDriveName()
+		logger.log(Level.INFO, "Project:" + control.getNewProjectName() + " Drive:" + control.getDriveName()
 				+ " DriveActive" + control.getDriveActive());
 		
 		return true;

@@ -28,7 +28,7 @@ public class FileDAO {
 	 */
 
 	public boolean insert(FileBean file, ProjectBean projectName) throws SQLException {
-		String insert = "INSERT INTO file(path,nome,project)" + "VALUES (?,?,?)";
+		String insert = "INSERT INTO files(path,name,project)" + "VALUES (?,?,?)";
 
 		dbConnection = dbHandler.getConnection();
 
@@ -47,7 +47,7 @@ public class FileDAO {
 	}
 
 	public ObservableList<String> getAllFile() throws SQLException {
-		String getAllFile = "SELECT * from file";
+		String getAllFile = "SELECT * from files";
 		ObservableList<String> allFile = FXCollections.observableArrayList();
 
 		dbConnection = dbHandler.getConnection();
@@ -67,7 +67,7 @@ public class FileDAO {
 		} else {
 			while (rs.next())
 				allFile.addAll(rs.getString("path"));
-				allFile.addAll(rs.getString("nome"));
+				allFile.addAll(rs.getString("name"));
 				allFile.addAll(rs.getString("Project"));
 		}
 		return allFile;

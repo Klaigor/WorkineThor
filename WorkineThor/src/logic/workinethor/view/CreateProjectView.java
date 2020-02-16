@@ -137,19 +137,21 @@ public class CreateProjectView {
 		memberList.setTranslateY(96);
 		memberList.setPrefSize(400, 450);
 		memberList.setItems(memberListSelector);
-		memberList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
+		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
 			String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
 			System.out.println(memberSelected);
+			bean.setUserToAdd(memberSelected);
+			projectController.createProject(bean);
 		});
 		
 		memberListSelector.addAll(result);
 		
-		Button doneButton = new Button();
-		doneButton.setText("Done");
-		doneButton.setPrefSize(70, 40);
-		doneButton.setTranslateY(553);
-		doneButton.setTranslateX(170);
+		Button addButton = new Button();
+		addButton.setText("Add");
+		addButton.setPrefSize(70, 40);
+		addButton.setTranslateY(553);
+		addButton.setTranslateX(170);
 
 		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
 																								// member list
@@ -167,17 +169,17 @@ public class CreateProjectView {
 		background.getChildren().add(logoView);
 		background.getChildren().add(searchField);
 		background.getChildren().add(memberList);
-		background.getChildren().add(doneButton);
+		background.getChildren().add(addButton);
 
 		Scene loginScene = new Scene(background, 400, 600);
 		addMemberWindow.setScene(loginScene);
 		addMemberWindow.setResizable(false);
 		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
 		
-		doneButton.setOnAction(new EventHandler<ActionEvent>() {
+		addButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				addMemberWindow.close();
+				//implementare che aggiunge il membro selezionato
 			}
 			
 		});

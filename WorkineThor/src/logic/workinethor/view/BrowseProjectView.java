@@ -3,21 +3,30 @@
  */
 package logic.workinethor.view;
 
-
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.util.Callback;
+import logic.bean.ProjectBean;
+import logic.controller.CreateProjectController;
 import logic.database.ProjectDAO;
+import logic.workinethor.Main;
 
 public class BrowseProjectView {
 
@@ -28,12 +37,12 @@ public class BrowseProjectView {
 	private void initialize() throws SQLException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		AnchorPane items = new AnchorPane();
-		
+
 		ObservableList<String> result = projectDAO.getAllProjects();
 		ObservableList<String> projectListSelector = FXCollections.observableArrayList();
-		
+
 		items = new AnchorPane();
-		
+
 		TextField searchField = new TextField();
 		searchField.setPromptText("Search here!");
 		searchField.setTranslateX(300);
@@ -51,6 +60,46 @@ public class BrowseProjectView {
 		projectList.setPrefSize(400, 500);
 		projectList.setItems(projectListSelector);
 		projectList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		projectList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+			@Override
+			public ListCell<String> call(ListView<String> param) {
+				ListCell project = new ListCell<String>() {
+					@Override
+					protected void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (item != null) {
+							setText(item);
+							setFont(new Font("Arial", 18));
+						}
+					}
+				};
+				project.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						if (event.isPrimaryButtonDown() && !project.isEmpty()) {
+							BorderPane mainLayout = null;
+							mainLayout = Main.getMainLayout();
+							ProjectBean bean = new ProjectBean();
+							CreateProjectController pC = CreateProjectController.getInstace();
+							
+							// pass Project values to the Project page
+							bean.setProjectName(project.getText());
+							pC.existentProject(bean);
+							
+							BorderPane mainLayoutProject = null;
+							try {
+								mainLayoutProject = FXMLLoader.load(NavBarView.class.getResource("Project.fxml"));
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							mainLayout.setCenter(mainLayoutProject);
+						}
+					}
+				});
+				return project;
+			}
+		});
+
 		projectListSelector.addAll(result);
 
 		FilteredList<String> filteredData = new FilteredList<>(projectListSelector, s -> true); // create a filtered
