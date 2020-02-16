@@ -1,7 +1,6 @@
 package logic.controller;
 
 import java.io.File;
-import java.nio.file.Files;
 
 import logic.bean.FileBean;
 import logic.bean.ProjectBean;
@@ -9,7 +8,6 @@ import logic.database.FileDAO;
 import logic.database.ProjectDAO;
 import logic.model.Project;
 import logic.model.Session;
-import logic.model.User;
 
 public class CreateProjectController {
 

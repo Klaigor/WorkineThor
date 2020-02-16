@@ -13,8 +13,6 @@ import java.sql.SQLException;
 public class LoginControllerTest {
 
 	 
-	    private java.util.List emptyList;
-	 
 	    /**
 	     * Sets up the test fixture. 
 	     * (Called before every test case method.)

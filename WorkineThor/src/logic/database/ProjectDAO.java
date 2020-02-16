@@ -3,9 +3,6 @@ package logic.database;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-import com.sun.crypto.provider.RSACipher;
-import com.sun.javafx.geom.PickRay;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -88,7 +85,6 @@ public class ProjectDAO {
 			
 			if(!resultSet.first()) {}
 			else {
-				int i = 0;
 				Project temp;
 				do {
 					temp = new Project();

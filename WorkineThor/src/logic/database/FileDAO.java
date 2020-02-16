@@ -10,10 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import logic.bean.FileBean;
 import logic.bean.ProjectBean;
-import sun.reflect.generics.tree.ReturnType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jdk.internal.org.objectweb.asm.Handle;
 
 public class FileDAO {
 	private DBhandle dbHandler = DBhandle.getDBhandleInstance();

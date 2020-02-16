@@ -2,8 +2,6 @@ package logic.workinethor.view;
 
 import java.io.IOException;
 
-import org.omg.CORBA.INITIALIZE;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ToolBar;

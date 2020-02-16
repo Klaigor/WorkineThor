@@ -3,21 +3,10 @@ package logic.workinethor.view;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import org.json.JSONException;
-
 import logic.bean.FileBean;
 import logic.controller.CreateProjectController;
-import logic.mega.MegaHandler;
 
 import java.io.File;
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -108,7 +97,6 @@ public class CPAddFileView {
 		WebView megaWebPage = new WebView();
 		WebEngine megaEngine = megaWebPage.getEngine();
 		
-		boolean success = false;
 		Stage megaPage = new Stage();
 		megaPage.setTitle("megaFiles");
 		megaPage.initModality(Modality.APPLICATION_MODAL);

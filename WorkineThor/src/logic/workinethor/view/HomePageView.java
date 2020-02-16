@@ -5,11 +5,8 @@
 package logic.workinethor.view;
 
 import logic.database.ProjectDAO;
-import logic.model.Project;
 import logic.model.Session;
 import logic.workinethor.Main;
-
-import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +18,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.util.Callback;
@@ -41,9 +37,7 @@ public class HomePageView {
 		
 		ProjectDAO projectDAO = new ProjectDAO();
 		AnchorPane items = new AnchorPane();
-		
-		ArrayList<String> allDutiesArrayList = new ArrayList<>();
-		
+			
 		Popup popup = new Popup();
 		popup.setAutoHide(true);
 		ListView<String> popupListView = new ListView<>();

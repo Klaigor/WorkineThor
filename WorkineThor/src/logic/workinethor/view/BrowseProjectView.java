@@ -63,7 +63,7 @@ public class BrowseProjectView {
 		projectList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
 			@Override
 			public ListCell<String> call(ListView<String> param) {
-				ListCell project = new ListCell<String>() {
+				ListCell<String> project = new ListCell<String>() {
 					@Override
 					protected void updateItem(String item, boolean empty) {
 						super.updateItem(item, empty);
