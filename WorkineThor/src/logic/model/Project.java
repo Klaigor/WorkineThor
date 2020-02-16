@@ -15,6 +15,7 @@ public class Project {
 	private ArrayList<User> members;
 	private ArrayList<File> files;
 	private ArrayList<String> schedule;
+	private ArrayList<Duty> duties;
 	
 	//default constructor
 	public Project() {
@@ -93,5 +94,14 @@ public class Project {
 		int indexOfAction = schedule.indexOf(action);
 		schedule.remove(indexOfAction);
 		return true;
+	}
+	
+	public ArrayList<Duty> getDutyData() {
+        return duties;
+    }
+	
+	public void addDuty(Duty newDuty) {
+		this.duties.add(newDuty);
+		
 	}
 }

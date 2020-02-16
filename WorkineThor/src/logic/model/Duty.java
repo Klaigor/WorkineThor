@@ -3,7 +3,7 @@ package logic.model;
 import java.util.ArrayList;
 
 public class Duty {
-		enum State {
+		public enum State {
 		discovered,
 		underDevelopement,
 		done,
@@ -14,6 +14,15 @@ public class Duty {
 	private String kindOfDuty;
 	private ArrayList<User> assignedUsers;
 	private State state;
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public boolean setName(String newName) {
+		this.name = newName;
+		return true;
+	}
 	
 	public String getDescription() {
 		return this.description;

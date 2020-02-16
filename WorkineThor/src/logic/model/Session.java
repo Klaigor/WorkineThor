@@ -6,10 +6,10 @@
  */
 package logic.model;
 
-
 public class Session {
 	private static Session sessionInstance = null;
 	private User loggedUser = null;
+	private Project currentProject = null;
 	
 	/**
 	 * constructor made private, to make this class a Singleton
@@ -42,6 +42,19 @@ public class Session {
 	 */
 	public User getLoggedUser() {
 		return this.loggedUser;
+	}
+	
+	public void setProject(Project project) {
+		this.currentProject = project;
+	}
+	
+	/**
+	 * 		retrieves the logged user for the current session 
+	 *  rerusn null if there isn't a logged user
+	 * @return
+	 */
+	public Project getCurrentProject() {
+		return this.currentProject;
 	}
 
 }

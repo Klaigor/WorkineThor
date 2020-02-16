@@ -4,6 +4,7 @@
  */
 package logic.workinethor.view;
 
+import logic.bean.ProjectBean;
 import logic.database.ProjectDAO;
 import logic.model.Session;
 import logic.workinethor.Main;
@@ -12,6 +13,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -20,12 +23,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.EventHandler;
 
 
 
 public class HomePageView {
+	
+	private BorderPane mainLayout = Main.getMainLayout();
+	private BorderPane progDutiesLayout = null;
 	
 	@FXML
 	private BorderPane background;
@@ -82,7 +89,26 @@ public class HomePageView {
 					@Override
 					public void handle(MouseEvent event) {
 						if(event.isPrimaryButtonDown() && !cell.isEmpty()) {
-							popup.show(Main.getMainWindow());
+							//popup.show(Main.getMainWindow());
+
+							ProjectBean projectBean = new ProjectBean();
+							projectBean.setProjectName(cell.getText()); //creo il bean con il nome del project che ho premuto
+							
+							Session session = Session.getSession();
+							session.setProject(projectDAO.getProjectFromDB(projectBean)); //setto il progetto della sessione come quello che ho ottenuto dal dao
+							
+							Stage dutiesView = new Stage();
+							dutiesView.setTitle("Duties");							
+							AnchorPane mainLayoutDuties = null;
+							try {
+								mainLayoutDuties = FXMLLoader.load(Main.class.getResource("view/DutiesOverview.fxml"));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							Scene scene = new Scene(mainLayoutDuties);
+							dutiesView.setScene(scene);
+							dutiesView.show();
+							
 						}
 					}
 				});
