@@ -8,6 +8,7 @@ public class Duty {
 		underDevelopement,
 		done,
 	}
+	private String name;
 	private String description;
 	//this could be further developed 
 	private String kindOfDuty;
