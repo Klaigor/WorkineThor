@@ -4,12 +4,13 @@
 <html>
 <body>
 	
-	<form action="homepage" method="post">
-		<label for="username">Username:</label>
+	<form action="login" method="post">
+		<label for="username">Username: </label>
 		<input type="text" id="user" name="username"><br>
-		<label for="password">Password:</label>
+		<label for="password">Password: </label>
 		<input type="text" id="pass" name="password"><br>
 		<input type="submit" value="Login">
 	</form>
+	
 </body>
 </html>
