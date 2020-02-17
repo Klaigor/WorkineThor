@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `duties`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `duties` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `description` varchar(125) DEFAULT NULL,
-  `type` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `project` varchar(45) NOT NULL,
+  `user` varchar(45) NOT NULL,
+  `kindOfDuty` varchar(45) DEFAULT NULL,
+  `state` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`name`,`project`,`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,6 +68,29 @@ LOCK TABLES `files` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `members`
+--
+
+DROP TABLE IF EXISTS `members`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `members` (
+  `project` varchar(45) NOT NULL,
+  `member` varchar(45) NOT NULL,
+  PRIMARY KEY (`project`,`member`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `members`
+--
+
+LOCK TABLES `members` WRITE;
+/*!40000 ALTER TABLE `members` DISABLE KEYS */;
+/*!40000 ALTER TABLE `members` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
@@ -77,7 +101,7 @@ CREATE TABLE `projects` (
   `project_name` varchar(45) NOT NULL,
   `drive_name` varchar(45) DEFAULT NULL,
   `user` varchar(45) NOT NULL,
-  PRIMARY KEY (`project_name`,`user`)
+  PRIMARY KEY (`project_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,7 +111,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES ('adasd',NULL,'mario'),('asdasd',NULL,'culo'),('prova',NULL,'carlo'),('prova','','luigi'),('prova',NULL,'mario'),('prova1','','culo'),('prova1',NULL,'mario');
+INSERT INTO `projects` VALUES ('prova',NULL,'carlo'),('prova2','mega','mario'),('prova3',NULL,'luigi');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-17 16:37:38
+-- Dump completed on 2020-02-17 18:36:55

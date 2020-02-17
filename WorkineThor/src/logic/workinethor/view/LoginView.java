@@ -15,6 +15,10 @@ import logic.controller.LoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
 import logic.workinethor.Main;
 
@@ -53,12 +57,15 @@ public class LoginView {
 	@FXML
 	public boolean initialize() {
 		
+		Image image = new Image("logic/Images/background.png", 800, 600, true, false);
+		BackgroundImage sfondo = new BackgroundImage(image, null, null, null, null);
+		
 		username.setStyle("-fx-text-fill: #cfd1dd");
 		Password.setStyle("-fx-text-fill: #cfd1dd");
-		pane.setStyle("-fx-background-color: #2d3447");
 		singup.setStyle("-fx-text-fill: #cfd1dd");
 		loginBtn.isUnderline();
-
+		pane.setBackground(new Background(sfondo));
+		
 		/**
 		 * sets action for login button
 		 * for now is a mock function thata checks pswd and usr vs two local variables
