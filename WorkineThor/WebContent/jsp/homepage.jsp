@@ -5,17 +5,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<style type="text/css">
+    <%@include file="../bootstrap/css/bootstrap.css" %>
+    <%@include file="../bootstrap/css/bootstrap-theme.css" %>
+</style>
+<script src="bootstrap/js/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<title>
+HomePage
+</title>
+
 </head>
-<body>
-	<label for="user">User: ${user}!</label><br>
+<body background="images/background.png">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#home" class="color-me-black">Home</a>
+				<li><a href="#create" class="color-me-black">Create Project</a>
+				<li><a href="#browse" class="color-me-black">Browse Projects</a>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
+			</ul>
+		</div>
+	</nav>
 	
-	<ul>
-    <c:forEach items="${project_list}" varStatus="i">
-    	<li><a href="project?id=${project_list[i.index]}">${project_list[i.index]}</a></li>
-    </c:forEach>
-	</ul>
+	<br>
+	<br>
+	<br>
 	
+	<div class="tumbotron text-center">
+		<h2 style="color:white">User: ${user}</h2>
+		<ul class="list-group justify-content-center" >
+   		<c:forEach items="${project_list}" varStatus="i">
+   			<li class="list-group-item" style="width:170px">
+   				<a href="project?id=${project_list[i.index]}">
+   					<img src="images/project-icon.png" class="media-object" style="width:20px">    				
+ 					${project_list[i.index]}
+   				</a>
+   				<br>
+    		</li>
+    	</c:forEach>
+		</ul>
+	</div>	
+
 </body>
 </html>
