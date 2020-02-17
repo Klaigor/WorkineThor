@@ -50,6 +50,28 @@ public class ProjectDAO {
 		logger.log(Level.INFO, "project:" + project.getProjectName() + " added");
 		return true;
 	}
+	
+	public boolean addUserInProjectToDB(Project project, User user) {
+		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
+		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
+
+		dbConnection = handle.getConnection();
+
+		try {
+			statement = dbConnection.prepareStatement(sqlString);
+			statement.setString(1, project.getProjectName());
+			statement.setString(2, project.getDriveName());
+			statement.setString(3, user.getUsername());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "SQL query failed!!");
+			return false;
+		}
+
+		logger.log(Level.INFO, "user:" + user.getUsername() + " added");
+		return true;
+	}
+	
 
 	public boolean removeProjectFromDB(Project project) {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());

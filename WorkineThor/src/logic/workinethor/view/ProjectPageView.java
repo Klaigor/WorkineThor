@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.bean.ProjectBean;
+import logic.bean.UserBean;
 import logic.controller.CreateProjectController;
 import logic.database.ProjectDAO;
 
@@ -36,6 +37,7 @@ public class ProjectPageView {
 	private void initialize() throws SQLException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		ProjectBean bean = new ProjectBean();
+		UserBean uBean = new UserBean();
 		bean.setProjectName(control.getProjectName());
 				
 		ObservableList<String> result = projectDAO.getAllProjectUsers(bean);
@@ -76,8 +78,8 @@ public class ProjectPageView {
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				ObservableList<String> result = projectDAO.getAllUsersNotInProject(bean);
-				ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
+				ObservableList<String> result2 = projectDAO.getAllUsersNotInProject(bean);
+				ObservableList<String> memberListSelector2 = FXCollections.observableArrayList(); // Create a member list
 				Stage addMemberWindow = new Stage();
 				addMemberWindow.setTitle("Add Member");
 
@@ -94,18 +96,18 @@ public class ProjectPageView {
 				logoView.setTranslateX(50);
 				logoView.setTranslateY(47);
 
-				ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
+				ListView<String> memberList = new ListView<>(memberListSelector2); // Create a list view where I can visualize
 																					// the list
 				memberList.setTranslateY(96);
 				memberList.setPrefSize(400, 450);
-				memberList.setItems(memberListSelector);
+				memberList.setItems(memberListSelector2);
 				memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 				memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
 					String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
-					System.out.println(memberSelected);
+					String memeberToAdd = memberSelected;
 				});
 				
-				memberListSelector.addAll(result);
+				memberListSelector2.addAll(result2);
 				
 				Button addButton = new Button();
 				addButton.setText("Add");
@@ -139,7 +141,13 @@ public class ProjectPageView {
 				addButton.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						//implementare che aggiunge il membro selezionato
+						ProjectDAO projectDAO = new ProjectDAO();
+						ProjectBean pBean = new ProjectBean();
+						UserBean uBean = new UserBean();
+						pBean.setProjectName(control.getProjectName());
+						uBean.getUsername();
+						System.out.println(uBean.getUsername());
+						
 					}
 					
 				});
@@ -153,7 +161,6 @@ public class ProjectPageView {
 		items.getChildren().add(member);
 		items.getChildren().add(duties);
 		items.getChildren().add(addMember);
-		items.getChildren().add(addFile);
 		
 		background.setCenter(items);
 		background.setStyle("-fx-background-color: #2d3447");
