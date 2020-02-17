@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -28,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.workinethor.Main;
@@ -52,6 +54,21 @@ public class CreateProjectView {
 
 	@FXML
 	private Button next;
+	
+	@FXML
+	private Button add;
+	
+	@FXML
+	private BorderPane pane;
+	
+	@FXML
+	private Label label;
+	
+	@FXML
+	private Label labelNameProject;
+	
+	@FXML
+	private Label labelDrive;
 
 	//changed for test
 	// changed for code smells
@@ -80,6 +97,17 @@ public class CreateProjectView {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
+		driveSelector.setStyle("-fx-background-radius: 10");
+		pane.setStyle("-fx-background-color: #2d3447");
+		label.setStyle("-fx-text-fill: #cfd1dd");
+		labelNameProject.setStyle("-fx-text-fill: #cfd1dd");
+		labelDrive.setStyle("-fx-text-fill: #cfd1dd");
+		next.setUnderline(true);
+		next.setStyle("-fx-background-radius: 10");
+		add.setStyle("-fx-background-radius: 10");
+		add.setUnderline(true);
+		projectNameField.setStyle("-fx-background-radius: 10");
+		driveBox.setStyle("-fx-background-radius: 10");	
 		return true;
 	}
 
@@ -126,11 +154,25 @@ public class CreateProjectView {
 		searchField.setTranslateX(101);
 		searchField.setTranslateY(52);
 		searchField.setPrefSize(250, 26);
-
+		searchField.setStyle("-fx-background-radius: 10");
+		
 		Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
 		ImageView logoView = new ImageView(searchLogo);
 		logoView.setTranslateX(50);
 		logoView.setTranslateY(47);
+		
+		Circle logo = new Circle(20, 20, 20);
+		logo.setTranslateX(48);
+		logo.setTranslateY(45);
+		logo.setFill(javafx.scene.paint.Color.AZURE);
+		
+		Button addButton = new Button();
+		addButton.setText("Add");
+		addButton.setPrefSize(70, 40);
+		addButton.setTranslateY(553);
+		addButton.setTranslateX(170);
+		addButton.setUnderline(true);
+		addButton.setStyle("-fx-background-radius: 10");
 
 		ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																			// the list
@@ -143,16 +185,18 @@ public class CreateProjectView {
 			System.out.println(memberSelected);
 			//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
 			bean.setUserToAdd(memberSelected);
-			projectController.createProject(bean);
+		//	projectController.createProject(bean);
+			
+			addButton.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					//implementare che aggiunge il membro selezionato
+				}
+				
+			});
 		});
 		
 		memberListSelector.addAll(result);
-		
-		Button addButton = new Button();
-		addButton.setText("Add");
-		addButton.setPrefSize(70, 40);
-		addButton.setTranslateY(553);
-		addButton.setTranslateX(170);
 
 		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
 																								// member list
@@ -167,23 +211,16 @@ public class CreateProjectView {
 			memberList.setItems(filteredData); // show filtered list
 		});
 
-		background.getChildren().add(logoView);
+		background.getChildren().addAll(logo, logoView);
 		background.getChildren().add(searchField);
 		background.getChildren().add(memberList);
 		background.getChildren().add(addButton);
+		background.setStyle("-fx-background-color: #2d3447");
 
 		Scene loginScene = new Scene(background, 400, 600);
 		addMemberWindow.setScene(loginScene);
 		addMemberWindow.setResizable(false);
 		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
-		
-		addButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				//implementare che aggiunge il membro selezionato
-			}
-			
-		});
 
 		addMemberWindow.show();
 		

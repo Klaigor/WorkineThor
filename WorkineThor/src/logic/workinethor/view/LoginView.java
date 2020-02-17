@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import logic.workinethor.Main;
 
 public class LoginView {
@@ -53,17 +54,31 @@ public class LoginView {
 	@FXML
 	private Label singup;
 	
+	@FXML
+	private Label title;
+	
 	//changed for test
 	@FXML
 	public boolean initialize() {
-		
 		Image image = new Image("logic/Images/background.png", 800, 600, true, false);
 		BackgroundImage sfondo = new BackgroundImage(image, null, null, null, null);
+		
+		title.setText("WorkineThor");
+		title.setTranslateX(-180);
+		title.setTranslateY(10);
+		title.setFont(new Font("Arial", 70));
+		title.setStyle("-fx-text-fill: #cfd1dd");
 		
 		username.setStyle("-fx-text-fill: #cfd1dd");
 		Password.setStyle("-fx-text-fill: #cfd1dd");
 		singup.setStyle("-fx-text-fill: #cfd1dd");
+		userName.setStyle("-fx-background-radius: 10");
+		password.setStyle("-fx-background-radius: 10");
 		loginBtn.isUnderline();
+		loginBtn.setStyle("-fx-background-radius: 10");
+		signupBtn.setStyle("-fx-background-radius: 10");
+		signupBtn.setStyle("-fx-background-color:  #b51c1c");
+		
 		pane.setBackground(new Background(sfondo));
 		
 		/**

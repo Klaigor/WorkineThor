@@ -25,11 +25,12 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="173.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="208.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label fx:id="username" text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -61,6 +62,11 @@
                         <Insets left="200.0" />
                      </GridPane.margin>
                   </Button>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="title" layoutX="112.0" layoutY="72.0" text="Label" />
+                     </children>
+                  </AnchorPane>
                </children>
             </GridPane>
          </children>
