@@ -62,15 +62,18 @@ public class HomePageView {
 		loggedUserLabel.setText("Username: " + activeSession.getLoggedUser().getUsername());
 		loggedUserLabel.setFont(new Font("Arial", 24));
 		loggedUserLabel.setTranslateY(5);
+		loggedUserLabel.setStyle("-fx-text-fill: #cfd1dd");
 		
 		Label projectLabel = new Label();
-		projectLabel.setText("Your Projects");
+		projectLabel.setText("Your Projects:");
 		projectLabel.setFont(new Font("Arial", 24));
 		projectLabel.setTranslateY(50);
+		projectLabel.setStyle("-fx-text-fill: #cfd1dd");
 		
 		ObservableList<String> userProjects = projectDAO.getAllUserProjects(Session.getSession().getLoggedUser());
 		ListView<String> allProjectsListView = new ListView<String>(userProjects);
 		allProjectsListView.setTranslateY(100);
+		allProjectsListView.setTranslateX(1);
 		allProjectsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
 			@Override
 			public ListCell<String> call(ListView<String> param) {
@@ -99,7 +102,7 @@ public class HomePageView {
 							
 							Stage dutiesView = new Stage();
 							dutiesView.setTitle("Duties");							
-							AnchorPane mainLayoutDuties = null;
+							BorderPane mainLayoutDuties = null;
 							try {
 								mainLayoutDuties = FXMLLoader.load(Main.class.getResource("view/DutiesOverview.fxml"));
 							} catch (Exception e) {
@@ -132,5 +135,6 @@ public class HomePageView {
 		
 		//System.out.println(userProjects);
 		background.setCenter(items);
+		background.setStyle("-fx-background-color: #2d3447");
 	}
 }

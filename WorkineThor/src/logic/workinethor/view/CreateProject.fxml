@@ -21,7 +21,7 @@
    <bottom>
       <AnchorPane prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="next" defaultButton="true" layoutX="621.0" layoutY="7.0" mnemonicParsing="false" onAction="#goNext" prefHeight="57.0" prefWidth="134.0" text="Next">
+            <Button fx:id="next" defaultButton="true" layoutX="621.0" layoutY="7.0" mnemonicParsing="false" onAction="#goNext" prefHeight="57.0" prefWidth="134.0" text="Next" underline="true">
                <font>
                   <Font size="30.0" />
                </font></Button>
@@ -51,7 +51,7 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></ChoiceBox>
-            <Button layoutX="303.0" layoutY="268.0" mnemonicParsing="false" onAction="#addMember" text="Add Member">
+            <Button layoutX="303.0" layoutY="268.0" mnemonicParsing="false" onAction="#addMember" text="Add Member" underline="true">
                <font>
                   <Font size="25.0" />
                </font>

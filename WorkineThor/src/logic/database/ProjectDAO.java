@@ -152,7 +152,7 @@ public class ProjectDAO {
 	}
 	
 	public ObservableList<String> getAllProjectUsers(ProjectBean bean){
-		String getAllUsers = "SELECT user FROM projects WHERE project_name = ? ";
+		String getAllUsers = "SELECT DISTINCT user FROM projects WHERE project_name = ? ";
 		ObservableList<String> users = FXCollections.observableArrayList();
 		
 		dbConnection = handle.getConnection();

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import logic.workinethor.Main;
@@ -14,20 +15,21 @@ public class NavBarView {
 	@FXML
 	private ToolBar toolbar;
 	private static ToolBar ret;
-	
-	//changed for test
+
+	// changed for test
 	@FXML
 	private boolean initialize() {
 		toolbar.setVisible(false);
 		ret = toolbar;
+		toolbar.setStyle("-fx-background-color: #a0a2ab; -fx-background-radius: 3");
 		return true;
 	}
-	
+
 	public static ToolBar getToolbar() {
 		return ret;
 	}
-	
-	//changed for test
+
+	// changed for test
 	@FXML
 	private boolean goHome() throws IOException {
 		BorderPane mainLayoutHome = null;
@@ -41,7 +43,7 @@ public class NavBarView {
 		return true;
 	}
 
-	//changed for test
+	// changed for test
 	@FXML
 	private boolean goCreate() throws IOException {
 		BorderPane mainLayoutItems = null;
@@ -69,18 +71,18 @@ public class NavBarView {
 		mainLayout.setCenter(mainLayoutLogin);
 		return true;
 	}
-	
-		@FXML
-		private boolean goProject() throws IOException {
-			BorderPane mainLayoutProject = null;
-			mainLayout = Main.getMainLayout();
-			try {
-				mainLayoutProject = FXMLLoader.load(Main.class.getResource("view/BrowseProject.fxml"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			mainLayout.setCenter(mainLayoutProject);
-			return true;
+
+	@FXML
+	private boolean goProject() throws IOException {
+		BorderPane mainLayoutProject = null;
+		mainLayout = Main.getMainLayout();
+		try {
+			mainLayoutProject = FXMLLoader.load(Main.class.getResource("view/BrowseProject.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		mainLayout.setCenter(mainLayoutProject);
+		return true;
+	}
 
 }

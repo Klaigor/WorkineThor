@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.LoginView">
+<BorderPane fx:id="pane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.LoginView">
    <center>
       <AnchorPane>
          <children>
@@ -32,11 +32,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="username" text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
-                  <Label text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="Password" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font size="25.0" />
                      </font></Label>
@@ -44,19 +44,19 @@
                   <PasswordField fx:id="password" prefHeight="38.0" prefWidth="313.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="86.0" layoutY="20.0" mnemonicParsing="false" text="Login" textAlignment="CENTER">
+                        <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="86.0" layoutY="20.0" mnemonicParsing="false" text="Login" textAlignment="CENTER" underline="true">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
-                  <Label prefHeight="36.0" prefWidth="158.0" text="want to became a user?" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Label fx:id="singup" prefHeight="36.0" prefWidth="158.0" text="want to became a user?" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="15.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button fx:id="signupBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5" underline="true">
+                  <Button fx:id="signupBtn" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #b51c1c;" text="Signup" textFill="WHITE" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="200.0" />
                      </GridPane.margin>

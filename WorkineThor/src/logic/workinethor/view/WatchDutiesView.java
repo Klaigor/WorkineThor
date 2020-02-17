@@ -52,9 +52,9 @@ public class WatchDutiesView {
     @FXML
     private void initialize() {
     	
-    	for (Duty duty : duties) {
+    /*	for (Duty duty : duties) {
     		dutiesBeans.add( new DutyWatchDutiesBean(duty));
-    	}
+    	} */
     	
         // Add observable list data to the table
         dutiesTable.setItems(dutiesBeans);

@@ -17,7 +17,7 @@
                <children>
                   <VBox layoutY="121.0" prefHeight="149.0" prefWidth="176.0">
                      <children>
-                        <MenuButton fx:id="MenuButton" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="176.0" text="Menu" textAlignment="CENTER">
+                        <MenuButton fx:id="MenuButton" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="176.0" style="-fx-background-radius: 10;" text="Menu" textAlignment="CENTER">
                           <items>
                             <MenuItem mnemonicParsing="false" onAction="#goHome" text="Home" />
                             <MenuItem mnemonicParsing="false" onAction="#goCreate" text="Create Project" />
@@ -29,7 +29,7 @@
                         </MenuButton>
                      </children>
                   </VBox>
-                  <Button layoutX="679.0" layoutY="118.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="34.0" prefWidth="96.0" style="-fx-background-color: #b51c1c;" text="Logout" textFill="WHITE" underline="true">
+                  <Button layoutX="679.0" layoutY="118.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="34.0" prefWidth="96.0" style="-fx-background-color: #b51c1c; -fx-background-radius: 10;" text="Logout" textFill="WHITE" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font></Button>

@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import logic.bean.ProjectBean;
@@ -52,7 +53,13 @@ public class BrowseProjectView {
 		Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
 		ImageView logoView = new ImageView(searchLogo);
 		logoView.setTranslateX(249);
-		logoView.setTranslateY(47);
+		logoView.setTranslateY(47);												
+		
+		Circle logo = new Circle(20, 20, 20);
+		logo.setTranslateX(247);
+		logo.setTranslateY(46);
+		logo.setFill(javafx.scene.paint.Color.AZURE);
+		
 
 		ListView<String> projectList = new ListView<>(projectListSelector);
 		projectList.setTranslateY(96);
@@ -115,11 +122,12 @@ public class BrowseProjectView {
 			projectList.setItems(filteredData); // show filtered list
 		});
 
-		items.getChildren().add(logoView);
+		items.getChildren().addAll(logo, logoView);
 		items.getChildren().add(searchField);
 		items.getChildren().add(projectList);
 
 		background.setCenter(items);
+		background.setStyle("-fx-background-color: #2d3447");
 
 	}
 }

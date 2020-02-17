@@ -56,9 +56,9 @@
                         </GridPane>
                         <ButtonBar layoutX="90.0" layoutY="342.0" prefHeight="40.0" prefWidth="252.0" AnchorPane.rightAnchor="7.333333333333314">
                            <buttons>
-                              <Button mnemonicParsing="false" onAction="#handleNewPerson" text="new" />
-                              <Button layoutX="50.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="delete" />
-                              <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleEditPerson" text="edit" />
+                              <Button mnemonicParsing="false" text="new" />
+                              <Button layoutX="50.0" layoutY="15.0" mnemonicParsing="false"  text="delete" />
+                              <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false"  text="edit" />
                            </buttons>
                         </ButtonBar>
                         <TableView layoutX="14.0" layoutY="132.0" prefHeight="200.0" prefWidth="172.0">

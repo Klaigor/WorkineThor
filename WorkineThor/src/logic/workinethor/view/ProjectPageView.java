@@ -37,10 +37,10 @@ public class ProjectPageView {
 		ProjectDAO projectDAO = new ProjectDAO();
 		ProjectBean bean = new ProjectBean();
 		bean.setProjectName(control.getProjectName());
-		
-		//ObservableList<String> result = projectDAO
+				
+		ObservableList<String> result = projectDAO.getAllProjectUsers(bean);
 		ObservableList<String> memberListSelector = FXCollections.observableArrayList();
-		memberListSelector.addAll();
+		memberListSelector.addAll(result);
 		
 		AnchorPane items = new AnchorPane();
 		
@@ -49,6 +49,7 @@ public class ProjectPageView {
 		title.setText(control.getProjectName());
 		title.setTranslateX(355);
 		title.setFont(new Font("Arial", 25));
+		title.setStyle("-fx-text-fill: #cfd1dd");
 		
 		ListView<String> member = new ListView<>(memberListSelector);
 		member.setTranslateY(50);
@@ -64,11 +65,13 @@ public class ProjectPageView {
 		addFile.setPrefSize(120, 40);
 		addFile.setTranslateY(500);
 		addFile.setTranslateX(170);
+		addFile.setUnderline(true);
 		
 		Button addMember = new Button();
 		addMember.setText("Add member");
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
+		addMember.setUnderline(true);
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -153,6 +156,7 @@ public class ProjectPageView {
 		items.getChildren().add(addFile);
 		
 		background.setCenter(items);
+		background.setStyle("-fx-background-color: #2d3447");
 	}
 
 }

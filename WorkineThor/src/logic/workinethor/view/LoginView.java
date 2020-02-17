@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -34,10 +36,28 @@ public class LoginView {
 	
 	@FXML 
 	private Button signupBtn;
-
+	
+	@FXML
+	private Label username;
+	
+	@FXML
+	private Label Password;
+	
+	@FXML
+	private BorderPane pane;
+	
+	@FXML
+	private Label singup;
+	
 	//changed for test
 	@FXML
 	public boolean initialize() {
+		
+		username.setStyle("-fx-text-fill: #cfd1dd");
+		Password.setStyle("-fx-text-fill: #cfd1dd");
+		pane.setStyle("-fx-background-color: #2d3447");
+		singup.setStyle("-fx-text-fill: #cfd1dd");
+		loginBtn.isUnderline();
 
 		/**
 		 * sets action for login button
