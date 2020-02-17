@@ -6,10 +6,13 @@
  */
 package logic.model;
 
+import logic.bean.ProjectBean;
+
 public class Session {
 	private static Session sessionInstance = null;
 	private User loggedUser = null;
 	private Project currentProject = null;
+	private Project currentBrowsingProject = null;
 	
 	/**
 	 * constructor made private, to make this class a Singleton
@@ -55,6 +58,19 @@ public class Session {
 	 */
 	public Project getCurrentProject() {
 		return this.currentProject;
+	}
+	
+	public void setCurrentBrowsingProject(ProjectBean bean) {
+		currentBrowsingProject = new Project();
+		currentBrowsingProject.setProjectName(bean.getProjectName());
+		if(bean.getDriveName() != null) {
+			currentBrowsingProject.setDriveActive(true);
+			currentBrowsingProject.setDriveName(bean.getDriveName());
+		}
+	}
+	
+	public Project getCurrentBrowsingProject() {
+		return currentBrowsingProject;
 	}
 
 }

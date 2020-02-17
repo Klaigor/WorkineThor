@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +10,9 @@
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
-<title>
-${active_project}
-</title>
+<title>Create Project</title>
 </head>
-<body background="images/background.png">
-
+<body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,7 +20,6 @@ ${active_project}
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="#home" class="color-me-black">Home</a>
-				<li><a href="create-project" class="color-me-black">Create Project</a>
 				<li><a href="#browse" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -33,14 +28,13 @@ ${active_project}
 		</div>
 	</nav>
 	
-	<div class="tumbotron text-center">
-		<h2 style="color:white">Project: ${active_project}<br></h2>
-		<h2 style="color:white">--Members--</h2>
-		<br>
-		<c:forEach items="${project_users}" varStatus="i">
-			<label for="${project_users[i.index]}" style="color:white">${project_users[i.index]}</label><br>
-		</c:forEach>
+	<div class="jumbotron">
+		<h2>Create Project</h2>
+		<label for="project_name">Insert Project Name</label>
+		<input type="text" id="project_name_id" name="project_name"></input>
+		<div class="checkbox">
+			<label><input type="checkbox" value="">Drive</label>
+		</div>
 	</div>
-	
 </body>
 </html>

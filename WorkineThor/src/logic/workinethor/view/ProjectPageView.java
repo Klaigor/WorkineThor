@@ -1,6 +1,7 @@
 package logic.workinethor.view;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import logic.bean.ProjectBean;
 import logic.bean.UserBean;
 import logic.controller.CreateProjectController;
 import logic.database.ProjectDAO;
+import logic.model.Session;
 
 public class ProjectPageView {
 	private CreateProjectController control = CreateProjectController.getInstace();
@@ -37,7 +39,6 @@ public class ProjectPageView {
 	private void initialize() throws SQLException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		ProjectBean bean = new ProjectBean();
-		UserBean uBean = new UserBean();
 		bean.setProjectName(control.getProjectName());
 				
 		ObservableList<String> result = projectDAO.getAllProjectUsers(bean);
@@ -60,7 +61,7 @@ public class ProjectPageView {
 		
 		ListView<String> duties = new ListView<>();
 		duties.setTranslateY(50);
-		duties.setTranslateX(550);	
+		duties.setTranslateX(550); 	
 		
 		Button addFile = new Button();
 		addFile.setText("Add File");
@@ -74,10 +75,12 @@ public class ProjectPageView {
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
+		addMember.setVisible(false);
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				UserBean userBean = new UserBean();
 				ObservableList<String> result2 = projectDAO.getAllUsersNotInProject(bean);
 				ObservableList<String> memberListSelector2 = FXCollections.observableArrayList(); // Create a member list
 				Stage addMemberWindow = new Stage();
@@ -104,7 +107,7 @@ public class ProjectPageView {
 				memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 				memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
 					String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
-					String memeberToAdd = memberSelected;
+					userBean.setUsername(memberSelected);
 				});
 				
 				memberListSelector2.addAll(result2);
@@ -141,13 +144,10 @@ public class ProjectPageView {
 				addButton.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent event) {
-						ProjectDAO projectDAO = new ProjectDAO();
-						ProjectBean pBean = new ProjectBean();
-						UserBean uBean = new UserBean();
-						pBean.setProjectName(control.getProjectName());
-						uBean.getUsername();
-						System.out.println(uBean.getUsername());
-						
+						bean.setProjectName(Session.getSession().getCurrentBrowsingProject().getProjectName());
+						bean.setDriveName(Session.getSession().getCurrentBrowsingProject().getDriveName());
+						projectDAO.addUserInProjectToDB(bean, userBean.getUsername());
+						System.out.println("clicked");
 					}
 					
 				});
@@ -157,10 +157,23 @@ public class ProjectPageView {
 			}
 		});	
 		
+		Button joinRequestButton = new Button();
+		joinRequestButton.setText("Request to join");
+		joinRequestButton.setTranslateY(500);
+		joinRequestButton.setPrefSize(120, 40);
+		joinRequestButton.setUnderline(true);
+		
+		ArrayList<String> mArrayList = new ArrayList<String>(memberListSelector);
+		for(String m: mArrayList) {
+			if(Session.getSession().getLoggedUser().getUsername().equals(m))
+				joinRequestButton.setVisible(false);
+		}
+		
 		items.getChildren().add(title);
 		items.getChildren().add(member);
 		items.getChildren().add(duties);
 		items.getChildren().add(addMember);
+		items.getChildren().add(joinRequestButton);
 		
 		background.setCenter(items);
 		background.setStyle("-fx-background-color: #2d3447");

@@ -19,14 +19,14 @@ HomePage
 
 </head>
 <body background="images/background.png">
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="#home" class="color-me-black">Home</a>
-				<li><a href="#create" class="color-me-black">Create Project</a>
+				<li><a href="create-project" class="color-me-black">Create Project</a>
 				<li><a href="#browse" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

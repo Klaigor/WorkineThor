@@ -27,6 +27,7 @@ import javafx.util.Callback;
 import logic.bean.ProjectBean;
 import logic.controller.CreateProjectController;
 import logic.database.ProjectDAO;
+import logic.model.Session;
 import logic.workinethor.Main;
 
 public class BrowseProjectView {
@@ -92,6 +93,10 @@ public class BrowseProjectView {
 							// pass Project values to the Project page
 							bean.setProjectName(project.getText());
 							pC.existentProject(bean);
+							
+							Session activeSession = Session.getSession();
+							
+							Session.getSession().setCurrentBrowsingProject(bean);
 							
 							BorderPane mainLayoutProject = null;
 							try {

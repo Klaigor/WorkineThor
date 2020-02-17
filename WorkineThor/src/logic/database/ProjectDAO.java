@@ -51,24 +51,24 @@ public class ProjectDAO {
 		return true;
 	}
 	
-	public boolean addUserInProjectToDB(Project project, User user) {
+	public boolean addUserInProjectToDB(ProjectBean bean, String user) {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
 		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
 
 		dbConnection = handle.getConnection();
-
+		
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
-			statement.setString(1, project.getProjectName());
-			statement.setString(2, project.getDriveName());
-			statement.setString(3, user.getUsername());
+			statement.setString(1, bean.getProjectName());
+			statement.setString(2, bean.getDriveName());
+			statement.setString(3, user);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "SQL query failed!!");
 			return false;
 		}
 
-		logger.log(Level.INFO, "user:" + user.getUsername() + " added");
+		logger.log(Level.INFO, "user:" + user + " added");
 		return true;
 	}
 	

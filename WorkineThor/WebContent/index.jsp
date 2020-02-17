@@ -14,7 +14,7 @@ WorkineThor
 <script src="bootstrap/js/bootstrap.js"></script>
 <body>
 	
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
