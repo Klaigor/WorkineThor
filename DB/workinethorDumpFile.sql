@@ -1,8 +1,10 @@
--- MariaDB dump 10.17  Distrib 10.4.12-MariaDB, for Win64 (AMD64)
+CREATE DATABASE  IF NOT EXISTS `workinethor` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `workinethor`;
+-- MariaDB dump 10.17  Distrib 10.4.12-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: 127.0.0.1    Database: workinethor
+-- Host: localhost    Database: workinethor
 -- ------------------------------------------------------
--- Server version	10.4.12-MariaDB
+-- Server version	10.4.12-MariaDB-1:10.4.12+maria~eoan
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -41,6 +43,30 @@ LOCK TABLES `duties` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `files`
+--
+
+DROP TABLE IF EXISTS `files`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `files` (
+  `path` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `project` varchar(45) NOT NULL,
+  PRIMARY KEY (`path`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `files`
+--
+
+LOCK TABLES `files` WRITE;
+/*!40000 ALTER TABLE `files` DISABLE KEYS */;
+/*!40000 ALTER TABLE `files` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `projects`
 --
 
@@ -50,9 +76,9 @@ DROP TABLE IF EXISTS `projects`;
 CREATE TABLE `projects` (
   `project_name` varchar(45) NOT NULL,
   `drive_name` varchar(45) DEFAULT NULL,
-  `user` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`project_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `user` varchar(45) NOT NULL,
+  PRIMARY KEY (`project_name`,`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +87,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES ('Project1','Mega','carlo'),('Project10',NULL,'carlo'),('Project2','Google Drive','carlo'),('Project3 ',NULL,'carlo'),('Project5','Google Drive','carlo'),('Project7','DropBox','carlo'),('ProjectA','DropBox','franco');
+INSERT INTO `projects` VALUES ('adasd',NULL,'mario'),('asdasd',NULL,'culo'),('prova',NULL,'carlo'),('prova','','luigi'),('prova',NULL,'mario'),('prova1','','culo'),('prova1',NULL,'mario');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +111,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('banana','fratello'),('bello','mio'),('carlo','conti'),('franco','franchi'),('luigi','mario'),('riccio','stuart');
+INSERT INTO `users` VALUES ('carlo','conti'),('culo','cane'),('luigi','mario'),('mario','mario');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -98,4 +124,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-16 15:43:05
+-- Dump completed on 2020-02-17 16:37:38
