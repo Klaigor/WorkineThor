@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import logic.bean.ProjectBean;
+import logic.exceptions.ProjectAlreadyExistsException;
 import logic.model.Project;
 import logic.model.Session;
 import logic.model.User;
@@ -29,25 +30,45 @@ public class ProjectDAO {
 	 * 
 	 * @param project
 	 * @param session
+	 * @throws ProjectAlreadyExistsException 
 	 */
-	public boolean addProjectToDB(Project project, Session session) {
+	public boolean addProjectToDB(Project project, Session session) throws ProjectAlreadyExistsException {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
+		String sqlFindString = "SELECT project_name FROM projects WHERE project_name = ?";
 		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
-
+		boolean result = false;
+		
 		dbConnection = handle.getConnection();
 
 		try {
-			statement = dbConnection.prepareStatement(sqlString);
+			statement = dbConnection.prepareStatement(sqlFindString);
 			statement.setString(1, project.getProjectName());
-			statement.setString(2, project.getDriveName());
-			statement.setString(3, session.getLoggedUser().getUsername());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "SQL query failed!!");
-			return false;
-		}
+			ResultSet rs = statement.executeQuery();
+			
+			if(!rs.first()) {
+				result = true;
+				logger.log(Level.INFO, "project with name:"+project.getProjectName()+" does not exist --> creating");
+			}
+			else {
+				result = false;
+				throw new ProjectAlreadyExistsException("project:"+project.getProjectName()+" already exists");
+			}
+		} catch (SQLException e1) {}
+		if(result) {
+			try {
+				statement = dbConnection.prepareStatement(sqlString);
+				statement.setString(1, project.getProjectName());
+				statement.setString(2, project.getDriveName());
+				statement.setString(3, session.getLoggedUser().getUsername());
+				statement.executeUpdate();
+			} catch (SQLException e) {
+				logger.log(Level.SEVERE, "SQL query failed!!");
+				return false;
+			}
 
-		logger.log(Level.INFO, "project:" + project.getProjectName() + " added");
+			logger.log(Level.INFO, "project:" + project.getProjectName() + " added");
+		}
+		
 		return true;
 	}
 	

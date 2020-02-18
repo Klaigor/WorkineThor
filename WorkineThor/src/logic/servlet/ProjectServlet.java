@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic.bean.ProjectBean;
 import logic.database.ProjectDAO;
+import logic.model.Session;
 
 @WebServlet("/project")
 public class ProjectServlet extends HttpServlet {
@@ -31,6 +32,9 @@ public class ProjectServlet extends HttpServlet {
 		String activeProject = request.getParameter("id");
 		projectBean.setProjectName(activeProject);
 		ArrayList<String> projectUsers = new ArrayList<>(projectDAO.getAllProjectUsers(projectBean));
+		
+		//set currentBrowsingProject on the session
+		Session.getSession().setCurrentBrowsingProject(projectBean);
 		
 		request.setAttribute("active_project", activeProject);
 		request.setAttribute("project_users", projectUsers);

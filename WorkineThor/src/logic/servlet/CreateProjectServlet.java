@@ -1,13 +1,16 @@
 package logic.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import logic.bean.ProjectBean;
+import logic.controller.CreateProjectController;
+import logic.exceptions.ProjectAlreadyExistsException;
 
 @WebServlet("/create-project")
 public class CreateProjectServlet extends HttpServlet {
@@ -21,15 +24,39 @@ public class CreateProjectServlet extends HttpServlet {
 	 * create a new project instance in the DB with the data received by create-project.jsp
 	 */
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		boolean driveActive;
-		String projectName = request.getParameter("project_name");
-		String checkbox = request.getParameter("drive_active");
+		boolean driveActive = false;
+		boolean result = false;
+		String projectName = request.getParameter("project-name");
+		String checkbox = request.getParameter("drive-active");
+		String driveName = request.getParameter("drive-select");
 		
 		if(checkbox == null)
 			driveActive = false;
 		else 
 			driveActive = true;
-		out.println(projectName+ driveActive);
+		
+		ProjectBean projectBean = new ProjectBean();
+		projectBean.setProjectName(projectName);
+		projectBean.setDriveIsActive(driveActive);
+		
+		if(driveActive) {
+			projectBean.setDriveName(driveName);
+		}
+		
+		CreateProjectController controller = CreateProjectController.getInstace();
+		
+		//creates project on DB
+		try {
+			controller.createProject(projectBean);
+			result = true;
+		} catch (ProjectAlreadyExistsException e) {
+			System.out.println("project exists");
+			result = false;
+		}
+	
+		if(result)
+			response.sendRedirect("homepage");
+		else
+			response.sendRedirect("create-project");
 	}
 }

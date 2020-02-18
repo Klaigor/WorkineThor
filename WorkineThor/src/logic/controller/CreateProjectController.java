@@ -6,6 +6,7 @@ import logic.bean.FileBean;
 import logic.bean.ProjectBean;
 import logic.database.FileDAO;
 import logic.database.ProjectDAO;
+import logic.exceptions.ProjectAlreadyExistsException;
 import logic.model.Project;
 import logic.model.Session;
 
@@ -35,11 +36,12 @@ public class CreateProjectController {
 	}
 
 	/**
-	 * method that creates a new project
+	 * method that creates a new project and adds it to the DB
 	 * 
 	 * @param bean
+	 * @throws ProjectAlreadyExistsException 
 	 */
-	public boolean createProject(ProjectBean bean) {
+	public boolean createProject(ProjectBean bean) throws ProjectAlreadyExistsException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		newProject = new Project(bean.getProjectName(), bean.getDriveIsActive(), bean.getDriveName());
 

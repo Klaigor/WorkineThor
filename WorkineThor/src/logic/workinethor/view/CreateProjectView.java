@@ -6,9 +6,12 @@ package logic.workinethor.view;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
+
 import logic.bean.ProjectBean;
 import logic.controller.CreateProjectController;
 import logic.database.UserDAO;
+import logic.exceptions.ProjectAlreadyExistsException;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -114,6 +118,7 @@ public class CreateProjectView {
 	//changed for test
 	@FXML
 	private boolean goNext() throws IOException, InterruptedException {
+		boolean result = false;
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
 
@@ -125,15 +130,26 @@ public class CreateProjectView {
 		}
 
 		// pass bean to controller so that i can instantiate a new project(model)
-		projectController.createProject(bean);
-
-		BorderPane mainLayoutNext = null;
 		try {
-			mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CPAddFile.fxml"));
-		} catch (IOException e) {
-			e.printStackTrace();
+			projectController.createProject(bean);
+			result = true;
+		} catch (ProjectAlreadyExistsException e1) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setHeaderText(null);
+			alert.setContentText("Project Already Exists!!");
+			alert.show();
+			result = false;
 		}
-		mainLayout.setCenter(mainLayoutNext);
+
+		if(result) {
+			BorderPane mainLayoutNext = null;
+			try {
+				mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CPAddFile.fxml"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			mainLayout.setCenter(mainLayoutNext);
+		}
 		return true;
 	}
 
