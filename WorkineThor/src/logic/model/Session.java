@@ -53,7 +53,7 @@ public class Session {
 	
 	/**
 	 * 		retrieves the logged user for the current session 
-	 *  rerusn null if there isn't a logged user
+	 *  returnn null if there isn't a logged user
 	 * @return
 	 */
 	public Project getCurrentProject() {

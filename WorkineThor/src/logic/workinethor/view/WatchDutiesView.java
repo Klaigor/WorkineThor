@@ -3,6 +3,9 @@ package logic.workinethor.view;
 import java.util.ArrayList;
 
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -10,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import logic.bean.DutyWatchDutiesBean;
+import logic.controller.WatchDutiesController;
+import logic.database.DutyDAO;
 import logic.model.Duty;
 import logic.model.Project;
 import logic.model.Session;
@@ -33,8 +38,7 @@ public class WatchDutiesView {
 
     // Reference to the project.
     private Project project = Session.getSession().getCurrentProject();
-    ArrayList<Duty> duties = project.getDutyData();
-    ListProperty<DutyWatchDutiesBean> dutiesBeans;
+    ArrayList<DutyWatchDutiesBean> dutiesBeans= new ArrayList<DutyWatchDutiesBean>();
     
     
     
@@ -52,12 +56,18 @@ public class WatchDutiesView {
     @FXML
     private void initialize() {
     	
-    /*	for (Duty duty : duties) {
-    		dutiesBeans.add( new DutyWatchDutiesBean(duty));
-    	} */
-    	
+    	WatchDutiesController controller = new WatchDutiesController();
+    	ArrayList<Duty> duties = new ArrayList<Duty>();
+    	duties = controller.getProjectDuties();
+/*
+    	for (Duty duty : duties) {
+    		dutiesBeans.add(new DutyWatchDutiesBean(duty));
+    	}
+  */
+    	ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
+    	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<DutyWatchDutiesBean>(observableDuty);
         // Add observable list data to the table
-        dutiesTable.setItems(dutiesBeans);
+        dutiesTable.setItems(dutiesProperty);
     	
         // Initialize the Duties table with the two columns.
         dutyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());

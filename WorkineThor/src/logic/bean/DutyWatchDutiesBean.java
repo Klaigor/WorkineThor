@@ -23,9 +23,10 @@ import logic.model.Duty.State;
 public class DutyWatchDutiesBean {
 	
 	private StringProperty name;
-	private StringProperty description;
-	private StringProperty kindOfDuty;
+	private StringProperty project;
 	private ListProperty<User> assignedUsers;
+	private StringProperty kindOfDuty;
+	private StringProperty description;	
 	private ObjectProperty<State> state;
 
 	public DutyWatchDutiesBean(Duty duty) {
@@ -47,6 +48,18 @@ public class DutyWatchDutiesBean {
     
     public StringProperty nameProperty() {
         return name;
+    }
+    
+	public String getProject(){
+    	return project.get();
+    }
+    
+    public void setProject(String newProject) {
+    	this.project.set(newProject);
+    }
+    
+    public StringProperty projectProperty() {
+        return project;
     }
     
 	public String getDescription(){

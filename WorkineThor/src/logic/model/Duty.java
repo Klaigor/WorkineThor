@@ -9,6 +9,7 @@ public class Duty {
 		done,
 	}
 	private String name;
+	private String project;
 	private String description;
 	//this could be further developed 
 	private String kindOfDuty;
@@ -21,6 +22,15 @@ public class Duty {
 	
 	public boolean setName(String newName) {
 		this.name = newName;
+		return true;
+	}
+	
+	public String getProject() {
+		return this.project;
+	}
+	
+	public boolean setProject(String newProject) {
+		this.project = newProject;
 		return true;
 	}
 	

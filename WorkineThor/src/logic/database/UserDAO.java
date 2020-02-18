@@ -21,8 +21,6 @@ public class UserDAO {
 	/**
 	 * prepares the statement and then sends it to the DB
 	 * 
-	 * @param username
-	 * @param password
 	 * @throws SQLException
 	 */
 	public boolean insert(UserBean user) throws SQLException {
