@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import logic.bean.FileBean;
 import logic.controller.CreateProjectController;
+import logic.model.Session;
 
 import java.io.File;
 
@@ -56,9 +57,11 @@ public class CPAddFileView {
 	//changed for test
 	@FXML
 	private boolean initialize() {
-		title.setText(control.getNewProjectName());
+
+		/*		
+		title.setText(Session.getSession().getCurrentBrowsingProject().getProjectName());
 		title.setFont(new Font("Arial", 70));
-		title.setStyle("-fx-text-fill: #cfd1dd");
+		title.setStyle("-fx-text-fill: #cfd1dd"); 
 		
 		addFileDrive.setUnderline(true);
 		addFileDrive.setStyle("-fx-background-radius: 10");
@@ -75,14 +78,14 @@ public class CPAddFileView {
 		});
 
 		// disable button if driveActive is false
-		if (!control.getDriveActive())
+		if (!Session.getSession().getCurrentBrowsingProject().getDriveActive())
 			addFileDrive.setDisable(true);
 
 		// only for info(can be deleted)
 		logger.log(Level.INFO, "Project:" + control.getNewProjectName() + " Drive:" + control.getDriveName()
-				+ " DriveActive" + control.getDriveActive());
-		
-		return true;
+				+ " DriveActive" + control.getDriveActive()); 
+				*/
+		return true; 
 	}
 
 	//changed for test

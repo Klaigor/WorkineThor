@@ -222,6 +222,27 @@ public class ProjectDAO {
 		return projects;
 	}
 	
+	public String getProjectAdmin(ProjectBean bean) {
+		String admin = "";
+		String sqlString = "SELECT user FROM projects WHERE project_name = ?";
+		
+		dbConnection = handle.getConnection();
+		
+		try {
+			statement = dbConnection.prepareStatement(sqlString);
+			statement.setString(1, bean.getProjectName());
+			
+			ResultSet rs = statement.executeQuery();
+			
+			if(!rs.first()) {}
+			else {
+				admin = rs.getString("user");
+			}
+		} catch (SQLException e) {}
+		
+		return admin;
+	}
+	
 	public ObservableList<String> getAllProjectUsers(ProjectBean bean){
 		String getAllUsers = "SELECT member FROM members WHERE project = ? ";
 		ObservableList<String> users = FXCollections.observableArrayList();

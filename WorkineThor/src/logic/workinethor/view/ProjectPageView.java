@@ -69,12 +69,33 @@ public class ProjectPageView {
 		addFile.setTranslateX(170);
 		addFile.setUnderline(true);
 		
+		addFile.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				BorderPane addFilePane = null;
+				BorderPane mainLayout = Main.getMainLayout();
+				try {
+					addFilePane = FXMLLoader.load(ProjectPageView.class.getResource("CPAddFile.fxml"));
+				} catch (IOException e) {}
+				
+				mainLayout.setCenter(addFilePane);
+			}
+		});
+		
 		Button addMember = new Button();
 		addMember.setText("Add member");
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
-		addMember.setVisible(true);
+		
+		//if you are not an admin you can't add Member and Files 
+		String admin = projectDAO.getProjectAdmin(bean);
+		if(!admin.equals(Session.getSession().getLoggedUser().getUsername())) {
+			System.out.println("in");
+			addMember.setVisible(false);
+			addFile.setVisible(false);
+		}
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -172,6 +193,7 @@ public class ProjectPageView {
 			}
 		});
 		
+		
 		Button joinRequestButton = new Button();
 		joinRequestButton.setText("Request to join");
 		joinRequestButton.setTranslateY(500);
@@ -187,6 +209,7 @@ public class ProjectPageView {
 		items.getChildren().add(title);
 		items.getChildren().add(member);
 		items.getChildren().add(addMember);
+		items.getChildren().add(addFile);
 		items.getChildren().add(joinRequestButton);
 		
 		background.setCenter(items);
