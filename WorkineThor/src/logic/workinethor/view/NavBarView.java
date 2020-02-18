@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import logic.workinethor.Main;

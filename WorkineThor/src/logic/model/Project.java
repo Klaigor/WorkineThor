@@ -2,6 +2,7 @@ package logic.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,7 +97,7 @@ public class Project {
 		return true;
 	}
 	
-	public ArrayList<Duty> getDutyData() {
+	public List<Duty> getDutyData() {
         return duties;
     }
 	

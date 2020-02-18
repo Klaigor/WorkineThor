@@ -16,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BorderPane;
@@ -28,10 +27,10 @@ public class LoginView {
 	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane homeLayout = null;
 	private BorderPane signupLayout = null;
-	
-
+	private String style = "-fx-text-fill: #cfd1dd"; 
+	private String backgroundStyle = "-fx-background-radius: 10";
 	@FXML
-	private TextField userName;
+	private TextField usernameTextField;
 
 	@FXML
 	private PasswordField password;
@@ -46,7 +45,7 @@ public class LoginView {
 	private Label username;
 	
 	@FXML
-	private Label Password;
+	private Label passwordLabel;
 	
 	@FXML
 	private BorderPane pane;
@@ -67,16 +66,16 @@ public class LoginView {
 		title.setTranslateX(-180);
 		title.setTranslateY(10);
 		title.setFont(new Font("Arial", 70));
-		title.setStyle("-fx-text-fill: #cfd1dd");
+		title.setStyle(style);
 		
-		username.setStyle("-fx-text-fill: #cfd1dd");
-		Password.setStyle("-fx-text-fill: #cfd1dd");
-		singup.setStyle("-fx-text-fill: #cfd1dd");
-		userName.setStyle("-fx-background-radius: 10");
-		password.setStyle("-fx-background-radius: 10");
+		username.setStyle(style);
+		passwordLabel.setStyle(style);
+		singup.setStyle(style);
+		usernameTextField.setStyle(backgroundStyle);
+		password.setStyle(backgroundStyle);
 		loginBtn.isUnderline();
-		loginBtn.setStyle("-fx-background-radius: 10");
-		signupBtn.setStyle("-fx-background-radius: 10");
+		loginBtn.setStyle(backgroundStyle);
+		signupBtn.setStyle(backgroundStyle);
 		signupBtn.setStyle("-fx-background-color:  #b51c1c");
 		
 		pane.setBackground(new Background(sfondo));
@@ -93,7 +92,7 @@ public class LoginView {
 				boolean res = false;
 				UserBean user = new UserBean();
 				user.setPassword(password.getText().toString());
-				user.setUsername(userName.getText().toString());
+				user.setUsername(usernameTextField.getText().toString());
 				
 				LoginController control = new LoginController();  
 					
@@ -124,7 +123,7 @@ public class LoginView {
 					alert.show();
 					
 				}
-				userName.setText("");
+				usernameTextField.setText("");
 				password.setText("");
 			}
 		});

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import logic.controller.WatchDutiesController;
 import logic.model.Duty;
 import logic.model.Project;

@@ -23,7 +23,8 @@ public class SignupView {
 	
 	private BorderPane mainLayout = Main.getMainLayout();
 	private BorderPane homeLayout = null;
-	
+	private String textFillStyle = "-fx-text-fill: #cfd1dd";
+	private String backgroundStyle = "-fx-background-radius: 10";
 	@FXML
 	private TextField username;
 
@@ -52,14 +53,14 @@ public class SignupView {
 		title.setTranslateX(-68);
 		title.setTranslateY(82);
 		title.setFont(new Font("Arial", 70));
-		title.setStyle("-fx-text-fill: #cfd1dd");
+		title.setStyle(textFillStyle);
 		
-		username.setStyle("-fx-background-radius: 10");
-		uname.setStyle("-fx-text-fill: #cfd1dd");
-		password.setStyle("-fx-background-radius: 10");
-		pass.setStyle("-fx-text-fill: #cfd1dd");
+		username.setStyle(backgroundStyle);
+		uname.setStyle(textFillStyle);
+		password.setStyle(backgroundStyle);
+		pass.setStyle(textFillStyle);
 		signupBtn.setUnderline(true);
-		signupBtn.setStyle("-fx-background-radius: 10");
+		signupBtn.setStyle(backgroundStyle);
 		
 		pane.setStyle("-fx-background-color: #2d3447");
 		

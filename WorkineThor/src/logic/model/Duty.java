@@ -57,7 +57,7 @@ public class Duty {
 		return this.assignedUsers;
 	}
 	
-	public boolean setAssignedUser( ArrayList<User> newAssignedUsers) {
+	public boolean setAssignedUser( List<User> newAssignedUsers) {
 		this.assignedUsers.addAll(newAssignedUsers);
 		return true;
 	}
