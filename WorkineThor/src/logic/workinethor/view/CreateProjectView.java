@@ -6,8 +6,6 @@ package logic.workinethor.view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.apache.jasper.tagplugins.jstl.core.If;
-
 import logic.bean.ProjectBean;
 import logic.controller.CreateProjectController;
 import logic.database.UserDAO;
