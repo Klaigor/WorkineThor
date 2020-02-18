@@ -4,9 +4,7 @@
  */
 package logic.bean;
 
-import java.util.ArrayList;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import java.util.List;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -15,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import logic.model.User;
 import logic.model.Duty;
 import logic.model.Duty.State;
@@ -35,8 +34,8 @@ public class DutyWatchDutiesBean {
 		if (duty.getState()!=null) {
 			this.state.set(duty.getState());
 		}
-		if (!(duty.getAssignedUsers()==null)) {
-			this.assignedUsers = new SimpleListProperty<User>(FXCollections.observableArrayList(duty.getAssignedUsers()));
+		if (duty.getAssignedUsers()!=null) {
+			this.assignedUsers = new SimpleListProperty<>(FXCollections.observableArrayList(duty.getAssignedUsers()));
 		}
 	}
 	
@@ -90,11 +89,11 @@ public class DutyWatchDutiesBean {
         return kindOfDuty;
     }
     
-    public List getAssignedUsers() {
-        return (List) assignedUsers.get();
+    public List<User> getAssignedUsers() {
+        return (List<User>) assignedUsers.get();
     }
 
-    public void setAssignedUsers(List newAssignedUsers) {
+    public void setAssignedUsers(List<User> newAssignedUsers) {
         this.assignedUsers.set((ObservableList<User>) newAssignedUsers);
     }
     
