@@ -29,6 +29,7 @@ public class LoginView {
 	private BorderPane signupLayout = null;
 	private String style = "-fx-text-fill: #cfd1dd"; 
 	private String backgroundStyle = "-fx-background-radius: 10";
+	
 	@FXML
 	private TextField usernameTextField;
 
