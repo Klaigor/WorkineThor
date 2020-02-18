@@ -50,7 +50,7 @@ public class DutyDAO {
 	/**
 	 * function called by {@link WatchDutiesController}
 	 * retrieves the Duties linked to a Project And gives them back
-	 * LA FUNZIONE è FATTA MALE, NEL DB POSSONO ESSERE MESSI 
+	 * LA FUNZIONE E' FATTA MALE, NEL DB POSSONO ESSERE MESSI 
 	 * DUTIES CON STESSO NOME, S EAPPARTENGONO A DB DIFFERENTI, MA QUESTO NON DEVE ESSERE
 	 * FATTO ALTRIMENTI LA FUNZIONE NON VA
 	 * @param project
