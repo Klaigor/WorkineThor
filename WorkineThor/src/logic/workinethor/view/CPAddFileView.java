@@ -57,8 +57,7 @@ public class CPAddFileView {
 	//changed for test
 	@FXML
 	private boolean initialize() {
-
-		/*		
+	
 		title.setText(Session.getSession().getCurrentBrowsingProject().getProjectName());
 		title.setFont(new Font("Arial", 70));
 		title.setStyle("-fx-text-fill: #cfd1dd"); 
@@ -69,6 +68,7 @@ public class CPAddFileView {
 		addfile.setStyle("-fx-background-radius: 10");
 
 		pane.setStyle("-fx-background-color: #2d3447");
+
 		
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -77,14 +77,11 @@ public class CPAddFileView {
 			}
 		});
 
+		
 		// disable button if driveActive is false
 		if (!Session.getSession().getCurrentBrowsingProject().getDriveActive())
 			addFileDrive.setDisable(true);
 
-		// only for info(can be deleted)
-		logger.log(Level.INFO, "Project:" + control.getNewProjectName() + " Drive:" + control.getDriveName()
-				+ " DriveActive" + control.getDriveActive()); 
-				*/
 		return true; 
 	}
 
