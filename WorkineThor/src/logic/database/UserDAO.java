@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logic.bean.UserBean;
+import logic.model.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -73,7 +74,7 @@ public class UserDAO {
 	}
 
 	public ObservableList<String> getAllUsers() throws SQLException { 
-		String getAllUsers = "SELECT * from users";
+		String getAllUsers = "SELECT username from users WHERE username != ?";
 		ObservableList<String> allUsers = FXCollections.observableArrayList();
 
 		Connection dbConnection = dbHandler.getConnection();
@@ -82,6 +83,7 @@ public class UserDAO {
 
 			pst = dbConnection.prepareStatement(getAllUsers);
 
+			pst.setString(1, Session.getSession().getLoggedUser().getUsername());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

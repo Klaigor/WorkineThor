@@ -56,6 +56,13 @@ public class CreateProjectController {
 
 		return true;
 	}
+	
+	public void addMember(String user) {
+		ProjectDAO projectDAO = new ProjectDAO();
+		ProjectBean bean = new ProjectBean();
+		bean.setProjectName(newProject.getProjectName());
+		projectDAO.addMemberToProject(bean, user);
+	}
 
 	public boolean addFile(FileBean bean) {
 		FileDAO fileDAO = new FileDAO();

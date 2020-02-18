@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `workinethor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `workinethor`;
--- MariaDB dump 10.17  Distrib 10.4.12-MariaDB, for debian-linux-gnu (x86_64)
+-- MariaDB dump 10.17  Distrib 10.4.12-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: workinethor
+-- Host: 127.0.0.1    Database: workinethor
 -- ------------------------------------------------------
--- Server version	10.4.12-MariaDB-1:10.4.12+maria~eoan
+-- Server version	10.4.12-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -88,6 +88,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
+INSERT INTO `members` VALUES ('prova','carlo'),('prova','luigi'),('prova','mario'),('prova10','luigi'),('prova2','mario'),('prova22','carlo'),('prova22','luigi'),('prova3','luigi'),('prova4','mario'),('prova5','luigi'),('prova55','mario'),('prova6','carlo'),('prova6','culo'),('prova6','mario'),('prova7','mario'),('prova8','carlo'),('prova8','luigi'),('prova8','mario');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +113,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES ('prova',NULL,'carlo'),('prova2','mega','mario'),('prova3',NULL,'luigi'),('prova4','Mega','mario');
+INSERT INTO `projects` VALUES ('prova',NULL,'carlo'),('prova10',NULL,'luigi'),('prova2','Mega','mario'),('prova22',NULL,'carlo'),('prova3',NULL,'luigi'),('prova4','Mega','mario'),('prova5','Google Drive','luigi'),('prova55',NULL,'mario'),('prova6','DropBox','carlo'),('prova7',NULL,'mario'),('prova8',NULL,'carlo');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-18 12:31:04
+-- Dump completed on 2020-02-18 17:42:39

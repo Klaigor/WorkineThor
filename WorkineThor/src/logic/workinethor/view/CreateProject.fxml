@@ -29,7 +29,7 @@
       </AnchorPane>
    </bottom>
    <center>
-      <AnchorPane prefHeight="362.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="anchor" prefHeight="362.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <CheckBox fx:id="driveBox" layoutX="358.0" layoutY="189.0" mnemonicParsing="false" onAction="#driveBoxYes" prefHeight="0.0" prefWidth="0.0" />
             <Label fx:id="labelDrive" layoutX="127.0" layoutY="178.0" prefHeight="39.0" prefWidth="91.0" text="Drive:">
@@ -42,7 +42,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="projectNameField" layoutX="358.0" layoutY="87.0" onKeyReleased="#nextYes" prefHeight="38.0" prefWidth="262.0" promptText="Insert Project Name">
+            <TextField fx:id="projectNameField" layoutX="358.0" layoutY="87.0" prefHeight="38.0" prefWidth="262.0" promptText="Insert Project Name">
                <font>
                   <Font size="15.0" />
                </font>

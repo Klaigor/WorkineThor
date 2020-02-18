@@ -9,6 +9,8 @@ import logic.database.ProjectDAO;
 import logic.model.Session;
 import logic.workinethor.Main;
 
+import java.io.IOException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -93,24 +95,17 @@ public class HomePageView {
 					public void handle(MouseEvent event) {
 						if(event.isPrimaryButtonDown() && !cell.isEmpty()) {
 							//popup.show(Main.getMainWindow());
+							
+							ProjectBean bean = new ProjectBean();
+							bean.setProjectName(cell.getText());
+							Session.getSession().setCurrentBrowsingProject(bean);
 
-							ProjectBean projectBean = new ProjectBean();
-							projectBean.setProjectName(cell.getText()); //creo il bean con il nome del project che ho premuto
-							
-							Session session = Session.getSession();
-							session.setProject(projectDAO.getProjectFromDB(projectBean)); //setto il progetto della sessione come quello che ho ottenuto dal dao
-							
-							Stage dutiesView = new Stage();
-							dutiesView.setTitle("Duties");							
-							BorderPane mainLayoutDuties = null;
+							BorderPane projectBorderPane = null;
 							try {
-								mainLayoutDuties = FXMLLoader.load(Main.class.getResource("view/DutiesOverview.fxml"));
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-							Scene scene = new Scene(mainLayoutDuties);
-							dutiesView.setScene(scene);
-							dutiesView.show();
+								projectBorderPane = FXMLLoader.load(HomePageView.class.getResource("Project.fxml"));
+							} catch (IOException e) {}
+							
+							mainLayout.setCenter(projectBorderPane);
 							
 						}
 					}

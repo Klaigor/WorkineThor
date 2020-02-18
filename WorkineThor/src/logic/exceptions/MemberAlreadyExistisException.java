@@ -1,13 +1,13 @@
 package logic.exceptions;
 
-public class ProjectAlreadyExistsException extends Exception {
+public class MemberAlreadyExistisException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProjectAlreadyExistsException(String message) {
+	public MemberAlreadyExistisException(String message) {
 		super(message);
 	}
 }

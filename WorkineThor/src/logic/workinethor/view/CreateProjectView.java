@@ -5,11 +5,15 @@ package logic.workinethor.view;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import logic.bean.ProjectBean;
 import logic.controller.CreateProjectController;
+import logic.database.ProjectDAO;
 import logic.database.UserDAO;
+import logic.exceptions.MemberAlreadyExistisException;
 import logic.exceptions.ProjectAlreadyExistsException;
+import logic.model.Session;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,6 +75,13 @@ public class CreateProjectView {
 	
 	@FXML
 	private Label labelDrive;
+	
+	@FXML
+	private AnchorPane anchor;
+	
+	private boolean projectDoesNotExist = false;
+	
+	private ArrayList<String> allMembersToAdd = new ArrayList<>();
 
 	//changed for test
 	// changed for code smells
@@ -84,11 +95,8 @@ public class CreateProjectView {
 	}
 
 	//changed for test
-	@FXML
 	private boolean nextYes() {
-		String textFieldValue = projectNameField.getText();
-		boolean isDisabled = (textFieldValue.isEmpty() || textFieldValue.trim().isEmpty());
-		next.setDisable(isDisabled);
+		next.setDisable(!projectDoesNotExist);
 		return true;
 	}
 
@@ -96,6 +104,7 @@ public class CreateProjectView {
 	@FXML
 	private boolean initialize() {
 		next.setDisable(true);
+		next.setText("Create");
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
@@ -110,6 +119,39 @@ public class CreateProjectView {
 		add.setUnderline(true);
 		projectNameField.setStyle("-fx-background-radius: 10");
 		driveBox.setStyle("-fx-background-radius: 10");	
+		
+		ProjectBean bean = new ProjectBean();
+		
+		Button checkButton = new Button();
+		checkButton.setText("Check Name");
+		checkButton.setTranslateX(640);
+		checkButton.setTranslateY(90);
+		
+		checkButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				ProjectDAO projectDAO = new ProjectDAO();
+				
+				if(!projectNameField.getText().isEmpty()) {
+					bean.setProjectName(projectNameField.getText());
+					try {
+						projectDAO.checkIfProjectExist(bean);
+						projectDoesNotExist = true;
+					} catch (ProjectAlreadyExistsException e) {
+						Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setHeaderText(null);
+						alert.setContentText("Project Already Exists!!");
+						alert.show();
+						projectDoesNotExist = false;
+					}
+					nextYes();
+				}
+			}
+		});
+		
+		
+		anchor.getChildren().add(checkButton);
+		
 		return true;
 	}
 
@@ -130,6 +172,9 @@ public class CreateProjectView {
 		// pass bean to controller so that i can instantiate a new project(model)
 		try {
 			projectController.createProject(bean);
+			for(String member: allMembersToAdd) {
+				projectController.addMember(member);
+			}
 			result = true;
 		} catch (ProjectAlreadyExistsException e1) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -140,9 +185,11 @@ public class CreateProjectView {
 		}
 
 		if(result) {
+			
+			Session.getSession().setCurrentBrowsingProject(bean);
 			BorderPane mainLayoutNext = null;
 			try {
-				mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("CPAddFile.fxml"));
+				mainLayoutNext = FXMLLoader.load(NavBarView.class.getResource("Project.fxml"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -199,12 +246,24 @@ public class CreateProjectView {
 			System.out.println(memberSelected);
 			//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
 			bean.setUserToAdd(memberSelected);
-		//	projectController.createProject(bean);
 			
 			addButton.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					//implementare che aggiunge il membro selezionato
+					boolean result = false;
+					try {
+						result = validateMember(memberSelected);
+					} catch (MemberAlreadyExistisException e) {
+						Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setHeaderText(null);
+						alert.setContentText("Member already Selected!!");
+						alert.show();
+					}
+					
+					if(!result) {
+						System.out.println("coddio");
+						addMemberWindow.close();
+					}
 				}
 				
 			});
@@ -241,4 +300,21 @@ public class CreateProjectView {
 		return true;
 	}
 
+	public boolean validateMember(String memberSelected) throws MemberAlreadyExistisException {
+		boolean result = false;
+		for(String member: allMembersToAdd) {
+			if(memberSelected.equals(member))
+				result = true;
+		}
+		
+		if(!result) {
+			allMembersToAdd.add(memberSelected);
+			System.out.println(allMembersToAdd);
+		}
+		else {
+			throw new MemberAlreadyExistisException("Member already in queue");
+		}
+		
+		return result;
+	}
 }

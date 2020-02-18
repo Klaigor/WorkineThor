@@ -1,5 +1,6 @@
 package logic.workinethor.view;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,17 +22,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.bean.ProjectBean;
-import logic.bean.UserBean;
-import logic.controller.CreateProjectController;
 import logic.database.ProjectDAO;
 import logic.model.Session;
+import logic.workinethor.Main;
 
 public class ProjectPageView {
-	private CreateProjectController control = CreateProjectController.getInstace();
 	
 	@FXML
 	private BorderPane background;
@@ -39,7 +40,8 @@ public class ProjectPageView {
 	private void initialize() throws SQLException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		ProjectBean bean = new ProjectBean();
-		bean.setProjectName(control.getProjectName());
+		String currentBrowsingProject = Session.getSession().getCurrentBrowsingProject().getProjectName();
+		bean.setProjectName(currentBrowsingProject);
 				
 		ObservableList<String> result = projectDAO.getAllProjectUsers(bean);
 		ObservableList<String> memberListSelector = FXCollections.observableArrayList();
@@ -49,7 +51,7 @@ public class ProjectPageView {
 		
 		
 		Label title = new Label();
-		title.setText(control.getProjectName());
+		title.setText(currentBrowsingProject);
 		title.setTranslateX(355);
 		title.setFont(new Font("Arial", 25));
 		title.setStyle("-fx-text-fill: #cfd1dd");
@@ -58,10 +60,7 @@ public class ProjectPageView {
 		member.setTranslateY(50);
 		member.setTranslateX(1);
 		member.setItems(memberListSelector);
-		
-		ListView<String> duties = new ListView<>();
-		duties.setTranslateY(50);
-		duties.setTranslateX(550); 	
+			
 		
 		Button addFile = new Button();
 		addFile.setText("Add File");
@@ -75,87 +74,103 @@ public class ProjectPageView {
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
-		addMember.setVisible(false);
+		addMember.setVisible(true);
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				UserBean userBean = new UserBean();
-				ObservableList<String> result2 = projectDAO.getAllUsersNotInProject(bean);
-				ObservableList<String> memberListSelector2 = FXCollections.observableArrayList(); // Create a member list
-				Stage addMemberWindow = new Stage();
-				addMemberWindow.setTitle("Add Member");
-
-				AnchorPane background = new AnchorPane();
-
-				TextField searchField = new TextField(); // create a search field
-				searchField.setPromptText("Search here!");
-				searchField.setTranslateX(101);
-				searchField.setTranslateY(52);
-				searchField.setPrefSize(250, 26);
-
-				Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
-				ImageView logoView = new ImageView(searchLogo);
-				logoView.setTranslateX(50);
-				logoView.setTranslateY(47);
-
-				ListView<String> memberList = new ListView<>(memberListSelector2); // Create a list view where I can visualize
-																					// the list
-				memberList.setTranslateY(96);
-				memberList.setPrefSize(400, 450);
-				memberList.setItems(memberListSelector2);
-				memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-				memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
-					String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
-					userBean.setUsername(memberSelected);
-				});
-				
-				memberListSelector2.addAll(result2);
-				
-				Button addButton = new Button();
-				addButton.setText("Add");
-				addButton.setPrefSize(70, 40);
-				addButton.setTranslateY(553);
-				addButton.setTranslateX(170);
-
-				FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
-																										// member list
-				searchField.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
-																// filtered list
-					String filter = searchField.getText();
-					if (filter == null || filter.length() == 0) {
-						filteredData.setPredicate(s -> true);
-					} else {
-						filteredData.setPredicate(s -> s.contains(filter));
-					}
-					memberList.setItems(filteredData); // show filtered list
-				});
-
-				background.getChildren().add(logoView);
-				background.getChildren().add(searchField);
-				background.getChildren().add(memberList);
-				background.getChildren().add(addButton);
-
-				Scene loginScene = new Scene(background, 400, 600);
-				addMemberWindow.setScene(loginScene);
-				addMemberWindow.setResizable(false);
-				addMemberWindow.initModality(Modality.APPLICATION_MODAL);
-				
-				addButton.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						bean.setProjectName(Session.getSession().getCurrentBrowsingProject().getProjectName());
-						bean.setDriveName(Session.getSession().getCurrentBrowsingProject().getDriveName());
-						projectDAO.addUserInProjectToDB(bean, userBean.getUsername());
-						System.out.println("clicked");
-					}
+					ObservableList<String> result = null;
+					result = projectDAO.getMembersToAdd(bean);
 					
-				});
+					ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
+					memberListSelector.addAll(result);
+					Stage addMemberWindow = new Stage();
+					addMemberWindow.setTitle("Add Member");
 
-				addMemberWindow.show();
-				
+					AnchorPane background = new AnchorPane();
+
+					TextField searchField = new TextField(); // create a search field
+					searchField.setPromptText("Search here!");
+					searchField.setTranslateX(101);
+					searchField.setTranslateY(52);
+					searchField.setPrefSize(250, 26);
+					searchField.setStyle("-fx-background-radius: 10");
+					
+					Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
+					ImageView logoView = new ImageView(searchLogo);
+					logoView.setTranslateX(50);
+					logoView.setTranslateY(47);
+					
+					Circle logo = new Circle(20, 20, 20);
+					logo.setTranslateX(48);
+					logo.setTranslateY(45);
+					logo.setFill(javafx.scene.paint.Color.AZURE);
+					
+					Button addButton = new Button();
+					addButton.setText("Add");
+					addButton.setPrefSize(70, 40);
+					addButton.setTranslateY(553);
+					addButton.setTranslateX(170);
+					addButton.setUnderline(true);
+					addButton.setStyle("-fx-background-radius: 10");
+
+					ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
+																						// the list
+					memberList.setTranslateY(96);
+					memberList.setPrefSize(400, 450);
+					memberList.setItems(memberListSelector);
+					memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+					memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
+						String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
+						System.out.println(memberSelected);
+						//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
+						bean.setUserToAdd(memberSelected);
+						
+						addButton.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								
+								projectDAO.addMemberToProject(bean, memberSelected);
+								
+								addMemberWindow.close();
+								
+								try {
+									Main.getMainLayout().setCenter(FXMLLoader.load(ProjectPageView.class.getResource("Project.fxml")));
+								} catch (IOException e) {}
+							}
+							
+						});
+			
+						
+					});
+
+					FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
+																											// member list
+					searchField.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
+																	// filtered list
+						String filter = searchField.getText();
+						if (filter == null || filter.length() == 0) {
+							filteredData.setPredicate(s -> true);
+						} else {
+							filteredData.setPredicate(s -> s.contains(filter));
+						}
+						memberList.setItems(filteredData); // show filtered list
+					});
+
+					background.getChildren().addAll(logo, logoView);
+					background.getChildren().add(searchField);
+					background.getChildren().add(memberList);
+					background.getChildren().add(addButton);
+					background.setStyle("-fx-background-color: #2d3447");
+
+					Scene loginScene = new Scene(background, 400, 600);
+					addMemberWindow.setScene(loginScene);
+					addMemberWindow.setResizable(false);
+					addMemberWindow.initModality(Modality.APPLICATION_MODAL);
+
+					addMemberWindow.show();
 			}
-		});	
+		});
 		
 		Button joinRequestButton = new Button();
 		joinRequestButton.setText("Request to join");
@@ -171,12 +186,11 @@ public class ProjectPageView {
 		
 		items.getChildren().add(title);
 		items.getChildren().add(member);
-		items.getChildren().add(duties);
 		items.getChildren().add(addMember);
 		items.getChildren().add(joinRequestButton);
 		
 		background.setCenter(items);
 		background.setStyle("-fx-background-color: #2d3447");
 	}
-
+	
 }
