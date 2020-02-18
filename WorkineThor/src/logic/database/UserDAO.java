@@ -17,7 +17,8 @@ public class UserDAO {
 
 	private DBhandle dbHandler = DBhandle.getDBhandleInstance();
 	private PreparedStatement pst;
-
+	//lo ha voluto sonarcloud
+	private String usernamestring = "username";
 	/**
 	 * prepares the statement and then sends it to the DB
 	 * 
@@ -65,7 +66,7 @@ public class UserDAO {
 			userOut.setUsername("");
 			userOut.setPassword("");
 		} else {
-			userOut.setUsername(rs.getString("username"));
+			userOut.setUsername(rs.getString(usernamestring));
 			userOut.setPassword(rs.getString("password"));
 		}
 		return userOut;
@@ -90,9 +91,9 @@ public class UserDAO {
 		if (!rs.first()) { // rs empty no user with the correct username
 
 		} else {
-			allUsers.addAll(rs.getString("username"));
+			allUsers.addAll(rs.getString(usernamestring));
 			while (rs.next())
-				allUsers.addAll(rs.getString("username"));
+				allUsers.addAll(rs.getString(usernamestring));
 		}
 		return allUsers;
 	}

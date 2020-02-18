@@ -1,12 +1,13 @@
 package logic.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Duty {
 		public enum State {
-		discovered,
-		underDevelopement,
-		done,
+		DISCOVERED,
+		UNDER_DEVELOPEMENT,
+		DONE,
 	}
 	private String name;
 	private String project;
@@ -52,12 +53,12 @@ public class Duty {
 		return true;
 	}
 	
-	public ArrayList<User> getAssignedUsers() {
+	public List<User> getAssignedUsers() {
 		return this.assignedUsers;
 	}
 	
-	public boolean setState(String newDescription) {
-		this.description = newDescription;
+	public boolean setAssignedUser( ArrayList<User> newAssignedUsers) {
+		this.assignedUsers.addAll(newAssignedUsers);
 		return true;
 	}
 	

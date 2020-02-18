@@ -75,7 +75,7 @@ public class DutyDAO {
 		ResultSet rs = pst.executeQuery();
 
 		if (!rs.first()) { // rs empty no no duty for the project
-			return new ArrayList<Duty>();
+			return new ArrayList<>();
 
 		} else {
 			int size =0;
@@ -95,31 +95,5 @@ public class DutyDAO {
 			return arrayOut;	
 		}
 		
-	}
-
-	public ObservableList<String> getAllUsers() throws SQLException { 
-		String getAllUsers = "SELECT * from users";
-		ObservableList<String> allUsers = FXCollections.observableArrayList();
-
-		Connection dbConnection = dbHandler.getConnection();
-
-		try {
-
-			pst = dbConnection.prepareStatement(getAllUsers);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		ResultSet rs = pst.executeQuery();
-
-		if (!rs.first()) { // rs empty no user with the correct username
-
-		} else {
-			allUsers.addAll(rs.getString("username"));
-			while (rs.next())
-				allUsers.addAll(rs.getString("username"));
-		}
-		return allUsers;
 	}
 }

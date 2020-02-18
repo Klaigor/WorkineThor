@@ -67,10 +67,11 @@ public class FileDAO {
 		if (!rs.first()) { // rs empty no File
 
 		} else {
-			while (rs.next())
+			while (rs.next()) {
 				allFile.addAll(rs.getString("path"));
 				allFile.addAll(rs.getString("name"));
 				allFile.addAll(rs.getString("Project"));
+			}
 		}
 		return allFile;
 	}
