@@ -32,7 +32,7 @@ public class HomePageServlet extends HttpServlet{
 		
 		String username = "";
 		
-		Cookie cookies[] = request.getCookies();
+		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie: cookies) {
 			if(cookie.getName().equals("result"))
 				result = Boolean.parseBoolean(cookie.getValue());

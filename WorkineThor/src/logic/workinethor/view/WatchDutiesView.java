@@ -2,19 +2,15 @@ package logic.workinethor.view;
 
 import java.util.ArrayList;
 
-import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import logic.bean.DutyWatchDutiesBean;
 import logic.controller.WatchDutiesController;
-import logic.database.DutyDAO;
 import logic.model.Duty;
 import logic.model.Project;
 import logic.model.Session;
@@ -37,17 +33,7 @@ public class WatchDutiesView {
   
 
     // Reference to the project.
-    private Project project = Session.getSession().getCurrentProject();
-    ArrayList<DutyWatchDutiesBean> dutiesBeans= new ArrayList<DutyWatchDutiesBean>();
-    
-    
-    
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
-    public WatchDutiesView() {
-    }
+    ArrayList<DutyWatchDutiesBean> dutiesBeans= new ArrayList<>();
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -57,7 +43,7 @@ public class WatchDutiesView {
     private void initialize() {
     	
     	WatchDutiesController controller = new WatchDutiesController();
-    	ArrayList<Duty> duties = new ArrayList<Duty>();
+    	ArrayList<Duty> duties;
     	duties = (ArrayList<Duty>) controller.getProjectDuties();
 
     	for (Duty duty : duties) {
@@ -65,7 +51,7 @@ public class WatchDutiesView {
     	}
     	
     	ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
-    	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<DutyWatchDutiesBean>(observableDuty);
+    	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
         // Add observable list data to the table
         dutiesTable.setItems(dutiesProperty);
     	
