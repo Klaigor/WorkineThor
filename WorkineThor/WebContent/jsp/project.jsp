@@ -26,7 +26,7 @@ ${active_project}
 			<ul class="nav navbar-nav">
 				<li><a href="#home" class="color-me-black">Home</a>
 				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
-				<li><a href="#browse" class="color-me-black">Browse Projects</a>
+				<li><a href="jsp/browse.jsp" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>

@@ -199,7 +199,7 @@ public class ProjectDAO {
 		return projectStrings;
 	}
 
-	public ObservableList<String> getAllProjects() throws SQLException {
+	public ObservableList<String> getAllProjects() {
 		String getAllProjects = "SELECT DISTINCT project_name FROM projects";
 		ObservableList<String> projects = FXCollections.observableArrayList();
 
@@ -211,13 +211,23 @@ public class ProjectDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		ResultSet rs = statement.executeQuery();
-		if (!rs.first()) {
+		ResultSet rs = null;
+		try {
+			rs = statement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if (!rs.first()) {
 
-		} else {
-			projects.addAll(rs.getString("project_name"));
-			while (rs.next())
+			} else {
 				projects.addAll(rs.getString("project_name"));
+				while (rs.next())
+					projects.addAll(rs.getString("project_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return projects;
 	}
