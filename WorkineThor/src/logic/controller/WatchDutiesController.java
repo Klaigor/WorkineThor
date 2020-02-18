@@ -16,7 +16,7 @@ public class WatchDutiesController {
 		DutyDAO dutyDao = new DutyDAO();
 		ArrayList<Duty> arrayDuty = new ArrayList<>();
 		try {
-			arrayDuty = dutyDao.getDuty(session.getCurrentProject());
+			arrayDuty = (ArrayList<Duty>) dutyDao.getDuty(session.getCurrentProject());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
