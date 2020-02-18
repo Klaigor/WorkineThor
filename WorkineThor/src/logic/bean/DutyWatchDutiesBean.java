@@ -4,16 +4,15 @@
  */
 package logic.bean;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javafx.beans.property.IntegerProperty;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.model.User;
@@ -33,10 +32,15 @@ public class DutyWatchDutiesBean {
 		this.name = new SimpleStringProperty(duty.getName());
 		this.description = new SimpleStringProperty(duty.getDescription());
 		this.kindOfDuty = new SimpleStringProperty(duty.getKindOfDuty());
-		//this.assignedUsers = new SimpleListProperty<User>(FXCollections.observableArrayList(duty.getAssignedUsers()));
-		//this.state.set(duty.getState());
-	
+		if (duty.getState()!=null) {
+			this.state.set(duty.getState());
+		}
+		if (!(duty.getAssignedUsers()==null)) {
+			this.assignedUsers = new SimpleListProperty<User>(FXCollections.observableArrayList(duty.getAssignedUsers()));
+		}
 	}
+	
+	
 	
 	public String getName(){
     	return name.get();
@@ -86,11 +90,11 @@ public class DutyWatchDutiesBean {
         return kindOfDuty;
     }
     
-    public ArrayList<User> getAssignedUsers() {
-        return (ArrayList<User>) assignedUsers.get();
+    public List getAssignedUsers() {
+        return (List) assignedUsers.get();
     }
 
-    public void setAssignedUsers(ArrayList<User> newAssignedUsers) {
+    public void setAssignedUsers(List newAssignedUsers) {
         this.assignedUsers.set((ObservableList<User>) newAssignedUsers);
     }
     
