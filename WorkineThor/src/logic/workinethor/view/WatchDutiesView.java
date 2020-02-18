@@ -58,7 +58,7 @@ public class WatchDutiesView {
     	
     	WatchDutiesController controller = new WatchDutiesController();
     	ArrayList<Duty> duties = new ArrayList<Duty>();
-    	duties = controller.getProjectDuties();
+    	duties = (ArrayList<Duty>) controller.getProjectDuties();
 
     	for (Duty duty : duties) {
     		dutiesBeans.add(new DutyWatchDutiesBean(duty));
