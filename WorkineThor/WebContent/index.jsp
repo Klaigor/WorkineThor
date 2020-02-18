@@ -14,6 +14,7 @@ WorkineThor
 <script src="bootstrap/js/bootstrap.js"></script>
 <body>
 	
+	<!-- navigation -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -30,6 +31,7 @@ WorkineThor
 		</div>
 	</nav>
 	
+	<!-- login form sends data to LoginServlet -> sends data to HomePageServlet that -->
 	<div class="jumbotron text-center">
   		<h1 style="color:white">WorkineThor</h1>
 		<div class="form-horizontal" align="center">

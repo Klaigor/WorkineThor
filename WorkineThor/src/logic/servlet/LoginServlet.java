@@ -22,6 +22,9 @@ public class LoginServlet extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * if login was a success sends data to HomePageServlet
+	 */
 	public void	doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		boolean result = false;
 		UserBean userBean = new UserBean();

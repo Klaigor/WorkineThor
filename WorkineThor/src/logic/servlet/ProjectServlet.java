@@ -21,6 +21,9 @@ public class ProjectServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * fetches project data from the DB and displays it in project.jsp
+	 */
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		ProjectDAO projectDAO = new ProjectDAO();
 		ProjectBean projectBean = new ProjectBean();

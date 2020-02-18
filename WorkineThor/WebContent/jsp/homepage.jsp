@@ -19,6 +19,8 @@ HomePage
 
 </head>
 <body background="images/background.png">
+
+	<!-- navigation -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,7 +28,7 @@ HomePage
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="#home" class="color-me-black">Home</a>
-				<li><a href="create-project" class="color-me-black">Create Project</a>
+				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
 				<li><a href="#browse" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -39,6 +41,7 @@ HomePage
 	<br>
 	<br>
 	
+	<!-- users data (projects) by clicking on a project you ask the ProjectServlet to display project.jsp-->
 	<div class="tumbotron text-center">
 		<h2 style="color:white">User: ${user}</h2>
 		<ul class="list-group justify-content-center" >

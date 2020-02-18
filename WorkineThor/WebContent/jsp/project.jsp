@@ -17,6 +17,7 @@ ${active_project}
 </head>
 <body background="images/background.png">
 
+	<!-- navigation -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -24,7 +25,7 @@ ${active_project}
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="#home" class="color-me-black">Home</a>
-				<li><a href="create-project" class="color-me-black">Create Project</a>
+				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
 				<li><a href="#browse" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -33,6 +34,7 @@ ${active_project}
 		</div>
 	</nav>
 	
+	<!-- project data (members and files) -->
 	<div class="tumbotron text-center">
 		<h2 style="color:white">Project: ${active_project}<br></h2>
 		<h2 style="color:white">--Members--</h2>

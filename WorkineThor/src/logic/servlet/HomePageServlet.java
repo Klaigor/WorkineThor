@@ -23,6 +23,9 @@ public class HomePageServlet extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * displays homepage.jsp with all the data (user logged, etc.)
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		boolean result = false;
 		ProjectDAO projectDAO = new ProjectDAO();
