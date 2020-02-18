@@ -5,10 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import logic.bean.UserBean;
 import logic.controller.WatchDutiesController;
 import logic.model.Duty;
 import logic.model.Project;
@@ -57,7 +57,7 @@ public class DutyDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<Duty> getDuty(Project project) throws SQLException {
+	public List<Duty> getDuty(Project project) throws SQLException {
 		
 		String getDuties = "SELECT DISTINCT name FROM duties WHERE project=?";
 
@@ -75,21 +75,21 @@ public class DutyDAO {
 		ResultSet rs = pst.executeQuery();
 
 		if (!rs.first()) { // rs empty no no duty for the project
-			ArrayList<Duty> arrayOut = new ArrayList<Duty>();
-			return arrayOut;
+			return new ArrayList<Duty>();
+
 		} else {
 			int size =0;
-			if (rs != null) 
+			if (rs.last()) 
 			{
 			  rs.last();    // moves cursor to the last row
 			  size = rs.getRow(); // get row id 
 			}
-			ArrayList<Duty> arrayOut = new ArrayList<Duty>();
+			ArrayList<Duty> arrayOut = new ArrayList<>();
 			rs.first();
 			for (int i = 0; i < size; i++) {
 				Duty duty = new Duty();
 				duty.setName(rs.getString("name"));
-				//duty.setProject(rs.getString("project"));
+				//dovrei settare il progetto a cui appartiene il duty
 				arrayOut.add(duty);				
 			}
 			return arrayOut;	
