@@ -3,37 +3,51 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.SignupView">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.SignupView">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.60003662109375" minWidth="10.0" prefWidth="161.60003662109375" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.79998779296875" minWidth="10.0" prefWidth="78.39996337890625" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.59998321533203" minWidth="0.0" prefWidth="63.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.79998779296875" minWidth="10.0" prefWidth="118.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="259.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="148.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="173.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="186.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="username" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="password" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="signupBtn" defaultButton="true" layoutX="70.0" layoutY="222.0" mnemonicParsing="false" text="Signup" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label text="WorkineThor" GridPane.columnIndex="2" />
+            <Label fx:id="uname" text="Username:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <Label fx:id="pass" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <TextField fx:id="username" prefHeight="37.0" prefWidth="312.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="password" prefHeight="37.0" prefWidth="312.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="signupBtn" defaultButton="true" layoutX="70.0" layoutY="222.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="121.0" text="Signup" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="title" text="label" />
+               </children>
+            </AnchorPane>
          </children>
       </GridPane>
    </center>

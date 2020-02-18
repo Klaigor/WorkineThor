@@ -14,8 +14,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;	
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;	
 
 public class SignupView {
 	
@@ -30,9 +32,37 @@ public class SignupView {
 	
 	@FXML 
 	private Button signupBtn;
+	
+	@FXML
+	private BorderPane pane;
+	
+	@FXML
+	private Label uname;
+	
+	@FXML
+	private Label pass;
+	
+	@FXML
+	private Label title;
 
 	@FXML
 	public void initialize() {
+		
+		title.setText("WorkineThor");
+		title.setTranslateX(-68);
+		title.setTranslateY(82);
+		title.setFont(new Font("Arial", 70));
+		title.setStyle("-fx-text-fill: #cfd1dd");
+		
+		username.setStyle("-fx-background-radius: 10");
+		uname.setStyle("-fx-text-fill: #cfd1dd");
+		password.setStyle("-fx-background-radius: 10");
+		pass.setStyle("-fx-text-fill: #cfd1dd");
+		signupBtn.setUnderline(true);
+		signupBtn.setStyle("-fx-background-radius: 10");
+		
+		pane.setStyle("-fx-background-color: #2d3447");
+		
 		signupBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			/*

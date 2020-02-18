@@ -59,11 +59,11 @@ public class WatchDutiesView {
     	WatchDutiesController controller = new WatchDutiesController();
     	ArrayList<Duty> duties = new ArrayList<Duty>();
     	duties = controller.getProjectDuties();
-/*
+
     	for (Duty duty : duties) {
     		dutiesBeans.add(new DutyWatchDutiesBean(duty));
     	}
-  */
+    	
     	ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
     	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<DutyWatchDutiesBean>(observableDuty);
         // Add observable list data to the table

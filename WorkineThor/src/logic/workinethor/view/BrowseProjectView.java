@@ -50,6 +50,7 @@ public class BrowseProjectView {
 		searchField.setTranslateX(300);
 		searchField.setTranslateY(52);
 		searchField.setPrefSize(250, 26);
+		searchField.setStyle("-fx-background-radius: 10");
 
 		Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
 		ImageView logoView = new ImageView(searchLogo);

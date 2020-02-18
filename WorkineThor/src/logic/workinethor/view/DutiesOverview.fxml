@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.WatchDutiesView">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.workinethor.view.WatchDutiesView">
    <center>
       <AnchorPane prefHeight="398.0" prefWidth="610.0">
          <children>
@@ -57,8 +57,8 @@
                         <ButtonBar layoutX="90.0" layoutY="342.0" prefHeight="40.0" prefWidth="252.0" AnchorPane.rightAnchor="7.333333333333314">
                            <buttons>
                               <Button mnemonicParsing="false" text="new" />
-                              <Button layoutX="50.0" layoutY="15.0" mnemonicParsing="false"  text="delete" />
-                              <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false"  text="edit" />
+                              <Button layoutX="50.0" layoutY="15.0" mnemonicParsing="false" text="delete" />
+                              <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" text="edit" />
                            </buttons>
                         </ButtonBar>
                         <TableView layoutX="14.0" layoutY="132.0" prefHeight="200.0" prefWidth="172.0">
@@ -66,7 +66,7 @@
                               <TableColumn prefWidth="170.66664123535156" text="Assigned Users" />
                            </columns>
                         </TableView>
-                        <TextArea layoutX="194.0" layoutY="161.0" prefHeight="171.0" prefWidth="200.0" />
+                        <TextArea layoutX="194.0" layoutY="161.0" prefHeight="171.0" prefWidth="200.0" wrapText="true" />
                         <Label layoutX="264.0" layoutY="132.0" text="Description" />
                      </children>
                   </AnchorPane>

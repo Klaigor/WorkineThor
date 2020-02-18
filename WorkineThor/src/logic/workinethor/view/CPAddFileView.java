@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
@@ -38,18 +40,33 @@ public class CPAddFileView {
 
 	@FXML
 	private Button addfile;
+	
 	@FXML
 	private ListView<String> filelist = new ListView<>();
+	
 	@FXML
 	private Label title;
+	
 	@FXML
 	private Button addFileDrive;
+	
+	@FXML
+	private BorderPane pane;
 
 	//changed for test
 	@FXML
 	private boolean initialize() {
 		title.setText(control.getNewProjectName());
+		title.setFont(new Font("Arial", 70));
+		title.setStyle("-fx-text-fill: #cfd1dd");
+		
+		addFileDrive.setUnderline(true);
+		addFileDrive.setStyle("-fx-background-radius: 10");
+		addfile.setUnderline(true);
+		addfile.setStyle("-fx-background-radius: 10");
 
+		pane.setStyle("-fx-background-color: #2d3447");
+		
 		addFileDrive.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

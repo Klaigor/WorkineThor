@@ -33,8 +33,8 @@ public class DutyWatchDutiesBean {
 		this.name = new SimpleStringProperty(duty.getName());
 		this.description = new SimpleStringProperty(duty.getDescription());
 		this.kindOfDuty = new SimpleStringProperty(duty.getKindOfDuty());
-		this.assignedUsers = new SimpleListProperty<User>(FXCollections.observableArrayList(duty.getAssignedUsers()));
-		this.state.set(duty.getState());
+		//this.assignedUsers = new SimpleListProperty<User>(FXCollections.observableArrayList(duty.getAssignedUsers()));
+		//this.state.set(duty.getState());
 	
 	}
 	
