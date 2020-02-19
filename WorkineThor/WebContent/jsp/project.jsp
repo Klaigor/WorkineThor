@@ -54,8 +54,25 @@ ${active_project}
 		</c:forEach>
 		<h3><input type="button" class="btn btn-default" value="add file" onclick="addFile()"></h3>
 	</div>
+	<br>
+	<!-- sends to a servlet that retrieves and shows project duties -->
+	<div class="tumbotron text-center">
+		<h2 style="color:white">--Duties--</h2>
+		<br>
+		<c:forEach items="${files}" varStatus="i">
+			<label for="${files[i.index]}" style="color:white">${files[i.index]}</label><br>
+		</c:forEach>
+		<h3><input type="button" class="btn btn-default" value="Duties" onclick="showDuties()"></h3>
+	</div>	
 	
 <script>
+	
+		/* method that calls ShowDutiesServlet --> sendRedirect*/
+	function showDuties() {
+		var name = "${active_project}";
+		document.location.href = "duties?project-name=" + name;
+	}
+
 	
 	/* method that calls AddFileServlet --> sendRedirect*/
 	function addFile(){
