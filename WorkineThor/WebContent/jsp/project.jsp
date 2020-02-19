@@ -24,13 +24,14 @@ ${active_project}
 			<div class="navbar-header">
 				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="homepage" class="color-me-black">Home</a>
+			<ul id="main-buttons" class="nav navbar-nav">
+				<li><a href="#home" class="color-me-black" onclick="handleHome()">Home</a>
 				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
 				<li><a href="browse" class="color-me-black">Browse Projects</a>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
+			<ul id = "right-buttons" class="nav navbar-nav navbar-right">
+				<li><a href="signup" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Signup</a>
+				<li><a href="logout" class="color-me-black"><img src="images/logout.png" class="media-object" style="width:20px">Logout</a>
 			</ul>
 		</div>
 	</nav>
@@ -43,7 +44,7 @@ ${active_project}
 		<c:forEach items="${project_users}" varStatus="i">
 			<label for="${project_users[i.index]}" style="color:white">${project_users[i.index]}</label><br>
 		</c:forEach>
-		<h3><input type="button" class="btn btn-default" value="add member" onclick="addMember()"></h3>
+		<h3><input type="button" id="add-member-button" class="btn btn-default" value="add member" onclick="addMember()"></h3>
 	</div>
 	
 	<div class="tumbotron text-center">
@@ -52,20 +53,37 @@ ${active_project}
 		<c:forEach items="${files}" varStatus="i">
 			<label for="${files[i.index]}" style="color:white">${files[i.index]}</label><br>
 		</c:forEach>
-		<h3><input type="button" class="btn btn-default" value="add file" onclick="addFile()"></h3>
+		<h3><input type="button" id="add-file-button" class="btn btn-default" value="add file" onclick="addFile()"></h3>
 	</div>
 	<br>
 	<!-- sends to a servlet that retrieves and shows project duties -->
 	<div class="tumbotron text-center">
 		<h2 style="color:white">--Duties--</h2>
 		<br>
-		<c:forEach items="${files}" varStatus="i">
-			<label for="${files[i.index]}" style="color:white">${files[i.index]}</label><br>
-		</c:forEach>
-		<h3><input type="button" class="btn btn-default" value="Duties" onclick="showDuties()"></h3>
+		<h3><input type="button" id="duties-button" class="btn btn-default" value="Duties" onclick="showDuties()"></h3>
 	</div>	
 	
+	<div class="tumbotron text-center">
+		<input type="button" id="request-join-button" style="" class="btn btn-default" value="request to join" onclick="request()">
+	</div>
+	
 <script>
+	<% String user = Session.getSession().getLoggedUser().getUsername(); %>
+	
+	var userLogged = "<%= user%>";
+	window.onload = function() {
+		if(userLogged === ""){
+			document.getElementById("right-buttons").children[1].style.display = "none";
+			document.getElementById("main-buttons").children[1].style.display = "none";
+			document.getElementById("add-member-button").style.display = "none";
+			document.getElementById("add-file-button").style.display = "none";
+			document.getElementById("duties-button").style.display = "none";
+			document.getElementById("request-join-button").style.display = "none";
+		}
+		else{
+			document.getElementById("right-buttons").children[0].style.display = "none";
+		}
+	};
 	
 		/* method that calls ShowDutiesServlet --> sendRedirect*/
 	function showDuties() {

@@ -45,6 +45,11 @@ public class Session {
 	 * @return
 	 */
 	public User getLoggedUser() {
+		if(loggedUser == null){
+			loggedUser = new User();
+			loggedUser.setUsername("");
+			loggedUser.setPassword("");
+		}
 		return this.loggedUser;
 	}
 	

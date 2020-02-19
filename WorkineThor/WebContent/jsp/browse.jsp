@@ -1,3 +1,4 @@
+<%@page import="logic.model.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,12 +27,13 @@ Browse Project
 			<div class="navbar-header">
 				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="#home" class="color-me-black">Home</a>
+			<ul id="main-buttons" class="nav navbar-nav">
+				<li><a href="#home" class="color-me-black" onclick="handleHome()">Home</a>
 				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul id="right-buttons" class="nav navbar-nav navbar-right">
 				<li><a href="#" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
+				<li><a href="logout" class="color-me-black"><img src="images/logout.png" class="media-object" style="width:20px">Logout</a>
 			</ul>
 		</div>
 	</nav>
@@ -57,5 +59,34 @@ Browse Project
     	</c:forEach>
 		</ul>
 	</div>	
+	
+<script>
+	
+	/* get logged user */
+	<% String user = Session.getSession().getLoggedUser().getUsername(); %>
+	var userLogged = "<%= user%>";
+	
+	/* hide items */
+	window.onload = function() {
+		if(userLogged === ""){
+			document.getElementById("right-buttons").children[1].style.display = "none";
+			document.getElementById("main-buttons").children[1].style.display = "none";
+		}
+		else{
+			document.getElementById("right-buttons").children[0].style.display = "none";
+		}
+	};
+	
+	/* if logged or not logged --> redirects to the right page*/
+	function handleHome() {
+		if(userLogged === ""){
+			document.location.href = "index.jsp";
+		}
+		else{
+			document.location.href = "homepage";
+		}
+	}
+</script>
+
 </body>
 </html>

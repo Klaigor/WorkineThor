@@ -1,3 +1,4 @@
+<%@page import="logic.model.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
 				<li><a href="../homepage" class="color-me-black">Home</a>
 				<li><a href="../browse" class="color-me-black">Browse Projects</a>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul id="right-buttons" class="nav navbar-nav navbar-right">
 				<li><a href="#" class="color-me-black"><img src="../images/signup.png" class="media-object" style="width:20px">Sign Up</a>
 			</ul>
 		</div>
@@ -56,6 +57,9 @@
 
 <!-- javaScript to enable/disable drive selection -->
 <script>
+	
+	<% String user = Session.getSession().getLoggedUser().getUsername(); %>
+	var userLogged = "<%= user%>";
 	
 	/* activates drive selection if checkbox is checked */
 	function driveActive() {
@@ -99,6 +103,10 @@
 	
 	/* method that checks if project name is already taken */
 	function checkIfExist(){
+		if(userLogged){
+			document.getElementById("right-buttons").children[0].style.display = "none";
+		}
+		
 		var failure = getParams("failure");
 	
 		if(failure)
