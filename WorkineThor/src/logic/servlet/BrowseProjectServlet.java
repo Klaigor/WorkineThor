@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import logic.database.ProjectDAO;
 
 
@@ -27,15 +28,13 @@ public class BrowseProjectServlet extends HttpServlet {
 	 * Display the Browse project page
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProjectDAO projectDAO = new ProjectDAO();	
-		System.out.println("porcodio");
+		ProjectDAO projectDAO = new ProjectDAO();
 		
 			ObservableList<String> projectList = projectDAO.getAllProjects();
 			ArrayList<String> projects = new ArrayList<>(projectList);
-			
+					
 			request.setAttribute("project_list", projects);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/browse.jsp");
 			dispatcher.forward(request, response);
-			System.out.println("porcodio");
 		}
 }
