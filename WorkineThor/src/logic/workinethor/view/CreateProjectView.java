@@ -47,6 +47,9 @@ public class CreateProjectView {
 	// createProject bean and controller 
 	private ProjectBean bean = new ProjectBean();
 	private CreateProjectController projectController = CreateProjectController.getInstace();
+	
+	private static final String sfond = "-fx-text-fill: #cfd1dd";
+	private static final String radio = "-fx-background-radius: 10";
 
 	// project information
 	@FXML
@@ -108,19 +111,17 @@ public class CreateProjectView {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
-		driveSelector.setStyle("-fx-background-radius: 10");
+		driveSelector.setStyle(radio);
 		pane.setStyle("-fx-background-color: #2d3447");
-		label.setStyle("-fx-text-fill: #cfd1dd");
-		labelNameProject.setStyle("-fx-text-fill: #cfd1dd");
-		labelDrive.setStyle("-fx-text-fill: #cfd1dd");
+		label.setStyle(sfond);
+		labelNameProject.setStyle(sfond);
+		labelDrive.setStyle(sfond);
 		next.setUnderline(true);
-		next.setStyle("-fx-background-radius: 10");
-		add.setStyle("-fx-background-radius: 10");
+		next.setStyle(radio);
+		add.setStyle(radio);
 		add.setUnderline(true);
-		projectNameField.setStyle("-fx-background-radius: 10");
-		driveBox.setStyle("-fx-background-radius: 10");	
-		
-		ProjectBean bean = new ProjectBean();
+		projectNameField.setStyle(radio);
+		driveBox.setStyle(radio);	
 		
 		Button checkButton = new Button();
 		checkButton.setText("Check Name");
@@ -205,49 +206,48 @@ public class CreateProjectView {
 		UserDAO usrDAO = new UserDAO();
 		ObservableList<String> result = usrDAO.getAllUsers();
 		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
-		Stage addMemberWindow = new Stage();
-		addMemberWindow.setTitle("Add Member");
+		Stage addMemberFinestra = new Stage();
+		addMemberFinestra.setTitle("Add Member");
 
-		AnchorPane background = new AnchorPane();
+		AnchorPane back = new AnchorPane();
 
-		TextField searchField = new TextField(); // create a search field
-		searchField.setPromptText("Search here!");
-		searchField.setTranslateX(101);
-		searchField.setTranslateY(52);
-		searchField.setPrefSize(250, 26);
-		searchField.setStyle("-fx-background-radius: 10");
+		TextField barraRicerca = new TextField(); // create a search field
+		barraRicerca .setPromptText("Search here!");
+		barraRicerca .setTranslateX(101);
+		barraRicerca .setTranslateY(52);
+		barraRicerca .setPrefSize(250, 26);
+		barraRicerca .setStyle(radio);
 		
-		Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
-		ImageView logoView = new ImageView(searchLogo);
-		logoView.setTranslateX(50);
-		logoView.setTranslateY(47);
+		Image lente = new Image("logic/Images/search--v2.png", 36, 36, true, false);
+		ImageView View = new ImageView(lente);
+		View.setTranslateX(50);
+		View.setTranslateY(47);
 		
-		Circle logo = new Circle(20, 20, 20);
-		logo.setTranslateX(48);
-		logo.setTranslateY(45);
-		logo.setFill(javafx.scene.paint.Color.AZURE);
+		Circle shape = new Circle(20, 20, 20);
+		shape.setTranslateX(48);
+		shape.setTranslateY(45);
+		shape.setFill(javafx.scene.paint.Color.AZURE);
 		
-		Button addButton = new Button();
-		addButton.setText("Add");
-		addButton.setPrefSize(70, 40);
-		addButton.setTranslateY(553);
-		addButton.setTranslateX(170);
-		addButton.setUnderline(true);
-		addButton.setStyle("-fx-background-radius: 10");
+		Button add = new Button();
+		add.setText("Add");
+		add.setPrefSize(70, 40);
+		add.setTranslateY(553);
+		add.setTranslateX(170);
+		add.setUnderline(true);
+		add.setStyle(radio);
 
-		ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
+		ListView<String> member = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																			// the list
-		memberList.setTranslateY(96);
-		memberList.setPrefSize(400, 450);
-		memberList.setItems(memberListSelector);
-		memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
-			String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
-			System.out.println(memberSelected);
+		member.setTranslateY(96);
+		member.setPrefSize(400, 450);
+		member.setItems(memberListSelector);
+		member.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		member.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
+			String memberSelected = member.getSelectionModel().getSelectedItem(); 
 			//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
 			bean.setUserToAdd(memberSelected);
 			
-			addButton.setOnAction(new EventHandler<ActionEvent>() {
+			add.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
 					boolean result = false;
@@ -261,8 +261,7 @@ public class CreateProjectView {
 					}
 					
 					if(!result) {
-						System.out.println("coddio");
-						addMemberWindow.close();
+						addMemberFinestra.close();
 					}
 				}
 				
@@ -273,29 +272,29 @@ public class CreateProjectView {
 
 		FilteredList<String> filteredData = new FilteredList<>(memberListSelector, s -> true); // create a filtered
 																								// member list
-		searchField.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
+		barraRicerca .textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
 														// filtered list
-			String filter = searchField.getText();
+			String filter = barraRicerca.getText();
 			if (filter == null || filter.length() == 0) {
 				filteredData.setPredicate(s -> true);
 			} else {
 				filteredData.setPredicate(s -> s.contains(filter));
 			}
-			memberList.setItems(filteredData); // show filtered list
+			member.setItems(filteredData); // show filtered list
 		});
 
-		background.getChildren().addAll(logo, logoView);
-		background.getChildren().add(searchField);
-		background.getChildren().add(memberList);
-		background.getChildren().add(addButton);
-		background.setStyle("-fx-background-color: #2d3447");
+		back.getChildren().addAll(shape, View);
+		back.getChildren().add(barraRicerca);
+		back.getChildren().add(member);
+		back.getChildren().add(add);
+		back.setStyle("-fx-background-color: #2d3447");
 
-		Scene loginScene = new Scene(background, 400, 600);
-		addMemberWindow.setScene(loginScene);
-		addMemberWindow.setResizable(false);
-		addMemberWindow.initModality(Modality.APPLICATION_MODAL);
+		Scene loginScene = new Scene(back, 400, 600);
+		addMemberFinestra.setScene(loginScene);
+		addMemberFinestra.setResizable(false);
+		addMemberFinestra.initModality(Modality.APPLICATION_MODAL);
 
-		addMemberWindow.show();
+		addMemberFinestra.show();
 		
 		return true;
 	}
@@ -309,7 +308,6 @@ public class CreateProjectView {
 		
 		if(!result) {
 			allMembersToAdd.add(memberSelected);
-			System.out.println(allMembersToAdd);
 		}
 		else {
 			throw new MemberAlreadyExistisException("Member already in queue");

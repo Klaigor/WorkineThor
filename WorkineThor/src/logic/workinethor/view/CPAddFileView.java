@@ -63,19 +63,22 @@ public class CPAddFileView {
 	@FXML
 	private BorderPane pane;
 
+	private static final String sfondo = "-fx-text-fill: #cfd1dd";
+	private static final String radius = "-fx-background-radius: 10";
+	
 	//changed for test
 	@FXML
 	private boolean initialize() {
 	
 		title.setText(Session.getSession().getCurrentBrowsingProject().getProjectName());
 		title.setFont(new Font("Arial", 70));
-		title.setStyle("-fx-text-fill: #cfd1dd"); 
+		title.setStyle(sfondo); 
 		
 		Button doneButton = new Button();
 		doneButton.setText("Done");
 		doneButton.setTranslateX(350);
 		doneButton.setTranslateY(220);
-		doneButton.setStyle("-fx-background-radius: 10");
+		doneButton.setStyle(radius);
 		doneButton.setUnderline(true);
 		
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -84,7 +87,9 @@ public class CPAddFileView {
 				BorderPane projectPane = null;
 				try {
 					projectPane = FXMLLoader.load(CPAddFileView.class.getResource("Project.fxml"));
-				} catch (IOException e) {}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 				Main.getMainLayout().setCenter(projectPane);
 			}
@@ -93,9 +98,9 @@ public class CPAddFileView {
 		anchor.getChildren().add(doneButton);
 		
 		addFileDrive.setUnderline(true);
-		addFileDrive.setStyle("-fx-background-radius: 10");
+		addFileDrive.setStyle(radius);
 		addfile.setUnderline(true);
-		addfile.setStyle("-fx-background-radius: 10");
+		addfile.setStyle(radius);
 		addfile.setUnderline(true);
 
 		pane.setStyle("-fx-background-color: #2d3447");
@@ -129,7 +134,6 @@ public class CPAddFileView {
 			try {
 				controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
 			} catch (FileAlreadyExistsException e) {
-				success = false;
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText(null);
 				alert.setContentText("File already exists in project");
@@ -159,28 +163,28 @@ public class CPAddFileView {
 		Label fileNameLabel = new Label("Insert URL");
 		fileNameLabel.setTranslateX(20);
 		fileNameLabel.setTranslateY(50);
-		fileNameLabel.setStyle("-fx-text-fill: #cfd1dd");
+		fileNameLabel.setStyle(sfondo);
 
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100);
 		fileURL.setTranslateY(50);
-		fileURL.setStyle("-fx-background-radius: 10");
+		fileURL.setStyle(radius);
 		
 		Label nameLabel = new Label("File Name");
 		nameLabel.setTranslateX(300);
 		nameLabel.setTranslateY(50);
-		nameLabel.setStyle("-fx-text-fill: #cfd1dd");
+		nameLabel.setStyle(sfondo);
 		
 		TextField fileNameTextField = new TextField();
 		fileNameTextField.setTranslateX(380);
 		fileNameTextField.setTranslateY(50);
-		fileNameTextField.setStyle("-fx-background-radius: 10");
+		fileNameTextField.setStyle(radius);
 
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
 		loadFileButton.setTranslateX(60);
 		loadFileButton.setTranslateY(100);
-		loadFileButton.setStyle("-fx-background-radius: 10");
+		loadFileButton.setStyle(radius);
 		loadFileButton.setUnderline(true);
 
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -207,7 +211,7 @@ public class CPAddFileView {
 		exitButton.setText("Done");
 		exitButton.setTranslateX(120);
 		exitButton.setTranslateY(100);
-		exitButton.setStyle("-fx-background-radius: 10");
+		exitButton.setStyle(radius);
 		exitButton.setUnderline(true);
 
 		exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -218,13 +222,13 @@ public class CPAddFileView {
 		});
 
 		switch (Session.getSession().getCurrentBrowsingProject().getDriveName()) {
-		case "Mega":
+		default:
 			megaEngine.load("https://mega.nz");
 			break;
 		case "Google Drive":
 			megaEngine.load("https://drive.google.com/");
 			break;
-		case "default":
+		case "Dropbox":
 			megaEngine.load("https://dropbox.com/");
 			break;
 		}

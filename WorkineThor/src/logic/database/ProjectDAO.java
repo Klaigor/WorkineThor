@@ -24,88 +24,93 @@ public class ProjectDAO {
 	private DBhandle handle = DBhandle.getDBhandleInstance();
 	private Connection dbConnection;
 	private PreparedStatement statement;
+	private static final String queryfailed = "SQL query failed!!";
+	private static final String projectString = "project:";
+	private static final String projectNameString = "project_name";
 
 	/**
 	 * method that adds the created project by the active user(found in Session)
 	 * 
 	 * @param project
 	 * @param session
-	 * @throws ProjectAlreadyExistsException 
+	 * @throws ProjectAlreadyExistsException
 	 */
 	public boolean addProjectToDB(Project project, Session session) throws ProjectAlreadyExistsException {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
 		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
 		boolean result = false;
-		
+
 		ProjectBean bean = new ProjectBean();
 		bean.setProjectName(project.getProjectName());
 		result = checkIfProjectExist(bean);
-		
-		if(result) {
+
+		if (result) {
 			try {
 				statement = dbConnection.prepareStatement(sqlString);
 				statement.setString(1, project.getProjectName());
 				statement.setString(2, project.getDriveName());
 				statement.setString(3, session.getLoggedUser().getUsername());
 				statement.executeUpdate();
-				
+
 				addMemberToProject(bean, session.getLoggedUser().getUsername());
 			} catch (SQLException e) {
-				logger.log(Level.SEVERE, "SQL query failed!!");
+				logger.log(Level.SEVERE, queryfailed);
 				return false;
 			}
 
-			logger.log(Level.INFO, "project:" + project.getProjectName() + " added");
+			logger.log(Level.INFO, projectString + project.getProjectName() + " added");
 		}
-		
+
 		return true;
 	}
-	
+
 	public boolean checkIfProjectExist(ProjectBean bean) throws ProjectAlreadyExistsException {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
 		String sqlFindString = "SELECT project_name FROM projects WHERE project_name = ?";
 		boolean result = false;
-		
+
 		dbConnection = handle.getConnection();
 
 		try {
 			statement = dbConnection.prepareStatement(sqlFindString);
 			statement.setString(1, bean.getProjectName());
 			ResultSet rs = statement.executeQuery();
-			
-			if(!rs.first()) {
+
+			if (!rs.first()) {
 				result = true;
-				logger.log(Level.INFO, "project with name:"+bean.getProjectName()+" does not exist");
+				logger.log(Level.INFO, "project with name:" + bean.getProjectName() + " does not exist");
+			} else {
+				throw new ProjectAlreadyExistsException(projectString + bean.getProjectName() + " already exists");
 			}
-			else {
-				result = false;
-				throw new ProjectAlreadyExistsException("project:"+bean.getProjectName()+" already exists");
-			}
-		} catch (SQLException e1) {}
-		
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
 		return result;
 	}
-	
+
 	public void addMemberToProject(ProjectBean projectBean, String member) {
 		String sqlInsertMembers = "INSERT INTO members(project, member) VALUES (?,?)";
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(sqlInsertMembers);
 			statement.setString(1, projectBean.getProjectName());
 			statement.setString(2, member);
-			
+
 			statement.executeUpdate();
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public boolean addUserInProjectToDB(ProjectBean bean, String user) {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
 		String sqlString = "INSERT INTO projects(project_name, drive_name, user)" + "VALUES (?,?,?)";
 
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
 			statement.setString(1, bean.getProjectName());
@@ -117,10 +122,9 @@ public class ProjectDAO {
 			return false;
 		}
 
-		logger.log(Level.INFO, "user:" + user + " added");
+		logger.log(Level.INFO, "user:{}" + user + " added");
 		return true;
 	}
-	
 
 	public boolean removeProjectFromDB(Project project) {
 		Logger logger = Logger.getLogger(ProjectDAO.class.getName());
@@ -153,23 +157,23 @@ public class ProjectDAO {
 			statement.setString(1, Session.getSession().getLoggedUser().getUsername());
 
 			resultSet = statement.executeQuery();
-			
-			if(!resultSet.first()) {}
-			else {
+
+			if (resultSet.first()) {
 				Project temp;
 				do {
 					temp = new Project();
-					temp.setProjectName(resultSet.getString("project_name"));
+					temp.setProjectName(resultSet.getString(projectNameString));
 					temp.setDriveName(resultSet.getString("drive_name"));
-					if(resultSet.getString("user") != null) {
+					if (resultSet.getString("user") != null) {
 						User user = new User();
 						user.setUsername(resultSet.getString("user"));
 						temp.addMember(user);
 					}
 					tempProjects.add(temp);
-				}while(resultSet.next());
+				} while (resultSet.next());
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return tempProjects;
 	}
@@ -215,7 +219,6 @@ public class ProjectDAO {
 		try {
 			rs = statement.executeQuery();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -231,117 +234,121 @@ public class ProjectDAO {
 		}
 		return projects;
 	}
-	
+
 	public String getProjectAdmin(ProjectBean bean) {
 		String admin = "";
 		String sqlString = "SELECT user FROM projects WHERE project_name = ?";
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
 			statement.setString(1, bean.getProjectName());
-			
+
 			ResultSet rs = statement.executeQuery();
-			
-			if(!rs.first()) {}
-			else {
+
+			if (rs.first()) {
 				admin = rs.getString("user");
 			}
-		} catch (SQLException e) {}
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return admin;
 	}
-	
-	public ObservableList<String> getAllProjectUsers(ProjectBean bean){
+
+	public ObservableList<String> getAllProjectUsers(ProjectBean bean) {
 		String getAllUsers = "SELECT member FROM members WHERE project = ? ";
 		ObservableList<String> users = FXCollections.observableArrayList();
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(getAllUsers);
 			statement.setString(1, bean.getProjectName());
-			
+
 			ResultSet rs = statement.executeQuery();
-			if(!rs.first()) {}
-			else {
+			if (rs.first()) {
 				users.addAll(rs.getString("member"));
-				while(rs.next())
+				while (rs.next())
 					users.addAll(rs.getString("member"));
 			}
-		} catch (SQLException e) {}
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return users;
 	}
 
-	public ObservableList<String> getAllUsersNotInProject(ProjectBean bean){
+	public ObservableList<String> getAllUsersNotInProject(ProjectBean bean) {
 		String getAllUsers = "SELECT DISTINCT user FROM projects WHERE project_name != ?";
 		ObservableList<String> users = FXCollections.observableArrayList();
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(getAllUsers);
 			statement.setString(1, bean.getProjectName());
-			
+
 			ResultSet rs = statement.executeQuery();
-			if(!rs.first()) {
-			}else{
+			if (rs.first()) {
 				users.addAll(rs.getString("user"));
-				while(rs.next())
+				while (rs.next())
 					users.addAll(rs.getString("user"));
-				}
-			
-			} catch (SQLException e) {			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return users;
 	}
-	
+
 	public Project getProjectFromDB(ProjectBean bean) {
 		String sqlString = "SELECT DISTINCT project_name, drive_name, user FROM projects WHERE project_name = ?";
 		Project temp = null;
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
 			statement.setString(1, bean.getProjectName());
-			
+
 			ResultSet rs = statement.executeQuery();
-			
-			if(rs.first()) {
+
+			if (rs.first()) {
 				temp = new Project();
 				temp.setProjectName(rs.getString("project_name"));
-				temp.setDriveName(rs.getString("drive_name"));
-				if(temp.getDriveName() != null)
-					temp.setDriveActive(true);
-				else 
-					temp.setDriveActive(false);
+				temp.setDriveName(rs.getString("drive_name"));	
+				boolean check = temp.getDriveName() != null;
+				temp.setDriveActive(check);
 			}
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return temp;
 	}
 	
-	public ObservableList<String> getMembersToAdd(ProjectBean bean){
+	
+
+	public ObservableList<String> getMembersToAdd(ProjectBean bean) {
 		String sqlString = "SELECT username FROM users EXCEPT SELECT member FROM members WHERE project = ?";
 		ObservableList<String> retList = FXCollections.observableArrayList();
-		
+
 		dbConnection = handle.getConnection();
-		
+
 		try {
 			statement = dbConnection.prepareStatement(sqlString);
 			statement.setString(1, bean.getProjectName());
-			
+
 			ResultSet rs = statement.executeQuery();
-			
-			if(!rs.first()) {}
-			else {
+
+			if (rs.first()) {
 				do {
 					retList.addAll(rs.getString("username"));
-				}while(rs.next());
+				} while (rs.next());
 			}
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return retList;
 	}
 }

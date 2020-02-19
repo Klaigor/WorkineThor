@@ -52,7 +52,7 @@ public class Main extends Application {
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
 		if(mainLayout == null)
 			return false;
-		else return true;
+		return true;
 	}
 	
 	public boolean hasStarted() {

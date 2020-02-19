@@ -38,30 +38,29 @@ public class BrowseProjectView {
 	@FXML
 	private void initialize() throws SQLException {
 		ProjectDAO projectDAO = new ProjectDAO();
-		AnchorPane items = new AnchorPane();
+		AnchorPane items;
 
 		ObservableList<String> result = projectDAO.getAllProjects();
 		ObservableList<String> projectListSelector = FXCollections.observableArrayList();
 
 		items = new AnchorPane();
 
-		TextField searchField = new TextField();
-		searchField.setPromptText("Search here!");
-		searchField.setTranslateX(300);
-		searchField.setTranslateY(52);
-		searchField.setPrefSize(250, 26);
-		searchField.setStyle("-fx-background-radius: 10");
+		TextField search = new TextField();
+		search.setPromptText("Search here!");
+		search.setTranslateX(300);
+		search.setTranslateY(52);
+		search.setPrefSize(250, 26);
+		search.setStyle("-fx-background-radius: 10");
 
-		Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
-		ImageView logoView = new ImageView(searchLogo);
-		logoView.setTranslateX(249);
-		logoView.setTranslateY(47);												
-		
-		Circle logo = new Circle(20, 20, 20);
-		logo.setTranslateX(247);
-		logo.setTranslateY(46);
-		logo.setFill(javafx.scene.paint.Color.AZURE);
-		
+		Image searchImage = new Image("logic/Images/search--v2.png", 36, 36, true, false);
+		ImageView logo = new ImageView(searchImage);
+		logo.setTranslateX(249);
+		logo.setTranslateY(47);
+
+		Circle circle = new Circle(20, 20, 20);
+		circle.setTranslateX(247);
+		circle.setTranslateY(46);
+		circle.setFill(javafx.scene.paint.Color.AZURE);
 
 		ListView<String> projectList = new ListView<>(projectListSelector);
 		projectList.setTranslateY(96);
@@ -90,15 +89,15 @@ public class BrowseProjectView {
 							mainLayout = Main.getMainLayout();
 							ProjectBean bean = new ProjectBean();
 							CreateProjectController pC = CreateProjectController.getInstace();
-							
+
 							// pass Project values to the Project page
 							bean.setProjectName(project.getText());
 							pC.existentProject(bean);
-							
+
 							Session activeSession = Session.getSession();
-							
-							Session.getSession().setCurrentBrowsingProject(bean);
-							
+
+							activeSession.setCurrentBrowsingProject(bean);
+
 							BorderPane mainLayoutProject = null;
 							try {
 								mainLayoutProject = FXMLLoader.load(NavBarView.class.getResource("Project.fxml"));
@@ -117,9 +116,9 @@ public class BrowseProjectView {
 
 		FilteredList<String> filteredData = new FilteredList<>(projectListSelector, s -> true); // create a filtered
 																								// list
-		searchField.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
-														// filtered list
-			String filter = searchField.getText();
+		search.textProperty().addListener(obs -> { // Compare if in the list there are some equals with the
+													// filtered list
+			String filter = search.getText();
 			if (filter == null || filter.length() == 0) {
 				filteredData.setPredicate(s -> true);
 			} else {
@@ -128,8 +127,8 @@ public class BrowseProjectView {
 			projectList.setItems(filteredData); // show filtered list
 		});
 
-		items.getChildren().addAll(logo, logoView);
-		items.getChildren().add(searchField);
+		items.getChildren().addAll(circle, logo);
+		items.getChildren().add(search);
 		items.getChildren().add(projectList);
 
 		background.setCenter(items);

@@ -80,6 +80,7 @@ public class FileDAO {
 		return allFile;
 	}
 	
+	//modificata per cod smell
 	/**
 	 * returns all project files
 	 * @param project
@@ -97,16 +98,18 @@ public class FileDAO {
 			
 			ResultSet rs = pst.executeQuery();
 			
-			if(!rs.first()) {}
-			else {
+			if(rs.first()) {
 				do {
 					files.addAll(rs.getString("name"));
 				}while(rs.next());
 			}
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return files;
 	}
 	
+	//modificata per cod smell
 	/**
 	 * adds current file to project
 	 * @param fileBean
@@ -129,13 +132,16 @@ public class FileDAO {
 				pst.setString(3, project);
 				
 				pst.executeUpdate();
-			} catch (SQLException e) {}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			
 			return true;
 		}
 		else return false;
 	}
 	
+	//modificata per cod smell
 	public boolean fileAlreadyExists(String project, FileBean bean) throws FileAlreadyExistsException {
 		boolean result = false;
 		String sqlString = "SELECT path, name FROM files WHERE project = ? AND name = ?";
@@ -149,14 +155,12 @@ public class FileDAO {
 			
 			ResultSet rs = pst.executeQuery();
 			
-			if(!rs.first()) {
-				result = false;
-			}
-			else {
+			if(rs.first()) {
 				result = true;
 				throw new FileAlreadyExistsException("File already exist in project:"+project);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		return result;
