@@ -39,8 +39,6 @@ public class DutyWatchDutiesBean {
 		}
 	}
 	
-	
-	
 	public String getName(){
     	return name.get();
     }

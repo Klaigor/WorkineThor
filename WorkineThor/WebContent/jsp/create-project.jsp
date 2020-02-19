@@ -21,8 +21,8 @@
 				<a class="navbar-brand color-me-black" href="">WorkineThor</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#home" class="color-me-black">Home</a>
-				<li><a href="browse" class="color-me-black">Browse Projects</a>
+				<li><a href="../homepage" class="color-me-black">Home</a>
+				<li><a href="../browse" class="color-me-black">Browse Projects</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" class="color-me-black"><img src="../images/signup.png" class="media-object" style="width:20px">Sign Up</a>
@@ -86,6 +86,27 @@
 			 							"&drive-select=" + selectedDriveItem;
 		}
 	}
+	
+	/* method that catches url params */ 
+	function getParams(parameter){
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+		
+		var value = urlParams.get(parameter);
+		
+		return value;
+	}
+	
+	/* method that checks if project name is already taken */
+	function checkIfExist(){
+		var failure = getParams("failure");
+	
+		if(failure)
+			alert("Project name already taken");
+	}
+	
+	window.onload = checkIfExist();
+	
 </script>
 
 </body>

@@ -27,8 +27,9 @@ public class SignupServlet extends HttpServlet{
 
 	/**
 	 * if Signup is a success sends data to HomePageServlet
+	 * @throws IOException 
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		boolean result = false;
 		UserBean  userBean = new UserBean();
 		LoginController controller = new LoginController();

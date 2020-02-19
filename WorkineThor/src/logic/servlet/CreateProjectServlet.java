@@ -56,7 +56,8 @@ public class CreateProjectServlet extends HttpServlet {
 	
 		if(result)
 			response.sendRedirect("homepage");
-		else
-			response.sendRedirect("create-project");
+		else {
+			response.sendRedirect("jsp/create-project.jsp?failure=true");
+		}
 	}
 }

@@ -14,7 +14,7 @@
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
-<body>
+<body background="../images/background.png">
 
 	<!-- navigation -->
 	<nav class="navbar navbar-default">
@@ -35,7 +35,7 @@
 	<div class="jumbotron text-center">
   		<h1 style="color:white">WorkineThor</h1>
 		<div class="form-horizontal" align="center">
-			<form action="signup" method="post">
+			<form action="../signup" method="post">
 				<label for="username" style="color:white">New Username: </label>
 				<input type="text" class="form-control" style="width:170px" id="user" name="username"><br>
 				<label for="password" style="color:white">New Password: </label>
