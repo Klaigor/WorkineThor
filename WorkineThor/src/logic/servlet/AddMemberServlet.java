@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.istack.internal.logging.Logger;
-
 import javafx.collections.ObservableList;
 import logic.bean.ProjectBean;
 import logic.controller.AddMemberController;
