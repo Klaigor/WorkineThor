@@ -6,6 +6,7 @@ package logic.workinethor.view;
 
 import logic.bean.ProjectBean;
 import logic.database.ProjectDAO;
+import logic.model.Project;
 import logic.model.Session;
 import logic.workinethor.Main;
 
@@ -95,10 +96,12 @@ public class HomePageView {
 					public void handle(MouseEvent event) {
 						if(event.isPrimaryButtonDown() && !cell.isEmpty()) {
 							//popup.show(Main.getMainWindow());
-							
+							Project project = new Project();
 							ProjectBean bean = new ProjectBean();
 							bean.setProjectName(cell.getText());
+							project.setProjectName(cell.getText());
 							Session.getSession().setCurrentBrowsingProject(bean);
+							Session.getSession().setProject(project);
 
 							BorderPane projectBorderPane = null;
 							try {

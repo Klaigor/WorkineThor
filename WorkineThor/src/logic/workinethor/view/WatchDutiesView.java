@@ -19,52 +19,52 @@ import logic.model.Project;
 import logic.model.Session;
 
 public class WatchDutiesView {
-	
-    @FXML
-    private TableView<DutyWatchDutiesBean> dutiesTable;
-    @FXML
-    private TableColumn<DutyWatchDutiesBean, String> dutyNameColumn;
-    @FXML
-    private TableColumn<DutyWatchDutiesBean, String> kindOfDutyColumn;
 
-    @FXML
-    private Label dutyNameLabel;
-    @FXML
-    private Label kindOfDutyLabel;
-    @FXML
-    private Label stateLabel;
-    @FXML
-    private Label dutyName;
-    @FXML
-    private Label kindOfDuty;
-    @FXML
-    private Label state;
-    @FXML
-    private Label details;
-    @FXML
+	@FXML
+	private TableView<DutyWatchDutiesBean> dutiesTable;
+	@FXML
+	private TableColumn<DutyWatchDutiesBean, String> dutyNameColumn;
+	@FXML
+	private TableColumn<DutyWatchDutiesBean, String> kindOfDutyColumn;
+
+	@FXML
+	private Label dutyNameLabel;
+	@FXML
+	private Label kindOfDutyLabel;
+	@FXML
+	private Label stateLabel;
+	@FXML
+	private Label dutyName;
+	@FXML
+	private Label kindOfDuty;
+	@FXML
+	private Label state;
+	@FXML
+	private Label details;
+	@FXML
 	private BorderPane pane;
-    @FXML
-   	private AnchorPane anchor;
-    @FXML
-   	private AnchorPane anchorPane;
-    @FXML
-   	private AnchorPane ancore;
-    @FXML
-   	private Button newButton;
-   	@FXML
-   	private Button delete;
-   	@FXML
-   	private Button edit;
-   	
-    // Reference to the project.
-    ArrayList<DutyWatchDutiesBean> dutiesBeans= new ArrayList<>();
+	@FXML
+	private AnchorPane anchor;
+	@FXML
+	private AnchorPane anchorPane;
+	@FXML
+	private AnchorPane ancore;
+	@FXML
+	private Button newButton;
+	@FXML
+	private Button delete;
+	@FXML
+	private Button edit;
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
-    @FXML
-    private void initialize() {
+	// Reference to the project.
+	ArrayList<DutyWatchDutiesBean> dutiesBeans = new ArrayList<>();
+
+	/**
+	 * Initializes the controller class. This method is automatically called after
+	 * the fxml file has been loaded.
+	 */
+	@FXML
+	private void initialize() {
 		pane.setStyle("-fx-background-color: #2d3447");
 		anchor.setStyle("-fx-background-color: #2d3447");
 		anchorPane.setStyle("-fx-background-color: #2d3447");
@@ -82,55 +82,54 @@ public class WatchDutiesView {
 		newButton.setStyle("-fx-background-radius: 10");
 		delete.setStyle("-fx-background-radius: 10");
 		edit.setStyle("-fx-background-radius: 10");
-    	/*
-    	WatchDutiesController controller = new WatchDutiesController();
-    	ArrayList<Duty> duties;
-    	duties = (ArrayList<Duty>) controller.getProjectDuties();
 
-    	for (Duty duty : duties) {
-    		dutiesBeans.add(new DutyWatchDutiesBean(duty));
-    	}
-    	*/
-    	ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
-    	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
-        // Add observable list data to the table
-        dutiesTable.setItems(dutiesProperty);
-        dutiesTable.setStyle("-fx-background-color: #2d3447");
-        dutiesTable.setStyle("-fx-text-fill: #cfd1dd");
-        dutiesTable.setStyle("-fx-background-radius: 10");
-    	
-        // Initialize the Duties table with the two columns.
-        dutyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        kindOfDutyColumn.setCellValueFactory(cellData -> cellData.getValue().kindOfDutyProperty());
-        
-        //clear Duty details.
-        showDutyDetails(null);
-        
-        //listener for selection changes and show the person details when changed.
-        dutiesTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showDutyDetails(newValue));
-    
-    
-    }
- 
-    /**
-     * Fills all text fields to show details about a duty.
-     * if the specified Duty is null, all text fields are cleared.
-     * 
-     * @param duty or null
-     */
-    private void showDutyDetails(DutyWatchDutiesBean duty) {
-    	if (duty != null) {
-    		//fill the labels with info the duty object.
-    		dutyNameLabel.setText(duty.getName());
-    		kindOfDutyLabel.setText(duty.getKindOfDuty());
-            stateLabel.setText(duty.getState().name());
-    	} else {
-    		 // duty is null, remove all the text.
-    		dutyNameLabel.setText("");
-    		kindOfDutyLabel.setText("");
-            stateLabel.setText("");
-    	}
-    }
+		WatchDutiesController controller = new WatchDutiesController();
+		ArrayList<Duty> duties;
+		duties = (ArrayList<Duty>) controller.getProjectDuties();
 
+		for (Duty duty : duties) {
+			dutiesBeans.add(new DutyWatchDutiesBean(duty));
+		} 
+
+		ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
+		SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
+		// Add observable list data to the table
+		dutiesTable.setItems(dutiesProperty);
+		dutiesTable.setStyle("-fx-background-color: #2d3447");
+		dutiesTable.setStyle("-fx-text-fill: #cfd1dd");
+		dutiesTable.setStyle("-fx-background-radius: 10");
+
+		// Initialize the Duties table with the two columns.
+		dutyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		kindOfDutyColumn.setCellValueFactory(cellData -> cellData.getValue().kindOfDutyProperty());
+
+		// clear Duty details.
+		showDutyDetails(null);
+
+		// listener for selection changes and show the person details when changed.
+		dutiesTable.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> showDutyDetails(newValue));
+
+	}
+
+	/**
+	 * Fills all text fields to show details about a duty. if the specified Duty is
+	 * null, all text fields are cleared.
+	 * 
+	 * @param duty or null
+	 */
+	private void showDutyDetails(DutyWatchDutiesBean duty) {
+		if (duty != null) {
+			// fill the labels with info the duty object.
+			dutyNameLabel.setText(duty.getName());
+			kindOfDutyLabel.setText(duty.getKindOfDuty());
+			stateLabel.setText(duty.getState().name());
+		} else {
+			// duty is null, remove all the text.
+			dutyNameLabel.setText("");
+			kindOfDutyLabel.setText("");
+			stateLabel.setText("");
+		}
+	}
 
 }

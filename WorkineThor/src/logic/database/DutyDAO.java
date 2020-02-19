@@ -87,6 +87,7 @@ public class DutyDAO {
 			for (int i = 0; i < size; i++) {
 				Duty duty = new Duty();
 				duty.setName(rs.getString("name"));
+				rs.next();
 				//dovrei settare il progetto a cui appartiene il duty
 				arrayOut.add(duty);				
 			}
