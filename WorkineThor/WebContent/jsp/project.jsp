@@ -60,7 +60,7 @@ ${active_project}
 	/* method that calls AddFileServlet --> sendRedirect*/
 	function addFile(){
 		var name = "${active_project}";
-		document.location.href = "add-file?project-name=" + name;
+		document.location.href = "jsp/add-file.jsp?project-name=" + name;
 	}
 	
 	/* method that catches url params */ 

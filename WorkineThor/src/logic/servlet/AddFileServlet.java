@@ -1,15 +1,14 @@
 package logic.servlet;
 
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.stage.FileChooser;
 import logic.bean.FileBean;
 import logic.controller.AddFileController;
 import logic.model.Session;
@@ -24,30 +23,39 @@ public class AddFileServlet extends HttpServlet {
 
 	/**
 	 * da finire
+	 * @throws IOException 
 	 */
-	public void service(HttpServletRequest request, HttpServletResponse response) {
-		Logger logger = Logger.getLogger(AddFileServlet.class.getName());
-		boolean success = false;
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		out.println("activated");
 		
-		String projectName = request.getParameter("project-name");
+		String project = Session.getSession().getCurrentBrowsingProject().getProjectName();
+		String[] filePaths = request.getParameterValues("fileArray");
+		String[] tokenizedPaths = filePaths[0].split(",");
 		
-		AddFileController controller = AddFileController.getInstace();
+		ArrayList<String> fileNames = new ArrayList<>();
 		
-		FileChooser fc = new FileChooser();
-		File selectedFile = fc.showOpenDialog(null);
-
-		FileBean fileBean = new FileBean();
-		
-		if (selectedFile != null) {
-			fileBean.setFilePath(selectedFile.getPath());
-			fileBean.setFileName(selectedFile.getName());
-			controller.addFileToProject(fileBean, projectName);
-			success = true;
-		} else {
-			logger.log(Level.WARNING, "No file selected");
-			success = false;
+		for(String file: tokenizedPaths) {
+			fileNames.add(file.substring(file.lastIndexOf("\\")+1));
 		}
 		
-		if(success) {}
+		for(String files: fileNames) {
+			out.println(files);
+		}
+		
+		AddFileController controller = AddFileController.getInstace();
+		FileBean fileBean = new FileBean();
+		
+		for(int i=0; i<tokenizedPaths.length; i++) {
+			fileBean.setFileName(fileNames.get(i));
+			fileBean.setFilePath(tokenizedPaths[i]);
+			out.println(fileBean.getFileName() + fileBean.getFilePath());
+			
+			if(!fileBean.getFileName().isEmpty() && !fileBean.getFilePath().isEmpty()) {
+				controller.addFileToProject(fileBean, project);
+			}
+		}
+		
+		
 	}
 }
