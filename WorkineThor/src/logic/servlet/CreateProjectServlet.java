@@ -50,14 +50,13 @@ public class CreateProjectServlet extends HttpServlet {
 			controller.createProject(projectBean);
 			result = true;
 		} catch (ProjectAlreadyExistsException e) {
-			System.out.println("project exists");
 			result = false;
 		}
 	
 		if(result)
 			response.sendRedirect("homepage");
 		else {
-			response.sendRedirect("jsp/create-project.jsp?failure=true");
+			response.sendRedirect("jsp/create-project.jsp?failure="+result);
 		}
 	}
 }

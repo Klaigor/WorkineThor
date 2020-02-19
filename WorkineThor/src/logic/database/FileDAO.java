@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import logic.bean.FileBean;
 import logic.bean.ProjectBean;
+import logic.exceptions.FileAlreadyExistsException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -111,21 +112,53 @@ public class FileDAO {
 	 * @param fileBean
 	 * @param project
 	 * @return
+	 * @throws FileAlreadyExistsException 
 	 */
-	public boolean addFileToProject(FileBean fileBean, String project) {
+	public boolean addFileToProject(FileBean fileBean, String project) throws FileAlreadyExistsException {
 		String sqlString = "INSERT INTO files(path,name,project) VALUES (?,?,?)";
+		
+		boolean result = fileAlreadyExists(project, fileBean);
+		
+		if(!result) {
+			dbConnection = dbHandler.getConnection();
+			
+			try {
+				pst = dbConnection.prepareStatement(sqlString);
+				pst.setString(1, fileBean.getFilePath());
+				pst.setString(2, fileBean.getFileName());
+				pst.setString(3, project);
+				
+				pst.executeUpdate();
+			} catch (SQLException e) {}
+			
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean fileAlreadyExists(String project, FileBean bean) throws FileAlreadyExistsException {
+		boolean result = false;
+		String sqlString = "SELECT path, name FROM files WHERE project = ? AND name = ?";
 		
 		dbConnection = dbHandler.getConnection();
 		
 		try {
 			pst = dbConnection.prepareStatement(sqlString);
-			pst.setString(1, fileBean.getFilePath());
-			pst.setString(2, fileBean.getFileName());
-			pst.setString(3, project);
+			pst.setString(1, project);
+			pst.setString(2, bean.getFileName());
 			
-			pst.executeUpdate();
-		} catch (SQLException e) {}
+			ResultSet rs = pst.executeQuery();
+			
+			if(!rs.first()) {
+				result = false;
+			}
+			else {
+				result = true;
+				throw new FileAlreadyExistsException("File already exist in project:"+project);
+			}
+		} catch (SQLException e) {
+		}
 		
-		return true;
+		return result;
 	}
 }

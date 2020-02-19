@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic.bean.FileBean;
 import logic.controller.AddFileController;
+import logic.exceptions.FileAlreadyExistsException;
 import logic.model.Session;
 
 @WebServlet("/add-file")
@@ -28,6 +29,8 @@ public class AddFileServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		out.println("activated");
+		
+		boolean result = false;
 		
 		String project = Session.getSession().getCurrentBrowsingProject().getProjectName();
 		String[] filePaths = request.getParameterValues("fileArray");
@@ -52,10 +55,20 @@ public class AddFileServlet extends HttpServlet {
 			out.println(fileBean.getFileName() + fileBean.getFilePath());
 			
 			if(!fileBean.getFileName().isEmpty() && !fileBean.getFilePath().isEmpty()) {
-				controller.addFileToProject(fileBean, project);
+				try {
+					controller.addFileToProject(fileBean, project);
+				} catch (FileAlreadyExistsException e) {
+					result = true;
+					System.out.println("ERrore");
+				}
+			}
+			
+			if(!result)
+				response.sendRedirect("jsp/add-file.jsp");
+			else {
+				response.sendRedirect("jsp/add-file.jsp?failure="+result);
 			}
 		}
-		
 		
 	}
 }

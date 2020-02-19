@@ -54,9 +54,13 @@ AddFile
 		<div class="form-horizontal" align="center">
 			<form action="../add-file" method="post">
 				<input type="hidden" id="file_array" name="fileArray" >
-				<input type="submit" id="file-submit" class="btn btn-default" value="Add Files">
+				<input disabled type="submit" id="file-submit" class="btn btn-default" value="Add Files">
 			</form>
 		</div>
+		
+		<br>
+		<br>
+		<input type=button onclick="done()" value="Done">
 	</div>
 	
 	
@@ -88,6 +92,10 @@ AddFile
 	  	fileLabel.style = "color:white;"
 	  	document.getElementById("file-container").appendChild(fileLabel);
 	  	
+	  	if (document.getElementById("file-container").hasChildNodes()) {
+		    document.getElementById("file-submit").disabled = false;
+		}
+	  	
 	  	/* assign input hidden element value --> fileArray*/
 	  	document.getElementById("file_array").value = fileArray;
 	  	
@@ -99,6 +107,29 @@ AddFile
 		if(fileElem)
 			fileElem.click();
 	}
+	
+	/* return to project view */
+	function done(){
+		document.location.href = "../homepage";
+	}
+	
+	/* method that catches url params */ 
+	function getParams(parameter){
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+		
+		var value = urlParams.get(parameter);
+		
+		return value;
+	}
+	
+	/* method that checks if project name is already taken */
+	window.onload = function() {
+		var failure = getParams("failure");
+		
+		if(failure)
+			alert("Warning: one or more files were redundant --> not added");
+	};
 		
 </script>
 </body>

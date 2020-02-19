@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import logic.bean.FileBean;
 import logic.controller.AddFileController;
+import logic.exceptions.FileAlreadyExistsException;
 import logic.model.Session;
 import logic.workinethor.Main;
 
@@ -19,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -124,7 +126,15 @@ public class CPAddFileView {
 			filelist.getItems().add(selectedFile.getPath());
 			fileBean.setFilePath(selectedFile.getPath());
 			fileBean.setFileName(selectedFile.getName());
-			controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
+			try {
+				controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
+			} catch (FileAlreadyExistsException e) {
+				success = false;
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setHeaderText(null);
+				alert.setContentText("File already exists in project");
+				alert.show();
+			}
 			success = true;
 		} else {
 			logger.log(Level.WARNING, "No file selected");
@@ -180,7 +190,14 @@ public class CPAddFileView {
 					filelist.getItems().add(fileURL.getText());
 					fileBean.setFilePath(fileURL.getText());
 					fileBean.setFileName(fileNameTextField.getText());
-					controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
+					try {
+						controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
+					} catch (FileAlreadyExistsException e) {
+						Alert alert = new Alert(Alert.AlertType.ERROR);
+						alert.setHeaderText(null);
+						alert.setContentText("File already exists in project");
+						alert.show();
+					}
 				}
 				else logger.log(Level.INFO, "Empty name field");
 			}

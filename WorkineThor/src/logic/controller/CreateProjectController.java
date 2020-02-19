@@ -6,6 +6,7 @@ import logic.bean.FileBean;
 import logic.bean.ProjectBean;
 import logic.database.FileDAO;
 import logic.database.ProjectDAO;
+import logic.exceptions.FileAlreadyExistsException;
 import logic.exceptions.ProjectAlreadyExistsException;
 import logic.model.Project;
 import logic.model.Session;
@@ -65,7 +66,7 @@ public class CreateProjectController {
 	}
 
 	//DEPRECATED DO NOT USE
-	public boolean addFile(FileBean bean) {
+	public boolean addFile(FileBean bean) throws FileAlreadyExistsException {
 		FileDAO fileDAO = new FileDAO();
 		ProjectBean projectBean = new ProjectBean();
 		File file = new File(bean.getFilePath());
