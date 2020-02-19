@@ -6,9 +6,12 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import logic.bean.DutyWatchDutiesBean;
 import logic.controller.WatchDutiesController;
 import logic.model.Duty;
@@ -30,8 +33,29 @@ public class WatchDutiesView {
     private Label kindOfDutyLabel;
     @FXML
     private Label stateLabel;
-  
-
+    @FXML
+    private Label dutyName;
+    @FXML
+    private Label kindOfDuty;
+    @FXML
+    private Label state;
+    @FXML
+    private Label details;
+    @FXML
+	private BorderPane pane;
+    @FXML
+   	private AnchorPane anchor;
+    @FXML
+   	private AnchorPane anchorPane;
+    @FXML
+   	private AnchorPane ancore;
+    @FXML
+   	private Button newButton;
+   	@FXML
+   	private Button delete;
+   	@FXML
+   	private Button edit;
+   	
     // Reference to the project.
     ArrayList<DutyWatchDutiesBean> dutiesBeans= new ArrayList<>();
 
@@ -41,6 +65,23 @@ public class WatchDutiesView {
      */
     @FXML
     private void initialize() {
+		pane.setStyle("-fx-background-color: #2d3447");
+		anchor.setStyle("-fx-background-color: #2d3447");
+		anchorPane.setStyle("-fx-background-color: #2d3447");
+		ancore.setStyle("-fx-background-color: #2d3447");
+		dutyNameLabel.setStyle("-fx-text-fill: #cfd1dd");
+		kindOfDutyLabel.setStyle("-fx-text-fill: #cfd1dd");
+		stateLabel.setStyle("-fx-text-fill: #cfd1dd");
+		dutyName.setStyle("-fx-text-fill: #cfd1dd");
+		kindOfDuty.setStyle("-fx-text-fill: #cfd1dd");
+		state.setStyle("-fx-text-fill: #cfd1dd");
+		details.setStyle("-fx-text-fill: #cfd1dd");
+		newButton.setUnderline(true);
+		delete.setUnderline(true);
+		edit.setUnderline(true);
+		newButton.setStyle("-fx-background-radius: 10");
+		delete.setStyle("-fx-background-radius: 10");
+		edit.setStyle("-fx-background-radius: 10");
     	/*
     	WatchDutiesController controller = new WatchDutiesController();
     	ArrayList<Duty> duties;
@@ -54,6 +95,9 @@ public class WatchDutiesView {
     	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
         // Add observable list data to the table
         dutiesTable.setItems(dutiesProperty);
+        dutiesTable.setStyle("-fx-background-color: #2d3447");
+        dutiesTable.setStyle("-fx-text-fill: #cfd1dd");
+        dutiesTable.setStyle("-fx-background-radius: 10");
     	
         // Initialize the Duties table with the two columns.
         dutyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());

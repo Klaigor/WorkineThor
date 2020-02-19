@@ -72,8 +72,9 @@ public class CPAddFileView {
 		Button doneButton = new Button();
 		doneButton.setText("Done");
 		doneButton.setTranslateX(350);
-		doneButton.setTranslateY(250);
+		doneButton.setTranslateY(220);
 		doneButton.setStyle("-fx-background-radius: 10");
+		doneButton.setUnderline(true);
 		
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -93,6 +94,7 @@ public class CPAddFileView {
 		addFileDrive.setStyle("-fx-background-radius: 10");
 		addfile.setUnderline(true);
 		addfile.setStyle("-fx-background-radius: 10");
+		addfile.setUnderline(true);
 
 		pane.setStyle("-fx-background-color: #2d3447");
 
@@ -147,23 +149,29 @@ public class CPAddFileView {
 		Label fileNameLabel = new Label("Insert URL");
 		fileNameLabel.setTranslateX(20);
 		fileNameLabel.setTranslateY(50);
+		fileNameLabel.setStyle("-fx-text-fill: #cfd1dd");
 
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100);
 		fileURL.setTranslateY(50);
+		fileURL.setStyle("-fx-background-radius: 10");
 		
 		Label nameLabel = new Label("File Name");
 		nameLabel.setTranslateX(300);
 		nameLabel.setTranslateY(50);
+		nameLabel.setStyle("-fx-text-fill: #cfd1dd");
 		
 		TextField fileNameTextField = new TextField();
 		fileNameTextField.setTranslateX(380);
 		fileNameTextField.setTranslateY(50);
+		fileNameTextField.setStyle("-fx-background-radius: 10");
 
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
 		loadFileButton.setTranslateX(60);
 		loadFileButton.setTranslateY(100);
+		loadFileButton.setStyle("-fx-background-radius: 10");
+		loadFileButton.setUnderline(true);
 
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -182,6 +190,8 @@ public class CPAddFileView {
 		exitButton.setText("Done");
 		exitButton.setTranslateX(120);
 		exitButton.setTranslateY(100);
+		exitButton.setStyle("-fx-background-radius: 10");
+		exitButton.setUnderline(true);
 
 		exitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -220,7 +230,9 @@ public class CPAddFileView {
 		background.getChildren().add(loadFileButton);
 		background.getChildren().add(exitButton);
 		background.getChildren().add(megaWebPage);
-
+		
+		background.setStyle("-fx-background-color: #2d3447");
+		
 		Scene megaScene = new Scene(background, 1024, 800);
 		megaPage.setScene(megaScene);
 		megaPage.show();

@@ -74,6 +74,7 @@ public class ProjectPageView {
 		addFile.setTranslateY(500);
 		addFile.setTranslateX(170);
 		addFile.setUnderline(true);
+		addFile.setStyle("-fx-background-radius: 10");
 		
 		addFile.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -94,6 +95,7 @@ public class ProjectPageView {
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
+		addMember.setStyle("-fx-background-radius: 10");
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -132,6 +134,7 @@ public class ProjectPageView {
 					addButton.setTranslateX(170);
 					addButton.setUnderline(true);
 					addButton.setStyle("-fx-background-radius: 10");
+					addButton.setUnderline(true);
 
 					ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																						// the list
@@ -203,6 +206,8 @@ public class ProjectPageView {
 		showDutiesButton.setTranslateX(400);
 		showDutiesButton.setTranslateY(500);
 		showDutiesButton.setVisible(false);
+		showDutiesButton.setStyle("-fx-background-radius: 10");
+		showDutiesButton.setUnderline(true);
 		
 		showDutiesButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -227,6 +232,8 @@ public class ProjectPageView {
 		joinRequestButton.setText("Request to join");
 		joinRequestButton.setTranslateY(500);
 		joinRequestButton.setPrefSize(120, 40);
+		joinRequestButton.setUnderline(true);
+		joinRequestButton.setStyle("-fx-background-radius: 10");
 		joinRequestButton.setUnderline(true);
 		
 		ArrayList<String> mArrayList = new ArrayList<String>(memberListSelector);
