@@ -26,7 +26,6 @@ WorkineThor
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="jsp/signup.jsp" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
-				<li><a href="index.jsp" class="color-me-black"><img src="images/login.png" class="media-object" style="width:20px">Login</a>
 			</ul>
 		</div>
 	</nav>
