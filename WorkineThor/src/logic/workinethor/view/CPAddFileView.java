@@ -63,8 +63,8 @@ public class CPAddFileView {
 	@FXML
 	private BorderPane pane;
 
-	private static final String sfondo = "-fx-text-fill: #cfd1dd";
-	private static final String radius = "-fx-background-radius: 10";
+	private static final String SFONDO = "-fx-text-fill: #cfd1dd";
+	private static final String RADIUS = "-fx-background-RADIUS: 10";
 	
 	//changed for test
 	@FXML
@@ -72,13 +72,13 @@ public class CPAddFileView {
 	
 		title.setText(Session.getSession().getCurrentBrowsingProject().getProjectName());
 		title.setFont(new Font("Arial", 70));
-		title.setStyle(sfondo); 
+		title.setStyle(SFONDO); 
 		
 		Button doneButton = new Button();
 		doneButton.setText("Done");
 		doneButton.setTranslateX(350);
 		doneButton.setTranslateY(220);
-		doneButton.setStyle(radius);
+		doneButton.setStyle(RADIUS);
 		doneButton.setUnderline(true);
 		
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -98,9 +98,9 @@ public class CPAddFileView {
 		anchor.getChildren().add(doneButton);
 		
 		addFileDrive.setUnderline(true);
-		addFileDrive.setStyle(radius);
+		addFileDrive.setStyle(RADIUS);
 		addfile.setUnderline(true);
-		addfile.setStyle(radius);
+		addfile.setStyle(RADIUS);
 		addfile.setUnderline(true);
 
 		pane.setStyle("-fx-background-color: #2d3447");
@@ -163,28 +163,28 @@ public class CPAddFileView {
 		Label fileNameLabel = new Label("Insert URL");
 		fileNameLabel.setTranslateX(20);
 		fileNameLabel.setTranslateY(50);
-		fileNameLabel.setStyle(sfondo);
+		fileNameLabel.setStyle(SFONDO);
 
 		TextField fileURL = new TextField();
 		fileURL.setTranslateX(100);
 		fileURL.setTranslateY(50);
-		fileURL.setStyle(radius);
+		fileURL.setStyle(RADIUS);
 		
 		Label nameLabel = new Label("File Name");
 		nameLabel.setTranslateX(300);
 		nameLabel.setTranslateY(50);
-		nameLabel.setStyle(sfondo);
+		nameLabel.setStyle(SFONDO);
 		
 		TextField fileNameTextField = new TextField();
 		fileNameTextField.setTranslateX(380);
 		fileNameTextField.setTranslateY(50);
-		fileNameTextField.setStyle(radius);
+		fileNameTextField.setStyle(RADIUS);
 
 		Button loadFileButton = new Button();
 		loadFileButton.setText("Load");
 		loadFileButton.setTranslateX(60);
 		loadFileButton.setTranslateY(100);
-		loadFileButton.setStyle(radius);
+		loadFileButton.setStyle(RADIUS);
 		loadFileButton.setUnderline(true);
 
 		loadFileButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -211,7 +211,7 @@ public class CPAddFileView {
 		exitButton.setText("Done");
 		exitButton.setTranslateX(120);
 		exitButton.setTranslateY(100);
-		exitButton.setStyle(radius);
+		exitButton.setStyle(RADIUS);
 		exitButton.setUnderline(true);
 
 		exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -222,14 +222,14 @@ public class CPAddFileView {
 		});
 
 		switch (Session.getSession().getCurrentBrowsingProject().getDriveName()) {
-		default:
-			megaEngine.load("https://mega.nz");
-			break;
 		case "Google Drive":
 			megaEngine.load("https://drive.google.com/");
 			break;
 		case "Dropbox":
 			megaEngine.load("https://dropbox.com/");
+			break;
+		default:
+			megaEngine.load("https://mega.nz");
 			break;
 		}
 

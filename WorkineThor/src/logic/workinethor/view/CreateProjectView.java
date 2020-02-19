@@ -48,7 +48,7 @@ public class CreateProjectView {
 	private ProjectBean bean = new ProjectBean();
 	private CreateProjectController projectController = CreateProjectController.getInstace();
 	
-	private static final String sfond = "-fx-text-fill: #cfd1dd";
+	private static final String SFOND = "-fx-text-fill: #cfd1dd";
 	private static final String radio = "-fx-background-radius: 10";
 
 	// project information
@@ -113,9 +113,9 @@ public class CreateProjectView {
 		driveSelector.setValue("");
 		driveSelector.setStyle(radio);
 		pane.setStyle("-fx-background-color: #2d3447");
-		label.setStyle(sfond);
-		labelNameProject.setStyle(sfond);
-		labelDrive.setStyle(sfond);
+		label.setStyle(SFOND);
+		labelNameProject.setStyle(SFOND);
+		labelDrive.setStyle(SFOND);
 		next.setUnderline(true);
 		next.setStyle(radio);
 		add.setStyle(radio);
@@ -219,22 +219,22 @@ public class CreateProjectView {
 		barraRicerca .setStyle(radio);
 		
 		Image lente = new Image("logic/Images/search--v2.png", 36, 36, true, false);
-		ImageView View = new ImageView(lente);
-		View.setTranslateX(50);
-		View.setTranslateY(47);
+		ImageView view = new ImageView(lente);
+		view.setTranslateX(50);
+		view.setTranslateY(47);
 		
 		Circle shape = new Circle(20, 20, 20);
 		shape.setTranslateX(48);
 		shape.setTranslateY(45);
 		shape.setFill(javafx.scene.paint.Color.AZURE);
 		
-		Button add = new Button();
-		add.setText("Add");
-		add.setPrefSize(70, 40);
-		add.setTranslateY(553);
-		add.setTranslateX(170);
-		add.setUnderline(true);
-		add.setStyle(radio);
+		Button addB = new Button();
+		addB.setText("Add");
+		addB.setPrefSize(70, 40);
+		addB.setTranslateY(553);
+		addB.setTranslateX(170);
+		addB.setUnderline(true);
+		addB.setStyle(radio);
 
 		ListView<String> member = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																			// the list
@@ -283,7 +283,7 @@ public class CreateProjectView {
 			member.setItems(filteredData); // show filtered list
 		});
 
-		back.getChildren().addAll(shape, View);
+		back.getChildren().addAll(shape, view);
 		back.getChildren().add(barraRicerca);
 		back.getChildren().add(member);
 		back.getChildren().add(add);
