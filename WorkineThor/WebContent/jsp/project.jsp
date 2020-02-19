@@ -43,7 +43,7 @@ ${active_project}
 		<c:forEach items="${project_users}" varStatus="i">
 			<label for="${project_users[i.index]}" style="color:white">${project_users[i.index]}</label><br>
 		</c:forEach>
-		<h3><input type="button" class="btn btn-default" value="add member"></h3>
+		<h3><input type="button" class="btn btn-default" value="add member" onclick="addMember()"></h3>
 	</div>
 	
 	<div class="tumbotron text-center">
@@ -90,6 +90,14 @@ ${active_project}
 		return value;
 	}
 </script>
-	
+<script>
+
+	// method taht call AddMemberServlet
+	function addMember(){
+		var name = "${active_project}";
+		document.location.href = "add-member?project-name=" + name;
+	}
+
+</script>	
 </body>
 </html>

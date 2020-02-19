@@ -57,6 +57,5 @@ Browse Project
     	</c:forEach>
 		</ul>
 	</div>	
-</form>
 </body>
 </html>
