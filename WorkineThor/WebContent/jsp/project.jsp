@@ -1,3 +1,4 @@
+<%@page import="logic.model.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -42,8 +43,36 @@ ${active_project}
 		<c:forEach items="${project_users}" varStatus="i">
 			<label for="${project_users[i.index]}" style="color:white">${project_users[i.index]}</label><br>
 		</c:forEach>
-		<h3><input type="submit" class="btn btn-default" value="add member"></h3>
+		<h3><input type="button" class="btn btn-default" value="add member"></h3>
 	</div>
+	
+	<div class="tumbotron text-center">
+		<h2 style="color:white">--Files--</h2>
+		<br>
+		<c:forEach items="${files}" varStatus="i">
+			<label for="${files[i.index]}" style="color:white">${files[i.index]}</label><br>
+		</c:forEach>
+		<h3><input type="button" class="btn btn-default" value="add file" onclick="addFile()"></h3>
+	</div>
+	
+<script>
+	
+	/* method that calls AddFileServlet --> sendRedirect*/
+	function addFile(){
+		var name = "${active_project}";
+		document.location.href = "add-file?project-name=" + name;
+	}
+	
+	/* method that catches url params */ 
+	function getParams(parameter){
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+		
+		var value = urlParams.get(parameter);
+		
+		return value;
+	}
+</script>
 	
 </body>
 </html>
