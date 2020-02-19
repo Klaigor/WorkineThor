@@ -56,14 +56,7 @@ public class SignupServlet extends HttpServlet{
 		if(result) {
 			response.sendRedirect("homepage");
 		}else {
-			out.println("<html>"+
-					"<body>");
-		out.println("Wrong Username or Password");
-		out.println("<a href=\"index.jsp\">"+
-					"<input type=\"submit\" value=\"retry\""+
-					"</a>"+
-					"</body>"+
-					"</html>");
+			response.sendRedirect("index.jsp?failure=true");
 		}
 		
 	}

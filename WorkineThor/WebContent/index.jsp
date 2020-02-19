@@ -44,5 +44,26 @@ WorkineThor
 		</div>
 	</div>
 
+<script>
+	
+	/* method that catches url params */ 
+	function getParams(parameter){
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+	
+		var value = urlParams.get(parameter);
+	
+		return value;
+	}
+	
+	window.onload = function() {
+		var failure = getParams("failure");
+		if(failure){
+			alert("Username and Password are already chosen!!");
+		}
+	}
+	
+</script>
+
 </body>
 </html>

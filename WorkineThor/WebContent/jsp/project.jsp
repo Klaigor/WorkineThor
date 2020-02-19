@@ -73,6 +73,7 @@ ${active_project}
 	var userLogged = "<%= user%>";
 	window.onload = function() {
 		if(userLogged === ""){
+			document.getElementById("right-buttons").children[0].style.display = "none";
 			document.getElementById("right-buttons").children[1].style.display = "none";
 			document.getElementById("main-buttons").children[1].style.display = "none";
 			document.getElementById("add-member-button").style.display = "none";
@@ -107,15 +108,13 @@ ${active_project}
 		
 		return value;
 	}
-</script>
-<script>
-
-	// method taht call AddMemberServlet
+	
+	/* method taht call AddMemberServlet */
 	function addMember(){
 		var name = "${active_project}";
 		document.location.href = "add-member?project-name=" + name;
 	}
+</script>
 
-</script>	
 </body>
 </html>

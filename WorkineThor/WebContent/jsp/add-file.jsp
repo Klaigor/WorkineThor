@@ -1,3 +1,4 @@
+<%@page import="logic.model.Session"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,7 +32,7 @@ AddFile
 				<li><a href="../homepage" class="color-me-black">Home</a>
 				<li><a href="create-project.jsp" class="color-me-black">Create Project</a>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul id="right-buttons" class="nav navbar-nav navbar-right">
 				<li><a href="#" class="color-me-black"><img src="../images/signup.png" class="media-object" style="width:20px">Sign Up</a>
 			</ul>
 		</div>
@@ -65,6 +66,10 @@ AddFile
 	
 	
 <script>
+
+	/* fetch user logged */
+	<% String user = Session.getSession().getLoggedUser().getUsername(); %>
+	var userLogged = "<%= user%>";
 
 	/* selected file*/
 	var file;
@@ -125,6 +130,10 @@ AddFile
 	
 	/* method that checks if project name is already taken */
 	window.onload = function() {
+		if(userLogged){
+			document.getElementById("right-buttons").children[0].style.display = "none";
+		}
+		
 		var failure = getParams("failure");
 		
 		if(failure)

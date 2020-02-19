@@ -32,7 +32,7 @@ Browse Project
 				<li><a href="jsp/create-project.jsp" class="color-me-black">Create Project</a>
 			</ul>
 			<ul id="right-buttons" class="nav navbar-nav navbar-right">
-				<li><a href="#" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
+				<li><a href="jsp/signup.jsp" class="color-me-black"><img src="images/signup.png" class="media-object" style="width:20px">Sign Up</a>
 				<li><a href="logout" class="color-me-black"><img src="images/logout.png" class="media-object" style="width:20px">Logout</a>
 			</ul>
 		</div>
