@@ -62,6 +62,14 @@ WorkineThor
   	}
 	}
 	
+	.color-me-black{
+		color:black;
+	}
+
+	.color-me-white{
+		color:white;
+	}
+	
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>

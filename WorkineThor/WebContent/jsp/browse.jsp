@@ -11,6 +11,67 @@
 <style type="text/css">
     <%@include file="../bootstrap/css/bootstrap.css" %>
     <%@include file="../bootstrap/css/bootstrap-theme.css" %>
+    
+    .tumbotron {
+ 		padding-top: 30px;
+  		padding-bottom: 30px;
+  		margin-bottom: 30px;
+  		color: inherit;
+  		background-color: #eee;
+	}
+
+	.tumbotron h1,
+	.tumbotron .h1 {
+  		color: inherit;
+	}
+	
+	.tumbotron p {
+  		margin-bottom: 15px;
+  		font-size: 21px;
+  		font-weight: 200;
+	}
+
+	.tumbotron > hr {
+  		border-top-color: #d5d5d5;
+	}
+
+	.container .tumbotron,
+	.container-fluid .tumbotron {
+  		padding-right: 15px;
+  		padding-left: 15px;
+  		border-radius: 6px;
+	}
+
+	.tumbotron .container {
+  		max-width: 100%;
+	}
+
+	@media screen and (min-width: 768px) {
+  	.tumbotron {
+    	padding-top: 48px;
+    	padding-bottom: 48px;
+  	}
+  
+  	.container .tumbotron,
+  	.container-fluid .tumbotron {
+    	padding-right: 60px;
+    	padding-left: 60px;
+  	}
+  
+  	.tumbotron h1,
+  	.tumbotron .h1 {
+    	font-size: 63px;
+  	}
+	}
+	
+	.color-me-black{
+		color:black;
+	}
+
+	.color-me-white{
+		color:white;
+	}
+    
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
