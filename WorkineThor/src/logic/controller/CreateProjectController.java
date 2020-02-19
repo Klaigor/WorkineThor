@@ -64,6 +64,7 @@ public class CreateProjectController {
 		projectDAO.addMemberToProject(bean, user);
 	}
 
+	//DEPRECATED DO NOT USE
 	public boolean addFile(FileBean bean) {
 		FileDAO fileDAO = new FileDAO();
 		ProjectBean projectBean = new ProjectBean();
@@ -71,7 +72,7 @@ public class CreateProjectController {
 		newProject.addFile(file);
 		
 		projectBean.setProjectName(newProject.getProjectName());
-		fileDAO.addFileToProject(bean, projectBean);
+		fileDAO.addFileToProject(bean, projectBean.getProjectName());
 		return true;
 	}
 

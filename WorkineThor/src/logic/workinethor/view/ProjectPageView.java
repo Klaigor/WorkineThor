@@ -27,6 +27,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.bean.ProjectBean;
+import logic.database.FileDAO;
 import logic.database.ProjectDAO;
 import logic.model.Session;
 import logic.workinethor.Main;
@@ -60,7 +61,12 @@ public class ProjectPageView {
 		member.setTranslateY(50);
 		member.setTranslateX(1);
 		member.setItems(memberListSelector);
-			
+		
+		FileDAO fileDAO = new FileDAO();
+		ObservableList<String> fileList = fileDAO.getAllProjectFiles(currentBrowsingProject); 
+		ListView<String> files = new ListView<String>(fileList);
+		files.setTranslateX(560);
+		files.setTranslateY(45);
 		
 		Button addFile = new Button();
 		addFile.setText("Add File");
@@ -88,14 +94,6 @@ public class ProjectPageView {
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
-		
-		//if you are not an admin you can't add Member and Files 
-		String admin = projectDAO.getProjectAdmin(bean);
-		if(!admin.equals(Session.getSession().getLoggedUser().getUsername())) {
-			System.out.println("in");
-			addMember.setVisible(false);
-			addFile.setVisible(false);
-		}
 		
 		addMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -193,6 +191,37 @@ public class ProjectPageView {
 			}
 		});
 		
+		//if you are not an admin you can't add Member and Files 
+		String admin = projectDAO.getProjectAdmin(bean);
+		if(!admin.equals(Session.getSession().getLoggedUser().getUsername())) {
+			addMember.setVisible(false);
+			addFile.setVisible(false);
+		}
+		
+		Button showDutiesButton = new Button();
+		showDutiesButton.setText("Show Duties");
+		showDutiesButton.setTranslateX(400);
+		showDutiesButton.setTranslateY(500);
+		showDutiesButton.setVisible(false);
+		
+		showDutiesButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage dutiesWindow = new Stage();
+				dutiesWindow.setTitle("Duties");
+				dutiesWindow.initModality(Modality.APPLICATION_MODAL);
+				
+				BorderPane dutiesPane = null;
+				
+				try {
+					dutiesPane = FXMLLoader.load(ProjectPageView.class.getResource("DutiesOverview.fxml"));
+				} catch (IOException e) {}
+				
+				Scene dutiesScene = new Scene(dutiesPane);
+				dutiesWindow.setScene(dutiesScene);
+				dutiesWindow.show();
+			}
+		});
 		
 		Button joinRequestButton = new Button();
 		joinRequestButton.setText("Request to join");
@@ -202,14 +231,18 @@ public class ProjectPageView {
 		
 		ArrayList<String> mArrayList = new ArrayList<String>(memberListSelector);
 		for(String m: mArrayList) {
-			if(Session.getSession().getLoggedUser().getUsername().equals(m))
+			if(Session.getSession().getLoggedUser().getUsername().equals(m)) {
 				joinRequestButton.setVisible(false);
+				showDutiesButton.setVisible(true);
+			}
 		}
 		
 		items.getChildren().add(title);
 		items.getChildren().add(member);
+		items.getChildren().add(files);
 		items.getChildren().add(addMember);
 		items.getChildren().add(addFile);
+		items.getChildren().add(showDutiesButton);
 		items.getChildren().add(joinRequestButton);
 		
 		background.setCenter(items);

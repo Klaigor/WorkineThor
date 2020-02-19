@@ -41,7 +41,7 @@ public class WatchDutiesView {
      */
     @FXML
     private void initialize() {
-    	
+    	/*
     	WatchDutiesController controller = new WatchDutiesController();
     	ArrayList<Duty> duties;
     	duties = (ArrayList<Duty>) controller.getProjectDuties();
@@ -49,7 +49,7 @@ public class WatchDutiesView {
     	for (Duty duty : duties) {
     		dutiesBeans.add(new DutyWatchDutiesBean(duty));
     	}
-    	
+    	*/
     	ObservableList<DutyWatchDutiesBean> observableDuty = FXCollections.observableArrayList(dutiesBeans);
     	SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
         // Add observable list data to the table

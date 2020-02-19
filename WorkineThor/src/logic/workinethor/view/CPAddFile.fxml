@@ -19,7 +19,7 @@
       </Label>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="anchor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addFileDrive" layoutX="528.0" layoutY="113.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="200.0" text="Add file from Drive" />
             <Button fx:id="addfile" layoutX="110.0" layoutY="113.0" mnemonicParsing="false" onAction="#addFileFunc" prefHeight="39.0" prefWidth="100.0" text="Add file" />

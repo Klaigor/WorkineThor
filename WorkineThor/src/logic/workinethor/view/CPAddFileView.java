@@ -4,10 +4,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import logic.bean.FileBean;
-import logic.controller.CreateProjectController;
+import logic.controller.AddFileController;
 import logic.model.Session;
+import logic.workinethor.Main;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,6 +17,7 @@ import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,13 +35,17 @@ import javafx.stage.Stage;
 public class CPAddFileView {
 
 	// get singleton instance
-	private CreateProjectController control = CreateProjectController.getInstace();
+	private AddFileController controller = AddFileController.getInstace();
 
 	// addFile bean
 	private FileBean fileBean = new FileBean();
 
 	private Logger logger = Logger.getLogger(CPAddFileView.class.getName());
-
+	
+	//FXML values
+	@FXML
+	private AnchorPane anchor;
+	
 	@FXML
 	private Button addfile;
 	
@@ -62,6 +69,26 @@ public class CPAddFileView {
 		title.setFont(new Font("Arial", 70));
 		title.setStyle("-fx-text-fill: #cfd1dd"); 
 		
+		Button doneButton = new Button();
+		doneButton.setText("Done");
+		doneButton.setTranslateX(350);
+		doneButton.setTranslateY(250);
+		doneButton.setStyle("-fx-background-radius: 10");
+		
+		doneButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				BorderPane projectPane = null;
+				try {
+					projectPane = FXMLLoader.load(CPAddFileView.class.getResource("Project.fxml"));
+				} catch (IOException e) {}
+				
+				Main.getMainLayout().setCenter(projectPane);
+			}
+		});
+		
+		anchor.getChildren().add(doneButton);
+		
 		addFileDrive.setUnderline(true);
 		addFileDrive.setStyle("-fx-background-radius: 10");
 		addfile.setUnderline(true);
@@ -77,11 +104,9 @@ public class CPAddFileView {
 			}
 		});
 
-		
 		// disable button if driveActive is false
 		if (!Session.getSession().getCurrentBrowsingProject().getDriveActive())
 			addFileDrive.setDisable(true);
-
 		return true; 
 	}
 
@@ -97,8 +122,7 @@ public class CPAddFileView {
 			filelist.getItems().add(selectedFile.getPath());
 			fileBean.setFilePath(selectedFile.getPath());
 			fileBean.setFileName(selectedFile.getName());
-			control.addFile(fileBean);
-			control.getProject().showFiles();
+			controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
 			success = true;
 		} else {
 			logger.log(Level.WARNING, "No file selected");
@@ -148,16 +172,7 @@ public class CPAddFileView {
 					filelist.getItems().add(fileURL.getText());
 					fileBean.setFilePath(fileURL.getText());
 					fileBean.setFileName(fileNameTextField.getText());
-					control.addFile(fileBean);
-					control.getProject().showFiles();
-					
-					//download del file
-					/*MegaHandler mHandler = new MegaHandler(megaEngine.getDocument().getElementById("username").getAttribute("username"), 
-															megaEngine.getDocument().getElementById("password").getAttribute("password"));
-					
-					try {
-						mHandler.download(fileURL.getText(), "C:\\");
-					} catch (Exception e) {}*/
+					controller.addFileToProject(fileBean, Session.getSession().getCurrentBrowsingProject().getProjectName());
 				}
 				else logger.log(Level.INFO, "Empty name field");
 			}
@@ -175,7 +190,7 @@ public class CPAddFileView {
 			}
 		});
 
-		switch (control.getDriveName()) {
+		switch (Session.getSession().getCurrentBrowsingProject().getDriveName()) {
 		case "Mega":
 			megaEngine.load("https://mega.nz");
 			break;

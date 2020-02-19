@@ -7,6 +7,7 @@
 package logic.model;
 
 import logic.bean.ProjectBean;
+import logic.database.ProjectDAO;
 
 public class Session {
 	private static Session sessionInstance = null;
@@ -61,12 +62,10 @@ public class Session {
 	}
 	
 	public void setCurrentBrowsingProject(ProjectBean bean) {
-		currentBrowsingProject = new Project();
-		currentBrowsingProject.setProjectName(bean.getProjectName());
-		if(bean.getDriveName() != null) {
-			currentBrowsingProject.setDriveActive(true);
-			currentBrowsingProject.setDriveName(bean.getDriveName());
-		}
+		ProjectDAO projectDAO = new ProjectDAO();
+		
+		currentBrowsingProject = projectDAO.getProjectFromDB(bean);
+		
 	}
 	
 	public Project getCurrentBrowsingProject() {

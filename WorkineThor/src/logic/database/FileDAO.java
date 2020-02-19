@@ -21,12 +21,10 @@ public class FileDAO {
 	/**
 	 * prepares the statement and then sends it to the DB
 	 * 
-	 * @param filePatha
-	 * @param fileName
+	 * @param file
 	 * @param projectName
 	 * @throws SQLException
 	 */
-
 	public boolean insert(FileBean file, ProjectBean projectName) throws SQLException {
 		String insert = "INSERT INTO files(path,name,project)" + "VALUES (?,?,?)";
 
@@ -46,6 +44,11 @@ public class FileDAO {
 		return true;
 	}
 
+	/**
+	 * get all files in the application
+	 * @return
+	 * @throws SQLException
+	 */
 	public ObservableList<String> getAllFile() throws SQLException {
 
 		String getAllFile = "SELECT * from files";
@@ -76,7 +79,40 @@ public class FileDAO {
 		return allFile;
 	}
 	
-	public boolean addFileToProject(FileBean fileBean, ProjectBean projectBean) {
+	/**
+	 * returns all project files
+	 * @param project
+	 * @return
+	 */
+	public ObservableList<String> getAllProjectFiles(String project){
+		ObservableList<String> files = FXCollections.observableArrayList();
+		String sqlString = "SELECT name FROM files WHERE project = ?";
+		
+		dbConnection = dbHandler.getConnection();
+		
+		try {
+			pst = dbConnection.prepareStatement(sqlString);
+			pst.setString(1, project);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			if(!rs.first()) {}
+			else {
+				do {
+					files.addAll(rs.getString("name"));
+				}while(rs.next());
+			}
+		} catch (SQLException e) {}
+		return files;
+	}
+	
+	/**
+	 * adds current file to project
+	 * @param fileBean
+	 * @param project
+	 * @return
+	 */
+	public boolean addFileToProject(FileBean fileBean, String project) {
 		String sqlString = "INSERT INTO files(path,name,project) VALUES (?,?,?)";
 		
 		dbConnection = dbHandler.getConnection();
@@ -85,7 +121,7 @@ public class FileDAO {
 			pst = dbConnection.prepareStatement(sqlString);
 			pst.setString(1, fileBean.getFilePath());
 			pst.setString(2, fileBean.getFileName());
-			pst.setString(3, projectBean.getProjectName());
+			pst.setString(3, project);
 			
 			pst.executeUpdate();
 		} catch (SQLException e) {}
