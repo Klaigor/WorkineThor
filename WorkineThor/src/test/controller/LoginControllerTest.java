@@ -5,6 +5,7 @@ import org.junit.*;
 import logic.bean.UserBean;
 import logic.controller.LoginController;
 import logic.database.UserDAO;
+import logic.exceptions.WrongLoginException;
 
 import static org.junit.Assert.*;
 
@@ -44,7 +45,7 @@ public class LoginControllerTest {
 	    }
 	    
 	    @Test
-	    public void testSignin() throws SQLException {
+	    public void testSignin() throws SQLException, WrongLoginException {
 	    	UserBean user = new UserBean();
 	    	LoginController controller = new LoginController();
 	    	user.setPassword("cane");

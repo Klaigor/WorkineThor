@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic.bean.UserBean;
 import logic.controller.LoginController;
+import logic.exceptions.WrongLoginException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
@@ -48,6 +49,8 @@ public class LoginServlet extends HttpServlet{
 			result = controller.signin(userBean);
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "SQLException occurred: problem injecting query");
+		} catch (WrongLoginException e) {
+			e.printStackTrace();
 		}
 		
 		Cookie cookie = new Cookie("result", String.valueOf(result));

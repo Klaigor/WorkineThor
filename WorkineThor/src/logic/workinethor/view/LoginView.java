@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import logic.bean.UserBean;
 import logic.controller.LoginController;
+import logic.exceptions.WrongLoginException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -100,6 +101,8 @@ public class LoginView {
 					try {
 						res = control.signin(user);
 					} catch (SQLException e) {
+						e.printStackTrace();
+					} catch (WrongLoginException e) {
 						e.printStackTrace();
 					}
 									

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logic.bean.UserBean;
+import logic.exceptions.UserAlreadyExistException;
 import logic.model.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,8 +25,9 @@ public class UserDAO {
 	 * prepares the statement and then sends it to the DB
 	 * 
 	 * @throws SQLException
+	 * @throws UserAlreadyExistException 
 	 */
-	public boolean insert(UserBean user) throws SQLException {
+	public boolean insert(UserBean user) throws SQLException, UserAlreadyExistException {
 		String insert = "INSERT INTO users(username,password)" + "VALUES (?,?)";
 
 		Connection dbConnection = dbHandler.getConnection();
@@ -41,6 +43,14 @@ public class UserDAO {
 		pst.setString(1, user.getUsername());
 		pst.setString(2, user.getPassword());
 
+		try {
+			Integer error = pst.executeUpdate();
+			if (error == 3) {
+				throw new UserAlreadyExistException ("user already exist");	
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}	
 		pst.executeUpdate();
 		return true;
 	}
