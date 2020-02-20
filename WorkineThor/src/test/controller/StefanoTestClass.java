@@ -2,7 +2,7 @@ package test.controller;
 
 import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import logic.bean.FileBean;
 import logic.database.FileDAO;
