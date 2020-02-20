@@ -95,16 +95,16 @@
 	
 	<!-- create form: sends data to CreateProjectServlet which will save the new project to the DB -->
 	<div class="tumbotron">
-		<h2 style="color:white">Create Project</h2>
+		<h2 style="color:black">Create Project</h2>
 		<br>
 		<div class="form-horizontal">
-			<label for="project_name" style="color:white"><h3>Insert Project Name</h3></label>
+			<label for="project_name" style="color:black"><h3>Insert Project Name</h3></label>
 			<input type="text" class="form-control" style="width:170px" id="project_name_id" name="project_name" ></input>
 			<br><br><br>
-			<label style="color:white"><h3>Use Drive</h3></label>
+			<label style="color:black"><h3>Use Drive</h3></label>
 			<input type="checkbox" name="drive_active" id="drive-active" onclick="driveActive()">
 			<div class="bootstrap-select-wrapper">
-  				<label style="color:white">Drive</label>
+  				<label style="color:black">Drive</label>
   				<select title="Scegli una opzione" id="drive-select" disabled>
     				<option value="gdrive">Google Drive</option>
    					<option value="mega">Mega</option>

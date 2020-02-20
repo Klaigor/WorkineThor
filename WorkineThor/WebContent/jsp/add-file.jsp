@@ -138,7 +138,7 @@ AddFile
 	var fileArray = [];
 	
 	/* change text to title-id label */
-  	document.getElementById("title-id").innerHTML = "<h3> Selected Files </h3>";
+  	document.getElementById("title-id").innerHTML = "<h3 style=\"color:black;\"> Selected Files </h3>";
   	
 	/* on file selected do method */
 	document.getElementById('fileElem').onchange = function () {
@@ -154,7 +154,7 @@ AddFile
 	  	/* create a new label to show selected files */
 	  	var fileLabel = document.createElement("label");
 	  	fileLabel.innerHTML = file;
-	  	fileLabel.style = "color:white;"
+	  	fileLabel.style = "color:black;"
 	  	document.getElementById("file-container").appendChild(fileLabel);
 	  	
 	  	if (document.getElementById("file-container").hasChildNodes()) {

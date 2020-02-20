@@ -112,7 +112,7 @@ Add Member
 	
 	<!-- Browse Member-->
 	<div class="tumbotron text-center">
-		<h2 style="color:white">Members to add</h2>
+		<h2 style="color:black">Members to add</h2>
 		<div class="form-horizontal" align="center">
 		<input type="text" class="form-control" style="width:170px" id="searchField" name="search" placeholder="Search!" ></input>
 		</div>	

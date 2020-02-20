@@ -103,7 +103,7 @@ Browse Project
 	
 	<!-- Browse project-->
 	<div class="tumbotron text-center">
-		<h2 style="color:white">Browse</h2>
+		<h2 style="color:black">Browse</h2>
 		<div class="form-horizontal" align="center">
 		<input type="text" class="form-control" style="width:170px" id="searchField" name="search" placeholder="Search!" ></input>
 		</div>	

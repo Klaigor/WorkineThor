@@ -104,7 +104,7 @@ HomePage
 	
 	<!-- users data (projects) by clicking on a project you ask the ProjectServlet to display project.jsp-->
 	<div class="tumbotron text-center">
-		<h2 style="color:white">User: ${user}</h2>
+		<h2 style="color:black">User: ${user}</h2>
 		<ul class="list-group justify-content-center" >
    		<c:forEach items="${project_list}" varStatus="i">
    			<li class="list-group-item" style="width:170px">

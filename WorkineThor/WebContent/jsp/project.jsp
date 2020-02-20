@@ -99,27 +99,27 @@ ${active_project}
 	
 	<!-- project data (members and files) -->
 	<div class="tumbotron text-center">
-		<h2 style="color:white">Project: ${active_project}<br></h2>
-		<h2 style="color:white">--Members--</h2>
+		<h2 style="color:black">Project: ${active_project}<br></h2>
+		<h2 style="color:black">--Members--</h2>
 		<br>
 		<c:forEach items="${project_users}" varStatus="i">
-			<label for="${project_users[i.index]}" style="color:white">${project_users[i.index]}</label><br>
+			<label for="${project_users[i.index]}" style="color:black">${project_users[i.index]}</label><br>
 		</c:forEach>
 		<h3><input type="button" id="add-member-button" class="btn btn-default" value="add member" onclick="addMember()"></h3>
 	</div>
 	
 	<div class="tumbotron text-center">
-		<h2 style="color:white">--Files--</h2>
+		<h2 style="color:black">--Files--</h2>
 		<br>
 		<c:forEach items="${files}" varStatus="i">
-			<label for="${files[i.index]}" style="color:white">${files[i.index]}</label><br>
+			<label for="${files[i.index]}" style="color:black">${files[i.index]}</label><br>
 		</c:forEach>
 		<h3><input type="button" id="add-file-button" class="btn btn-default" value="add file" onclick="addFile()"></h3>
 	</div>
 	<br>
 	<!-- sends to a servlet that retrieves and shows project duties -->
 	<div class="tumbotron text-center">
-		<h2 style="color:white">--Duties--</h2>
+		<h2 style="color:black">--Duties--</h2>
 		<br>
 		<h3><input type="button" id="duties-button" class="btn btn-default" value="Duties" onclick="showDuties()"></h3>
 	</div>	

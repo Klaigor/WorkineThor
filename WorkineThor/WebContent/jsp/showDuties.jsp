@@ -88,7 +88,7 @@
 	</head>
 <body>
 	<div class="tumbotron text-center">
-		<h1 style="color:white">
+		<h1 style="color:black">
 		${project_name} Duties
 		</h1>
 	</div>
