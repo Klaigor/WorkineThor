@@ -162,6 +162,8 @@ public class CreateProjectView {
 		boolean result = false;
 		BorderPane mainLayout = null;
 		mainLayout = Main.getMainLayout();
+		
+		Alert alert = new Alert(Alert.AlertType.ERROR);
 
 		// pass createProject values to the bean class
 		bean.setProjectName(projectNameField.getText());
@@ -178,7 +180,6 @@ public class CreateProjectView {
 			}
 			result = true;
 		} catch (ProjectAlreadyExistsException e1) {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText(null);
 			alert.setContentText("Project Already Exists!!");
 			alert.show();
@@ -203,6 +204,7 @@ public class CreateProjectView {
 	// method that create the add member view
 	@FXML
 	private boolean addMember() throws SQLException {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
 		UserDAO usrDAO = new UserDAO();
 		ObservableList<String> result = usrDAO.getAllUsers();
 		ObservableList<String> memberListSelector = FXCollections.observableArrayList(); // Create a member list
@@ -254,7 +256,6 @@ public class CreateProjectView {
 					try {
 						result = validateMember(memberSelected);
 					} catch (MemberAlreadyExistisException e) {
-						Alert alert = new Alert(Alert.AlertType.ERROR);
 						alert.setHeaderText(null);
 						alert.setContentText("Member already Selected!!");
 						alert.show();
@@ -286,7 +287,7 @@ public class CreateProjectView {
 		back.getChildren().addAll(shape, view);
 		back.getChildren().add(barraRicerca);
 		back.getChildren().add(member);
-		back.getChildren().add(add);
+		back.getChildren().add(addB);
 		back.setStyle("-fx-background-color: #2d3447");
 
 		Scene loginScene = new Scene(back, 400, 600);

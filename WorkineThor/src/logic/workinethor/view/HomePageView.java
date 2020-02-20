@@ -36,6 +36,7 @@ public class HomePageView {
 	
 	private static final String DUTY_STRING = "Duty1"; 
 	private static final String ARIAL_STRING = "Arial";
+	private static final String FILL_STRING = "-fx-text-fill: #cfd1dd";
 	
 	private BorderPane mainLayout = Main.getMainLayout();
 	
@@ -69,13 +70,13 @@ public class HomePageView {
 		loggedUserLabel.setText("Username: " + activeSession.getLoggedUser().getUsername());
 		loggedUserLabel.setFont(new Font(ARIAL_STRING, 24));
 		loggedUserLabel.setTranslateY(5);
-		loggedUserLabel.setStyle("-fx-text-fill: #cfd1dd");
+		loggedUserLabel.setStyle(FILL_STRING);
 		
 		Label projectLabel = new Label();
 		projectLabel.setText("Your Projects:");
-		projectLabel.setFont(new Font("Arial", 24));
+		projectLabel.setFont(new Font(ARIAL_STRING, 24));
 		projectLabel.setTranslateY(50);
-		projectLabel.setStyle("-fx-text-fill: #cfd1dd");
+		projectLabel.setStyle(FILL_STRING);
 		
 		ObservableList<String> userProjects = projectDAO.getAllUserProjects(Session.getSession().getLoggedUser());
 		ListView<String> allProjectsListView = new ListView<>(userProjects);

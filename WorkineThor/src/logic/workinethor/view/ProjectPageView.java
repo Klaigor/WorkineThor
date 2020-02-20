@@ -100,7 +100,7 @@ public class ProjectPageView {
 		addMember.setTranslateY(500);
 		addMember.setPrefSize(120, 40);
 		addMember.setUnderline(true);
-		addMember.setStyle("-fx-background-radius: 10");
+		addMember.setStyle(FXBACKGROUNDRADIUS);
 		
 		addMember.setOnAction(addMemberEventHandler(projectDAO, bean));
 			

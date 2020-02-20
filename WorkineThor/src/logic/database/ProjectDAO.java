@@ -28,6 +28,8 @@ public class ProjectDAO {
 	private static final String QUERYFAILED = "SQL query failed!!";
 	private static final String PROJECTSTRING = "project:";
 	private static final String PROJECTNAMESTRING = "project_name";
+	private static final String MEMBER_STRING = "member";
+	private static final String USER_STRING = "user";
 
 	/**
 	 * method that adds the created project by the active user(found in Session)
@@ -226,9 +228,9 @@ public class ProjectDAO {
 			if (!rs.first()) {
 				logger.log(Level.WARNING, "result set is empty");
 			} else {
-				projects.addAll(rs.getString("project_name"));
+				projects.addAll(rs.getString(PROJECTNAMESTRING));
 				while (rs.next())
-					projects.addAll(rs.getString("project_name"));
+					projects.addAll(rs.getString(PROJECTNAMESTRING));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -249,7 +251,7 @@ public class ProjectDAO {
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.first()) {
-				admin = rs.getString("user");
+				admin = rs.getString(USER_STRING);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -270,9 +272,9 @@ public class ProjectDAO {
 
 			ResultSet rs = statement.executeQuery();
 			if (rs.first()) {
-				users.addAll(rs.getString("member"));
+				users.addAll(rs.getString(MEMBER_STRING));
 				while (rs.next())
-					users.addAll(rs.getString("member"));
+					users.addAll(rs.getString(MEMBER_STRING));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -293,9 +295,9 @@ public class ProjectDAO {
 
 			ResultSet rs = statement.executeQuery();
 			if (rs.first()) {
-				users.addAll(rs.getString("user"));
+				users.addAll(rs.getString(USER_STRING));
 				while (rs.next())
-					users.addAll(rs.getString("user"));
+					users.addAll(rs.getString(USER_STRING));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -317,7 +319,7 @@ public class ProjectDAO {
 
 			if (rs.first()) {
 				temp = new Project();
-				temp.setProjectName(rs.getString("project_name"));
+				temp.setProjectName(rs.getString(PROJECTNAMESTRING));
 				temp.setDriveName(rs.getString("drive_name"));	
 				boolean check = temp.getDriveName() != null;
 				temp.setDriveActive(check);

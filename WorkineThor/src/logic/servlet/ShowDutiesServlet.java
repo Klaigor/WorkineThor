@@ -33,16 +33,16 @@ public class ShowDutiesServlet extends HttpServlet {
 		
 		String[] project = request.getParameterValues("project-name");
 		WatchDutiesController controller = new WatchDutiesController();
-		/*ArrayList<Duty> duties = (ArrayList<Duty>) controller.getWebProjectDuties(project[0]);
+		ArrayList<Duty> duties = (ArrayList<Duty>) controller.getWebProjectDuties(project[0]);
 		int numberOfDuties = duties.size();
 		ArrayList<String> dutiesNames = new ArrayList<>();
 		
 		for (int i = 0; i < numberOfDuties; i++) {
 			dutiesNames.add(duties.get(i).getName());			
 		}
-		*/
+		
 		request.setAttribute("project_name", project[0]);
-		//request.setAttribute("duties_list", dutiesNames);		
+		request.setAttribute("duties_list", dutiesNames);		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/showDuties.jsp");
 		dispatcher.forward(request, response);
 	}
