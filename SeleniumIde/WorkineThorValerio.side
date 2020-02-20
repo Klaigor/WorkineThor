@@ -1,0 +1,148 @@
+{
+  "id": "14dcf926-c68b-4fc9-8570-6727dd6dde40",
+  "version": "2.0",
+  "name": "WorkineThor",
+  "url": "http://localhost:8080/WorkineThor/",
+  "tests": [{
+    "id": "2e0b9a77-1dcd-4845-9795-a790085570c4",
+    "name": "WorkineThorWebAddMember",
+    "commands": [{
+      "id": "06121b17-a29b-4ec5-a9ec-e49866c8746f",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/WorkineThor/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4ea300e0-7eaa-4551-960b-31fb48179b56",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x691",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cf0314e7-9a59-4e9f-b847-1ad14d039689",
+      "comment": "",
+      "command": "click",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a0aee5cd-7096-4e26-abc9-d5b2db11c189",
+      "comment": "",
+      "command": "type",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mario"
+    }, {
+      "id": "5e574bff-87a9-458a-8838-ad364615759a",
+      "comment": "",
+      "command": "type",
+      "target": "id=pass",
+      "targets": [
+        ["id=pass", "id"],
+        ["name=password", "name"],
+        ["css=#pass", "css:finder"],
+        ["xpath=//input[@id='pass']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "mario"
+    }, {
+      "id": "cdf0302e-6b07-4802-b973-85832aabea4e",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=pass",
+      "targets": [
+        ["id=pass", "id"],
+        ["name=password", "name"],
+        ["css=#pass", "css:finder"],
+        ["xpath=//input[@id='pass']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "966efc1f-bfe5-4b67-bf96-eb6355045841",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=prova2",
+      "targets": [
+        ["linkText=prova2", "linkText"],
+        ["css=.list-group-item:nth-child(1) > a", "css:finder"],
+        ["xpath=//a[contains(@href, 'project?id=prova2')]", "xpath:href"],
+        ["xpath=//body/div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'prova2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b685872-3966-4b58-9a46-61fb0e1fc5ea",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3:nth-child(6) > .btn",
+      "targets": [
+        ["css=h3:nth-child(6) > .btn", "css:finder"],
+        ["xpath=//input[@value='add member']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b39a5b3a-be9b-45e1-8cbd-d267f560f520",
+      "comment": "",
+      "command": "click",
+      "target": "css=.list-group-item:nth-child(3) > .btn",
+      "targets": [
+        ["css=.list-group-item:nth-child(3) > .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[9]", "xpath:attributes"],
+        ["xpath=//li[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'luigi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c4695975-aff5-4aa2-939d-63d7f3f13bbe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.list-group-item:nth-child(1) > #myModal .btn-primary",
+      "targets": [
+        ["css=.list-group-item:nth-child(1) > #myModal .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='myModal']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Add')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e53cb89a-756b-4bf2-aabe-907aaf47c153",
+      "comment": "",
+      "command": "click",
+      "target": "css=.list-group-item:nth-child(1) > #myModal span",
+      "targets": [
+        ["css=.list-group-item:nth-child(1) > #myModal span", "css:finder"],
+        ["xpath=//div[@id='myModal']/div/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'×')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "96d45c15-82bc-4b79-a4e9-499ca78e54d0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/WorkineThor/"],
+  "plugins": []
+}
