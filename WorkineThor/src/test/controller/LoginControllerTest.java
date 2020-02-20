@@ -7,6 +7,7 @@ import logic.controller.LoginController;
 import logic.database.UserDAO;
 import logic.exceptions.UserAlreadyExistException;
 import logic.exceptions.WrongLoginException;
+import logic.model.Duty;
 
 import static org.junit.Assert.*;
 
