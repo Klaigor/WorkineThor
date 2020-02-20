@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 import java.sql.Connection;
@@ -24,9 +25,9 @@ public class ProjectDAO {
 	private DBhandle handle = DBhandle.getDBhandleInstance();
 	private Connection dbConnection;
 	private PreparedStatement statement;
-	private static final String queryfailed = "SQL query failed!!";
-	private static final String projectString = "project:";
-	private static final String projectNameString = "project_name";
+	private static final String QUERYFAILED = "SQL query failed!!";
+	private static final String PROJECTSTRING = "project:";
+	private static final String PROJECTNAMESTRING = "project_name";
 
 	/**
 	 * method that adds the created project by the active user(found in Session)
@@ -54,11 +55,11 @@ public class ProjectDAO {
 
 				addMemberToProject(bean, session.getLoggedUser().getUsername());
 			} catch (SQLException e) {
-				logger.log(Level.SEVERE, queryfailed);
+				logger.log(Level.SEVERE, QUERYFAILED);
 				return false;
 			}
 
-			logger.log(Level.INFO, projectString + project.getProjectName() + " added");
+			logger.log(Level.INFO, PROJECTSTRING + project.getProjectName() + " added");
 		}
 
 		return true;
@@ -80,7 +81,7 @@ public class ProjectDAO {
 				result = true;
 				logger.log(Level.INFO, "project with name:" + bean.getProjectName() + " does not exist");
 			} else {
-				throw new ProjectAlreadyExistsException(projectString + bean.getProjectName() + " already exists");
+				throw new ProjectAlreadyExistsException(PROJECTSTRING + bean.getProjectName() + " already exists");
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -118,11 +119,11 @@ public class ProjectDAO {
 			statement.setString(3, user);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "SQL query failed!!");
+			logger.log(Level.SEVERE, QUERYFAILED);
 			return false;
 		}
 
-		logger.log(Level.INFO, "user:{}" + user + " added");
+		logger.log(Level.INFO, "user:{0}", user + " added");
 		return true;
 	}
 
@@ -137,7 +138,7 @@ public class ProjectDAO {
 			statement.setString(1, project.getProjectName());
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "SQL query failed!!");
+			logger.log(Level.SEVERE, QUERYFAILED);
 			return false;
 		}
 
@@ -145,7 +146,7 @@ public class ProjectDAO {
 		return true;
 	}
 
-	public ArrayList<Project> getActiveUserProjectsFromDB() {
+	public List<Project> getActiveUserProjectsFromDB() {
 		ArrayList<Project> tempProjects = new ArrayList<>();
 		String sqlString = "SELECT * FROM projects WHERE " + "user = ?";
 		ResultSet resultSet;
@@ -162,7 +163,7 @@ public class ProjectDAO {
 				Project temp;
 				do {
 					temp = new Project();
-					temp.setProjectName(resultSet.getString(projectNameString));
+					temp.setProjectName(resultSet.getString(PROJECTNAMESTRING));
 					temp.setDriveName(resultSet.getString("drive_name"));
 					if (resultSet.getString("user") != null) {
 						User user = new User();
@@ -190,15 +191,14 @@ public class ProjectDAO {
 
 			ResultSet resultSet = statement.executeQuery();
 
-			if (!resultSet.first()) {
-
-			} else {
+			if (resultSet.first()) {
 				projectStrings.addAll(resultSet.getString("project_name"));
 				while (resultSet.next()) {
 					projectStrings.addAll(resultSet.getString("project_name"));
 				}
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return projectStrings;
 	}
