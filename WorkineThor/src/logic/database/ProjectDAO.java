@@ -142,7 +142,7 @@ public class ProjectDAO {
 			return false;
 		}
 
-		logger.log(Level.INFO, "project:" + project.getProjectName() + " removed");
+		logger.log(Level.INFO,  project.getProjectName() + " removed");
 		return true;
 	}
 
@@ -192,7 +192,7 @@ public class ProjectDAO {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.first()) {
-				projectStrings.addAll(resultSet.getString("project_name"));
+				projectStrings.addAll(resultSet.getString(PROJECTNAMESTRING));
 				while (resultSet.next()) {
 					projectStrings.addAll(resultSet.getString("project_name"));
 				}
@@ -204,6 +204,7 @@ public class ProjectDAO {
 	}
 
 	public ObservableList<String> getAllProjects() {
+		Logger logger =  Logger.getLogger(ProjectDAO.class.getName());
 		String getAllProjects = "SELECT DISTINCT project_name FROM projects";
 		ObservableList<String> projects = FXCollections.observableArrayList();
 
@@ -223,7 +224,7 @@ public class ProjectDAO {
 		}
 		try {
 			if (!rs.first()) {
-
+				logger.log(Level.WARNING, "result set is empty");
 			} else {
 				projects.addAll(rs.getString("project_name"));
 				while (rs.next())

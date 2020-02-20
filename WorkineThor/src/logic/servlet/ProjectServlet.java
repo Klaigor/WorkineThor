@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.bean.ProjectBean;
 import logic.database.FileDAO;

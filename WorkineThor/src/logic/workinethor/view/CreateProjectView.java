@@ -49,7 +49,7 @@ public class CreateProjectView {
 	private CreateProjectController projectController = CreateProjectController.getInstace();
 	
 	private static final String SFOND = "-fx-text-fill: #cfd1dd";
-	private static final String radio = "-fx-background-radius: 10";
+	private static final String RADIO = "-fx-background-radius: 10";
 
 	// project information
 	@FXML
@@ -111,17 +111,17 @@ public class CreateProjectView {
 		driveSelector.setDisable(true);
 		driveSelector.setItems(driveSelectorList);
 		driveSelector.setValue("");
-		driveSelector.setStyle(radio);
+		driveSelector.setStyle(RADIO);
 		pane.setStyle("-fx-background-color: #2d3447");
 		label.setStyle(SFOND);
 		labelNameProject.setStyle(SFOND);
 		labelDrive.setStyle(SFOND);
 		next.setUnderline(true);
-		next.setStyle(radio);
-		add.setStyle(radio);
+		next.setStyle(RADIO);
+		add.setStyle(RADIO);
 		add.setUnderline(true);
-		projectNameField.setStyle(radio);
-		driveBox.setStyle(radio);	
+		projectNameField.setStyle(RADIO);
+		driveBox.setStyle(RADIO);	
 		
 		Button checkButton = new Button();
 		checkButton.setText("Check Name");
@@ -216,7 +216,7 @@ public class CreateProjectView {
 		barraRicerca .setTranslateX(101);
 		barraRicerca .setTranslateY(52);
 		barraRicerca .setPrefSize(250, 26);
-		barraRicerca .setStyle(radio);
+		barraRicerca .setStyle(RADIO);
 		
 		Image lente = new Image("logic/Images/search--v2.png", 36, 36, true, false);
 		ImageView view = new ImageView(lente);
@@ -234,7 +234,7 @@ public class CreateProjectView {
 		addB.setTranslateY(553);
 		addB.setTranslateX(170);
 		addB.setUnderline(true);
-		addB.setStyle(radio);
+		addB.setStyle(RADIO);
 
 		ListView<String> member = new ListView<>(memberListSelector); // Create a list view where I can visualize
 																			// the list

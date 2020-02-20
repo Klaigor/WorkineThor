@@ -11,13 +11,14 @@ import logic.model.Session;
 import logic.workinethor.Main;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -26,7 +27,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.event.EventHandler;
 
@@ -34,8 +34,10 @@ import javafx.event.EventHandler;
 
 public class HomePageView {
 	
+	private static final String DUTY_STRING = "Duty1"; 
+	private static final String ARIAL_STRING = "Arial";
+	
 	private BorderPane mainLayout = Main.getMainLayout();
-	private BorderPane progDutiesLayout = null;
 	
 	@FXML
 	private BorderPane background;
@@ -45,17 +47,19 @@ public class HomePageView {
 	@FXML
 	private void initialize() {
 		
+		Logger logger = Logger.getLogger(HomePageView.class.getName());
+		
 		ProjectDAO projectDAO = new ProjectDAO();
 		AnchorPane items = new AnchorPane();
 			
 		Popup popup = new Popup();
 		popup.setAutoHide(true);
 		ListView<String> popupListView = new ListView<>();
-		popupListView.getItems().add("Duty1");
-		popupListView.getItems().add("Duty1");
-		popupListView.getItems().add("Duty1");
-		popupListView.getItems().add("Duty1");
-		popupListView.getItems().add("Duty1");
+		popupListView.getItems().add(DUTY_STRING);
+		popupListView.getItems().add(DUTY_STRING);
+		popupListView.getItems().add(DUTY_STRING);
+		popupListView.getItems().add(DUTY_STRING);
+		popupListView.getItems().add(DUTY_STRING);
 		
 		popup.getContent().add(popupListView);
 		
@@ -63,7 +67,7 @@ public class HomePageView {
 		
 		Label loggedUserLabel = new Label();
 		loggedUserLabel.setText("Username: " + activeSession.getLoggedUser().getUsername());
-		loggedUserLabel.setFont(new Font("Arial", 24));
+		loggedUserLabel.setFont(new Font(ARIAL_STRING, 24));
 		loggedUserLabel.setTranslateY(5);
 		loggedUserLabel.setStyle("-fx-text-fill: #cfd1dd");
 		
@@ -74,7 +78,7 @@ public class HomePageView {
 		projectLabel.setStyle("-fx-text-fill: #cfd1dd");
 		
 		ObservableList<String> userProjects = projectDAO.getAllUserProjects(Session.getSession().getLoggedUser());
-		ListView<String> allProjectsListView = new ListView<String>(userProjects);
+		ListView<String> allProjectsListView = new ListView<>(userProjects);
 		allProjectsListView.setTranslateY(100);
 		allProjectsListView.setTranslateX(1);
 		allProjectsListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -95,7 +99,6 @@ public class HomePageView {
 					@Override
 					public void handle(MouseEvent event) {
 						if(event.isPrimaryButtonDown() && !cell.isEmpty()) {
-							//popup.show(Main.getMainWindow());
 							Project project = new Project();
 							ProjectBean bean = new ProjectBean();
 							bean.setProjectName(cell.getText());
@@ -106,7 +109,9 @@ public class HomePageView {
 							BorderPane projectBorderPane = null;
 							try {
 								projectBorderPane = FXMLLoader.load(HomePageView.class.getResource("Project.fxml"));
-							} catch (IOException e) {}
+							} catch (IOException e) {
+								logger.log(Level.SEVERE, "failed to load fxml");
+							}
 							
 							mainLayout.setCenter(projectBorderPane);
 							
@@ -122,7 +127,7 @@ public class HomePageView {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				if(oldValue != newValue) {
-					System.out.println(newValue);
+					logger.log(Level.INFO, newValue);
 				}
 			}
 		});
@@ -131,7 +136,7 @@ public class HomePageView {
 		items.getChildren().add(projectLabel);
 		items.getChildren().add(allProjectsListView);
 		
-		//System.out.println(userProjects);
+		
 		background.setCenter(items);
 		background.setStyle("-fx-background-color: #2d3447");
 	}

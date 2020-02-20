@@ -235,6 +235,7 @@ public class CPAddFileView {
 
 		megaEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 			public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
+				logger.log(Level.INFO, oldState + ov.toString());
 				if (newState == State.SUCCEEDED) {
 					logger.log(Level.INFO, "Page loaded");
 				}

@@ -100,7 +100,6 @@ public class LoginView {
 					try {
 						res = control.signin(user);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 									
@@ -110,7 +109,6 @@ public class LoginView {
 							homeLayout = FXMLLoader.load(NavBarView.class.getResource("HomePage.fxml"));
 						
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 		

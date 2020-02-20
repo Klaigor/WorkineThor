@@ -156,7 +156,6 @@ public class FileDAO {
 			ResultSet rs = pst.executeQuery();
 			
 			if(rs.first()) {
-				result = true;
 				throw new FileAlreadyExistsException("File already exist in project:"+project);
 			}
 		} catch (SQLException e) {

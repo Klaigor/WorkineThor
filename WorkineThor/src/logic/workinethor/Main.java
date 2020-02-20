@@ -21,7 +21,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		// setup primaryStage
-		primaryStage = stage;
+		setMainLayout(stage);
 		primaryStage.setTitle("WorkineThor");
 
 		// loads NavBar view
@@ -49,10 +49,15 @@ public class Main extends Application {
 	
 	//changed for test
 	public static boolean startMainLayout() throws IOException {
+		boolean result = true;
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
 		if(mainLayout == null)
-			return false;
-		return true;
+			result = false;
+		return result;
+	}
+	
+	public static void setMainLayout(Stage newStage) {
+		primaryStage = newStage;
 	}
 	
 	public boolean hasStarted() {

@@ -2,6 +2,8 @@ package logic.workinethor.view;
 
 import java.util.ArrayList;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +17,12 @@ import javafx.scene.layout.BorderPane;
 import logic.bean.DutyWatchDutiesBean;
 import logic.controller.WatchDutiesController;
 import logic.model.Duty;
-import logic.model.Project;
-import logic.model.Session;
 
 public class WatchDutiesView {
 
+	private static final String FXBACKGROUNDCOLOR = "-fx-background-color: #2d3447";
+	private static final String FXTEXTFILL = "-fx-text-fill: #cfd1dd";
+	private static final String FXRADIUS = "-fx-background-radius: 10";
 	@FXML
 	private TableView<DutyWatchDutiesBean> dutiesTable;
 	@FXML
@@ -65,23 +68,23 @@ public class WatchDutiesView {
 	 */
 	@FXML
 	private void initialize() {
-		pane.setStyle("-fx-background-color: #2d3447");
-		anchor.setStyle("-fx-background-color: #2d3447");
-		anchorPane.setStyle("-fx-background-color: #2d3447");
-		ancore.setStyle("-fx-background-color: #2d3447");
-		dutyNameLabel.setStyle("-fx-text-fill: #cfd1dd");
-		kindOfDutyLabel.setStyle("-fx-text-fill: #cfd1dd");
-		stateLabel.setStyle("-fx-text-fill: #cfd1dd");
-		dutyName.setStyle("-fx-text-fill: #cfd1dd");
-		kindOfDuty.setStyle("-fx-text-fill: #cfd1dd");
-		state.setStyle("-fx-text-fill: #cfd1dd");
-		details.setStyle("-fx-text-fill: #cfd1dd");
+		pane.setStyle(FXBACKGROUNDCOLOR);
+		anchor.setStyle(FXBACKGROUNDCOLOR);
+		anchorPane.setStyle(FXBACKGROUNDCOLOR);
+		ancore.setStyle(FXBACKGROUNDCOLOR);
+		dutyNameLabel.setStyle(FXTEXTFILL);
+		kindOfDutyLabel.setStyle(FXTEXTFILL);
+		stateLabel.setStyle(FXTEXTFILL);
+		dutyName.setStyle(FXTEXTFILL);
+		kindOfDuty.setStyle(FXTEXTFILL);
+		state.setStyle(FXTEXTFILL);
+		details.setStyle(FXTEXTFILL);
 		newButton.setUnderline(true);
 		delete.setUnderline(true);
 		edit.setUnderline(true);
-		newButton.setStyle("-fx-background-radius: 10");
-		delete.setStyle("-fx-background-radius: 10");
-		edit.setStyle("-fx-background-radius: 10");
+		newButton.setStyle(FXRADIUS);
+		delete.setStyle(FXRADIUS);
+		edit.setStyle(FXRADIUS);
 
 		WatchDutiesController controller = new WatchDutiesController();
 		ArrayList<Duty> duties;

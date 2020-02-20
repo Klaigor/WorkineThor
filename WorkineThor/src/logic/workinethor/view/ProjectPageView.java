@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +37,8 @@ public class ProjectPageView {
 	
 	@FXML
 	private BorderPane background;
+	
+	private static final String FXBACKGROUNDRADIUS = "-fx-background-radius: 10";
 
 	@FXML
 	private void initialize() throws SQLException {
@@ -64,7 +67,7 @@ public class ProjectPageView {
 		
 		FileDAO fileDAO = new FileDAO();
 		ObservableList<String> fileList = fileDAO.getAllProjectFiles(currentBrowsingProject); 
-		ListView<String> files = new ListView<String>(fileList);
+		ListView<String> files = new ListView<>(fileList);
 		files.setTranslateX(560);
 		files.setTranslateY(45);
 		
@@ -74,7 +77,7 @@ public class ProjectPageView {
 		addFile.setTranslateY(500);
 		addFile.setTranslateX(170);
 		addFile.setUnderline(true);
-		addFile.setStyle("-fx-background-radius: 10");
+		addFile.setStyle(FXBACKGROUNDRADIUS);
 		
 		addFile.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -84,7 +87,9 @@ public class ProjectPageView {
 				BorderPane mainLayout = Main.getMainLayout();
 				try {
 					addFilePane = FXMLLoader.load(ProjectPageView.class.getResource("CPAddFile.fxml"));
-				} catch (IOException e) {}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 				mainLayout.setCenter(addFilePane);
 			}
@@ -97,7 +102,146 @@ public class ProjectPageView {
 		addMember.setUnderline(true);
 		addMember.setStyle("-fx-background-radius: 10");
 		
-		addMember.setOnAction(new EventHandler<ActionEvent>() {
+		addMember.setOnAction(addMemberEventHandler(projectDAO, bean));
+			
+		
+		//if you are not an admin you can't add Member and Files 
+		String admin = projectDAO.getProjectAdmin(bean);
+		if(!admin.equals(Session.getSession().getLoggedUser().getUsername())) {
+			addMember.setVisible(false);
+			addFile.setVisible(false);
+		}
+		
+		Button showDutiesButton = new Button();
+		showDutiesButton.setText("Show Duties");
+		showDutiesButton.setTranslateX(400);
+		showDutiesButton.setTranslateY(500);
+		showDutiesButton.setVisible(false);
+		showDutiesButton.setStyle("-fx-background-radius: 10");
+		showDutiesButton.setUnderline(true);
+		
+		showDutiesButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage dutiesWindow = new Stage();
+				dutiesWindow.setTitle("Duties");
+				dutiesWindow.initModality(Modality.APPLICATION_MODAL);
+				
+				BorderPane dutiesPane = null;
+				
+				try {
+					dutiesPane = FXMLLoader.load(ProjectPageView.class.getResource("DutiesOverview.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				Scene dutiesScene = new Scene(dutiesPane);
+				dutiesWindow.setScene(dutiesScene);
+				dutiesWindow.show();
+			}
+		});
+		
+		Button joinRequestButton = new Button();
+		joinRequestButton.setText("Request to join");
+		joinRequestButton.setTranslateY(500);
+		joinRequestButton.setPrefSize(120, 40);
+		joinRequestButton.setUnderline(true);
+		joinRequestButton.setStyle("-fx-background-radius: 10");
+		joinRequestButton.setUnderline(true);
+		
+		joinRequestButton.setOnAction(joinEventHandler());
+		
+		ArrayList<String> mArrayList = new ArrayList<>(memberListSelector);
+		for(String m: mArrayList) {
+			if(Session.getSession().getLoggedUser().getUsername().equals(m)) {
+				joinRequestButton.setVisible(false);
+				showDutiesButton.setVisible(true);
+			}
+		}
+		
+		items.getChildren().add(title);
+		items.getChildren().add(member);
+		items.getChildren().add(files);
+		items.getChildren().add(addMember);
+		items.getChildren().add(addFile);
+		items.getChildren().add(showDutiesButton);
+		items.getChildren().add(joinRequestButton);
+		
+		background.setCenter(items);
+		background.setStyle("-fx-background-color: #2d3447");
+	}
+	
+	public EventHandler<ActionEvent> joinEventHandler(){
+		
+		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage joinRequestWindow = new Stage();
+				joinRequestWindow.setTitle("Request Form");
+				joinRequestWindow.initModality(Modality.APPLICATION_MODAL);
+				joinRequestWindow.setResizable(false);
+				
+				AnchorPane requestPane = new AnchorPane();
+				
+				Label nameLabel = new Label();
+				nameLabel.setText("Name");
+				nameLabel.setTranslateX(20);
+				nameLabel.setTranslateY(20);
+				
+				TextField nameTextField = new TextField();
+				nameTextField.setTranslateX(20);
+				nameTextField.setTranslateY(60);
+				
+				Label surnameLabel = new Label();
+				surnameLabel.setText("Surname");
+				surnameLabel.setTranslateX(20);
+				surnameLabel.setTranslateY(100);
+				
+				TextField surnameTextField = new TextField();
+				surnameTextField.setTranslateX(20);
+				surnameTextField.setTranslateY(140);
+				
+				Label meaningLabel = new Label();
+				meaningLabel.setText("Talk about why you would like to join");
+				meaningLabel.setTranslateX(220);
+				meaningLabel.setTranslateY(20);
+				
+				TextArea meaningArea = new TextArea();
+				meaningArea.setTranslateX(220);
+				meaningArea.setTranslateY(60);
+				meaningArea.prefWidth(100);
+				
+				Button endForm = new Button();
+				endForm.setText("Complete Request");
+				endForm.setTranslateX(20);
+				endForm.setTranslateY(180);
+				
+				endForm.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						joinRequestWindow.close();
+					}
+				});
+				
+				requestPane.getChildren().add(nameLabel);
+				requestPane.getChildren().add(nameTextField);
+				requestPane.getChildren().add(surnameLabel);
+				requestPane.getChildren().add(surnameTextField);
+				requestPane.getChildren().add(meaningLabel);
+				requestPane.getChildren().add(meaningArea);
+				requestPane.getChildren().add(endForm);
+				
+				Scene requestScene = new Scene(requestPane, 600, 400);
+				joinRequestWindow.setScene(requestScene);
+				joinRequestWindow.show();
+			}
+		};
+		
+		return handler;
+	}
+	
+	public EventHandler<ActionEvent> addMemberEventHandler(ProjectDAO projectDAO, ProjectBean bean){
+		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 					ObservableList<String> result = null;
@@ -108,7 +252,7 @@ public class ProjectPageView {
 					Stage addMemberWindow = new Stage();
 					addMemberWindow.setTitle("Add Member");
 
-					AnchorPane background = new AnchorPane();
+					AnchorPane backgroundMember = new AnchorPane();
 
 					TextField searchField = new TextField(); // create a search field
 					searchField.setPromptText("Search here!");
@@ -144,7 +288,6 @@ public class ProjectPageView {
 					memberList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 					memberList.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
 						String memberSelected = memberList.getSelectionModel().getSelectedItem(); 
-						System.out.println(memberSelected);
 						//!!!!!!!!!!!!!!!!!aggiungi membro al progetto!!!!!!!!!!!!!!!!!!!!
 						bean.setUserToAdd(memberSelected);
 						
@@ -158,7 +301,9 @@ public class ProjectPageView {
 								
 								try {
 									Main.getMainLayout().setCenter(FXMLLoader.load(ProjectPageView.class.getResource("Project.fxml")));
-								} catch (IOException e) {}
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 							
 						});
@@ -179,81 +324,21 @@ public class ProjectPageView {
 						memberList.setItems(filteredData); // show filtered list
 					});
 
-					background.getChildren().addAll(logo, logoView);
-					background.getChildren().add(searchField);
-					background.getChildren().add(memberList);
-					background.getChildren().add(addButton);
-					background.setStyle("-fx-background-color: #2d3447");
+					backgroundMember.getChildren().addAll(logo, logoView);
+					backgroundMember.getChildren().add(searchField);
+					backgroundMember.getChildren().add(memberList);
+					backgroundMember.getChildren().add(addButton);
+					backgroundMember.setStyle("-fx-background-color: #2d3447");
 
-					Scene loginScene = new Scene(background, 400, 600);
+					Scene loginScene = new Scene(backgroundMember, 400, 600);
 					addMemberWindow.setScene(loginScene);
 					addMemberWindow.setResizable(false);
 					addMemberWindow.initModality(Modality.APPLICATION_MODAL);
 
 					addMemberWindow.show();
 			}
-		});
-		
-		//if you are not an admin you can't add Member and Files 
-		String admin = projectDAO.getProjectAdmin(bean);
-		if(!admin.equals(Session.getSession().getLoggedUser().getUsername())) {
-			addMember.setVisible(false);
-			addFile.setVisible(false);
-		}
-		
-		Button showDutiesButton = new Button();
-		showDutiesButton.setText("Show Duties");
-		showDutiesButton.setTranslateX(400);
-		showDutiesButton.setTranslateY(500);
-		showDutiesButton.setVisible(false);
-		showDutiesButton.setStyle("-fx-background-radius: 10");
-		showDutiesButton.setUnderline(true);
-		
-		showDutiesButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Stage dutiesWindow = new Stage();
-				dutiesWindow.setTitle("Duties");
-				dutiesWindow.initModality(Modality.APPLICATION_MODAL);
-				
-				BorderPane dutiesPane = null;
-				
-				try {
-					dutiesPane = FXMLLoader.load(ProjectPageView.class.getResource("DutiesOverview.fxml"));
-				} catch (IOException e) {}
-				
-				Scene dutiesScene = new Scene(dutiesPane);
-				dutiesWindow.setScene(dutiesScene);
-				dutiesWindow.show();
-			}
-		});
-		
-		Button joinRequestButton = new Button();
-		joinRequestButton.setText("Request to join");
-		joinRequestButton.setTranslateY(500);
-		joinRequestButton.setPrefSize(120, 40);
-		joinRequestButton.setUnderline(true);
-		joinRequestButton.setStyle("-fx-background-radius: 10");
-		joinRequestButton.setUnderline(true);
-		
-		ArrayList<String> mArrayList = new ArrayList<String>(memberListSelector);
-		for(String m: mArrayList) {
-			if(Session.getSession().getLoggedUser().getUsername().equals(m)) {
-				joinRequestButton.setVisible(false);
-				showDutiesButton.setVisible(true);
-			}
-		}
-		
-		items.getChildren().add(title);
-		items.getChildren().add(member);
-		items.getChildren().add(files);
-		items.getChildren().add(addMember);
-		items.getChildren().add(addFile);
-		items.getChildren().add(showDutiesButton);
-		items.getChildren().add(joinRequestButton);
-		
-		background.setCenter(items);
-		background.setStyle("-fx-background-color: #2d3447");
+		};
+		return handler;
 	}
 	
 }

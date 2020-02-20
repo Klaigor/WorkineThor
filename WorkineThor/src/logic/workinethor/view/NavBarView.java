@@ -19,13 +19,17 @@ public class NavBarView {
 	@FXML
 	private boolean initialize() {
 		toolbar.setVisible(false);
-		ret = toolbar;
+		setToolbar(toolbar);
 		toolbar.setStyle("-fx-background-color: #a0a2ab; -fx-background-radius: 3");
 		return true;
 	}
 
 	public static ToolBar getToolbar() {
 		return ret;
+	}
+	
+	public static void setToolbar(ToolBar toolbar) {
+		ret = toolbar;
 	}
 
 	// changed for test
