@@ -27,6 +27,9 @@
     <path id="TomcatServlet">
     <pathelement location="ExternalJar/servlet-api.jar"/>
     </path>
+    <path id="Selenium>
+    <pathelement location="ExternalJar/selenium-server-standalone-3.141.59.jar"/>
+    </path>
     <path id="WorkineThor.classpath">
         <pathelement location="bin"/>
         <path refid="JavaFX"/>
@@ -35,6 +38,7 @@
 	    <path refid="JSQL"/>
         <path refid="Tomcat"/>
         <path refid="TomcatServlet"/>
+	<path refid="Selenium"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
