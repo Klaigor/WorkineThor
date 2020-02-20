@@ -100,11 +100,9 @@ public class LoginView {
 					
 					try {
 						res = control.signin(user);
-					} catch (SQLException e) {
+					} catch (SQLException | WrongLoginException e) {
 						e.printStackTrace();
-					} catch (WrongLoginException e) {
-						e.printStackTrace();
-					}
+					} 
 									
 				if (res) {						
 						try {
