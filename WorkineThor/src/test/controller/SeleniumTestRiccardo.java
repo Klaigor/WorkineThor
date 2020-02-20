@@ -1,7 +1,5 @@
 package test.controller;
 
-import java.util.logging.Logger;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +23,7 @@ public class SeleniumTestRiccardo {
 		driver.findElement(By.xpath("//*[@id=\"duties-button\"]")).click();
 		WebElement txtBoxContente = driver.findElement(By.xpath("/html/body/div/h1"));
 		String mario = (txtBoxContente.getText());
+		System.out.println(mario);
 		driver.close();
 		return(mario);
 	}

@@ -6,6 +6,16 @@ public class User {
 	private String password = null; 
 	private boolean logged = false;
 	
+	public User() {
+		this("","");
+	}
+	
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+		this.logged = false;
+	}
+	
 	public String getUsername(){
 		return this.username;
 	}
