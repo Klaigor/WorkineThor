@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import logic.exceptions.LoadMainLayoutFailException;
 
 public class Main extends Application {
 
@@ -25,7 +26,11 @@ public class Main extends Application {
 		primaryStage.setTitle("WorkineThor");
 
 		// loads NavBar view
-		startMainLayout();
+		try {
+			startMainLayout();
+		} catch (LoadMainLayoutFailException e) {
+			primaryStage.close();
+		}
 		
 		// add scene mainLayout to window
 		Scene scene = new Scene(mainLayout);
@@ -48,11 +53,11 @@ public class Main extends Application {
 	}
 	
 	//changed for test
-	public static boolean startMainLayout() throws IOException {
+	public static boolean startMainLayout() throws IOException, LoadMainLayoutFailException {
 		boolean result = true;
 		mainLayout = FXMLLoader.load(Main.class.getResource("view/NavBar.fxml"));
 		if(mainLayout == null)
-			result = false;
+			throw new LoadMainLayoutFailException("failed to load MainLayout");
 		return result;
 	}
 	
