@@ -2,8 +2,6 @@ package logic.workinethor.view;
 
 import java.util.ArrayList;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,9 +96,9 @@ public class WatchDutiesView {
 		SimpleListProperty<DutyWatchDutiesBean> dutiesProperty = new SimpleListProperty<>(observableDuty);
 		// Add observable list data to the table
 		dutiesTable.setItems(dutiesProperty);
-		dutiesTable.setStyle("-fx-background-color: #2d3447");
-		dutiesTable.setStyle("-fx-text-fill: #cfd1dd");
-		dutiesTable.setStyle("-fx-background-radius: 10");
+		dutiesTable.setStyle(FXBACKGROUNDCOLOR);
+		dutiesTable.setStyle(FXTEXTFILL);
+		dutiesTable.setStyle(FXRADIUS);
 
 		// Initialize the Duties table with the two columns.
 		dutyNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());

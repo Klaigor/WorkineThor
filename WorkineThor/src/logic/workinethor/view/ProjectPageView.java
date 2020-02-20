@@ -117,7 +117,7 @@ public class ProjectPageView {
 		showDutiesButton.setTranslateX(400);
 		showDutiesButton.setTranslateY(500);
 		showDutiesButton.setVisible(false);
-		showDutiesButton.setStyle("-fx-background-radius: 10");
+		showDutiesButton.setStyle(FXBACKGROUNDRADIUS);
 		showDutiesButton.setUnderline(true);
 		
 		showDutiesButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -146,7 +146,7 @@ public class ProjectPageView {
 		joinRequestButton.setTranslateY(500);
 		joinRequestButton.setPrefSize(120, 40);
 		joinRequestButton.setUnderline(true);
-		joinRequestButton.setStyle("-fx-background-radius: 10");
+		joinRequestButton.setStyle(FXBACKGROUNDRADIUS);
 		joinRequestButton.setUnderline(true);
 		
 		joinRequestButton.setOnAction(joinEventHandler());
@@ -173,7 +173,7 @@ public class ProjectPageView {
 	
 	public EventHandler<ActionEvent> joinEventHandler(){
 		
-		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
+		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				Stage joinRequestWindow = new Stage();
@@ -237,11 +237,10 @@ public class ProjectPageView {
 			}
 		};
 		
-		return handler;
 	}
 	
 	public EventHandler<ActionEvent> addMemberEventHandler(ProjectDAO projectDAO, ProjectBean bean){
-		EventHandler<ActionEvent> handler = new EventHandler<ActionEvent>() {
+		return new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 					ObservableList<String> result = null;
@@ -259,7 +258,7 @@ public class ProjectPageView {
 					searchField.setTranslateX(101);
 					searchField.setTranslateY(52);
 					searchField.setPrefSize(250, 26);
-					searchField.setStyle("-fx-background-radius: 10");
+					searchField.setStyle(FXBACKGROUNDRADIUS);
 					
 					Image searchLogo = new Image("logic/Images/search--v2.png", 36, 36, true, false);
 					ImageView logoView = new ImageView(searchLogo);
@@ -277,7 +276,7 @@ public class ProjectPageView {
 					addButton.setTranslateY(553);
 					addButton.setTranslateX(170);
 					addButton.setUnderline(true);
-					addButton.setStyle("-fx-background-radius: 10");
+					addButton.setStyle(FXBACKGROUNDRADIUS);
 					addButton.setUnderline(true);
 
 					ListView<String> memberList = new ListView<>(memberListSelector); // Create a list view where I can visualize
@@ -338,7 +337,6 @@ public class ProjectPageView {
 					addMemberWindow.show();
 			}
 		};
-		return handler;
 	}
 	
 }

@@ -194,7 +194,7 @@ public class ProjectDAO {
 			if (resultSet.first()) {
 				projectStrings.addAll(resultSet.getString(PROJECTNAMESTRING));
 				while (resultSet.next()) {
-					projectStrings.addAll(resultSet.getString("project_name"));
+					projectStrings.addAll(resultSet.getString(PROJECTNAMESTRING));
 				}
 			}
 		} catch (SQLException e) {

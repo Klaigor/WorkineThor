@@ -91,7 +91,7 @@ public class HomePageView {
 						super.updateItem(item, empty);
                         if (item != null) {
                             setText(item);
-                            setFont(new Font("Arial", 18));
+                            setFont(new Font(ARIAL_STRING, 18));
                         }
 					}
 				};
