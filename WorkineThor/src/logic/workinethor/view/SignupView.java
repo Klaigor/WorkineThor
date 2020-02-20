@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import logic.bean.UserBean;
 import logic.controller.LoginController;
+import logic.exceptions.UserAlreadyExistException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -84,6 +85,8 @@ public class SignupView {
 					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+				} catch (UserAlreadyExistException e) {
+					e.printStackTrace();
 				}
 
 								

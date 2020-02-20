@@ -5,6 +5,7 @@ import org.junit.*;
 import logic.bean.UserBean;
 import logic.controller.LoginController;
 import logic.database.UserDAO;
+import logic.exceptions.UserAlreadyExistException;
 import logic.exceptions.WrongLoginException;
 
 import static org.junit.Assert.*;
@@ -34,7 +35,7 @@ public class LoginControllerTest {
 	    }
 	    
 	    @Test
-	    public void testSignup() throws SQLException {
+	    public void testSignup() throws SQLException, UserAlreadyExistException {
 	    	UserBean user = new UserBean();
 	    	LoginController controller = new LoginController();
 	    	user.setPassword("test");

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic.bean.UserBean;
 import logic.controller.LoginController;
+import logic.exceptions.UserAlreadyExistException;
 
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet{
@@ -51,6 +52,8 @@ public class SignupServlet extends HttpServlet{
 			result = controller.signup(userBean);
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "SQLException occurred: failed to inject query");
+		} catch (UserAlreadyExistException e) {
+			e.printStackTrace();
 		}
 		
 		Cookie cookie = new Cookie("result", String.valueOf(result));
