@@ -1,8 +1,9 @@
 package logic.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -34,8 +35,8 @@ public class SignupServlet extends HttpServlet{
 		UserBean  userBean = new UserBean();
 		LoginController controller = new LoginController();
 		
-
-		PrintWriter out = response.getWriter();
+		Logger logger = Logger.getLogger(SignupServlet.class.getName());
+		
 		
 		String username = request.getParameter("username");
 		Cookie usernameCookie = new Cookie("username", username);
@@ -48,7 +49,9 @@ public class SignupServlet extends HttpServlet{
 		
 		try {
 			result = controller.signup(userBean);
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "SQLException occurred: failed to inject query");
+		}
 		
 		Cookie cookie = new Cookie("result", String.valueOf(result));
 		response.addCookie(cookie);

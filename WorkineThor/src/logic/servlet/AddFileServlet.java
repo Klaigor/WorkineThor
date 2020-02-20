@@ -3,6 +3,8 @@ package logic.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +29,7 @@ public class AddFileServlet extends HttpServlet {
 	 * @throws IOException 
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Logger logger = Logger.getLogger(AddFileServlet.class.getName());
 		PrintWriter out = response.getWriter();
 		out.println("activated");
 		
@@ -39,7 +42,7 @@ public class AddFileServlet extends HttpServlet {
 		ArrayList<String> fileNames = new ArrayList<>();
 		
 		for(String file: tokenizedPaths) {
-			fileNames.add(file.substring(file.lastIndexOf("\\")+1));
+			fileNames.add(file.substring(file.lastIndexOf('\\')+1));
 		}
 		
 		for(String files: fileNames) {
@@ -59,7 +62,7 @@ public class AddFileServlet extends HttpServlet {
 					controller.addFileToProject(fileBean, project);
 				} catch (FileAlreadyExistsException e) {
 					result = true;
-					System.out.println("ERrore");
+					logger.log(Level.SEVERE, "Exception occurred file already exists");
 				}
 			}
 			

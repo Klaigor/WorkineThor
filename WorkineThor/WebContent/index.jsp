@@ -70,6 +70,11 @@ WorkineThor
 		color:white;
 	}
 	
+	.center_div{
+    	margin: 0 auto;
+    	width:13% /* value of your choice which suits your alignment */
+	}
+	
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
@@ -94,7 +99,7 @@ WorkineThor
 	<!-- login form sends data to LoginServlet -> sends data to HomePageServlet that -->
 	<div class="jumbotron text-center">
   		<h1 style="color:white">WorkineThor</h1>
-		<div class="form-horizontal" align="center">
+		<div class="form-horizontal center_div">
 			<form action="login" method="post">
 				<label for="username" style="color:white">Username: </label>
 				<input type="text" class="form-control" style="width:170px" id="user" name="username"><br>

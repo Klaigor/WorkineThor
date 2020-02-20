@@ -26,18 +26,19 @@ public class ShowDutiesServlet extends HttpServlet {
      */
     public ShowDutiesServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println("alive");
 		
 		String[] project = request.getParameterValues("project-name");
 		WatchDutiesController controller = new WatchDutiesController();
-		ArrayList<Duty> Duties = (ArrayList<Duty>) controller.getWebProjectDuties(project[0]);
-		int numberOfDuties = Duties.size();
+		ArrayList<Duty> duties = (ArrayList<Duty>) controller.getWebProjectDuties(project[0]);
+		int numberOfDuties = duties.size();
 		ArrayList<String> dutiesNames = new ArrayList<>();
 		
 		for (int i = 0; i < numberOfDuties; i++) {
-			dutiesNames.add(Duties.get(i).getName());			
+			dutiesNames.add(duties.get(i).getName());			
 		}
 		request.setAttribute("project_name", project[0]);
 		request.setAttribute("duties_list", dutiesNames);		
@@ -46,7 +47,6 @@ public class ShowDutiesServlet extends HttpServlet {
 	}
  
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 		
 	}

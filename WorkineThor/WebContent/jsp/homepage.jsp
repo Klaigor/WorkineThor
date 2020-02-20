@@ -70,6 +70,15 @@
 	.color-me-white{
 		color:white;
 	}
+	
+	body {
+  		background-image: url("images/background.png");
+	}
+	
+	.center_div{
+    	margin: 0 auto;
+    	width:13% /* value of your choice which suits your alignment */
+	}
     
 </style>
 <script src="bootstrap/js/jquery.js"></script>
@@ -79,7 +88,7 @@ HomePage
 </title>
 
 </head>
-<body background="images/background.png">
+<body>
 
 	<!-- navigation -->
 	<nav class="navbar navbar-default">

@@ -19,6 +19,8 @@ public class LogoutServlet extends HttpServlet {
 
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		request.getLocalName();
+		
 		/* reset Session attributes */
 		Session.getSession().getLoggedUser().setUsername(null);
 		Session.getSession().getLoggedUser().setPassword(null);

@@ -38,14 +38,14 @@ public class ProjectServlet extends HttpServlet {
 		String activeProject = request.getParameter("id");
 		projectBean.setProjectName(activeProject);
 		
-		ObservableList<String> userResult = FXCollections.observableArrayList();
-		ObservableList<String> fileResult = FXCollections.observableArrayList();
+		ObservableList<String> userResult;
+		ObservableList<String> fileResult;
 		
 		userResult = projectDAO.getAllProjectUsers(projectBean);
 		fileResult = fileDAO.getAllProjectFiles(projectBean.getProjectName());
 		
 		ArrayList<String> projectUsers = new ArrayList<>(userResult);
-		ArrayList<String> files = new ArrayList<String>(fileResult);
+		ArrayList<String> files = new ArrayList<>(fileResult);
 		
 		// set currentBrowsingProject on the session
 		Session.getSession().setCurrentBrowsingProject(projectBean);

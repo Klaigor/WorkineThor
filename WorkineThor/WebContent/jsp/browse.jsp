@@ -71,6 +71,15 @@
 	.color-me-white{
 		color:white;
 	}
+	
+	body {
+  		background-image: url("images/background.png");
+	}
+	
+	.center_div{
+    	margin: 0 auto;
+    	width:13% /* value of your choice which suits your alignment */
+	}
     
 </style>
 <script src="bootstrap/js/jquery.js"></script>
@@ -80,7 +89,7 @@ Browse Project
 </title>
 
 </head>
-<body background="images/background.png">
+<body>
 
 	<!-- navigation -->
 	<nav class="navbar navbar-default">
@@ -104,7 +113,7 @@ Browse Project
 	<!-- Browse project-->
 	<div class="tumbotron text-center">
 		<h2 style="color:black">Browse</h2>
-		<div class="form-horizontal" align="center">
+		<div class="form-horizontal center_div">
 		<input type="text" class="form-control" style="width:170px" id="searchField" name="search" placeholder="Search!" ></input>
 		</div>	
 		<br>

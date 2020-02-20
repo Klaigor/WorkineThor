@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import logic.database.ProjectDAO;
 
 

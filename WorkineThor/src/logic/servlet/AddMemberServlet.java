@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javafx.collections.ObservableList;
 import logic.bean.ProjectBean;
 import logic.controller.AddMemberController;
-import logic.database.ProjectDAO;
 
 /**
  * Servlet implementation class AddMemberServlet

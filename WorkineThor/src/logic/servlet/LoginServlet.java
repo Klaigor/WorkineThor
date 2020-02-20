@@ -3,6 +3,8 @@ package logic.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +28,7 @@ public class LoginServlet extends HttpServlet{
 	 * if login was a success sends data to HomePageServlet
 	 */
 	public void	doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		Logger logger = Logger.getLogger(LoginServlet.class.getName());
 		boolean result = false;
 		UserBean userBean = new UserBean();
 		LoginController controller = new LoginController();
@@ -43,7 +46,9 @@ public class LoginServlet extends HttpServlet{
 		
 		try {
 			result = controller.signin(userBean);
-		} catch (SQLException e) {}
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "SQLException occurred: problem injecting query");
+		}
 		
 		Cookie cookie = new Cookie("result", String.valueOf(result));
 		response.addCookie(cookie);

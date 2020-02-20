@@ -71,6 +71,15 @@
 		color:white;
 	}
 	
+	body {
+  		background-image: url("../images/background.png");
+	}
+	
+	.center_div{
+    	margin: 0 auto;
+    	width:13% /* value of your choice which suits your alignment */
+	}
+	
 </style>
 <script src="bootstrap/js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
@@ -80,7 +89,7 @@ AddFile
 </title>
 
 </head>
-<body background="../images/background.png">
+<body>
 
 	<!-- navigation -->
 	<nav class="navbar navbar-default">
@@ -112,7 +121,7 @@ AddFile
 		</div>
 	
 		<!-- requestDispatcher to AddFileServlet -->
-		<div class="form-horizontal" align="center">
+		<div class="form-horizontal">
 			<form action="../add-file" method="post">
 				<input type="hidden" id="file_array" name="fileArray" >
 				<input disabled type="submit" id="file-submit" class="btn btn-default" value="Add Files">
