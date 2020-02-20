@@ -27,7 +27,7 @@
     <path id="TomcatServlet">
     <pathelement location="ExternalJar/servlet-api.jar"/>
     </path>
-    <path id="Selenium>
+    <path id="Selenium">
     <pathelement location="ExternalJar/selenium-server-standalone-3.141.59.jar"/>
     </path>
     <path id="WorkineThor.classpath">
