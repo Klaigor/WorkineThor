@@ -33,6 +33,27 @@ public class LoginControllerTest {
 	    public void tearDown(){
 	    	
 	    }
+	
+	    @Test
+	    public void testSignup() throws SQLException {
+	    	UserBean user = new UserBean();
+	    	LoginController controller = new LoginController();
+	    	user.setPassword("test");
+	    	user.setUsername("test"); 	
+	        assertEquals(true, controller.signup(user)); //sarebber buona cosa mettere nella funzione teardown ua query che elimina ogni volta questo utente dal db
+	    	UserDAO dao = new UserDAO();
+	    	dao.deleteUser(user);
+	    }
+	
+	    @Test
+	    public void testSignin() throws SQLException, WrongLoginException {
+	    	UserBean user = new UserBean();
+	    	LoginController controller = new LoginController();
+	    	user.setPassword("cane");
+	    	user.setUsername("culo"); 	
+	        assertEquals(true, controller.signin(user));
+	    	
+	    }
 	    
 	    @Test
 	    public void testSignup() throws SQLException, UserAlreadyExistException {
@@ -44,18 +65,7 @@ public class LoginControllerTest {
 	    	UserDAO dao = new UserDAO();
 	    	dao.deleteUser(user);
 	    }
-	    
-	    @Test
-	    public void testSignin() throws SQLException, WrongLoginException {
-	    	UserBean user = new UserBean();
-	    	LoginController controller = new LoginController();
-	    	user.setPassword("cane");
-	    	user.setUsername("culo"); 	
-	        assertEquals(true, controller.signin(user));
-	    	
-	    }
-
-	    
+	        
 	    
 	    /**
 	    @Test(expected=IndexOutOfBoundsException.class)
