@@ -1,0 +1,112 @@
+{
+  "id": "6ce56e96-cdf0-4ed0-998e-8ba72d99f7bd",
+  "version": "2.0",
+  "name": "LoginAndLogout",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "ee0130fc-e5e8-4640-9d0c-200b807181e1",
+    "name": "login",
+    "commands": [{
+      "id": "b1429c3b-b651-4463-abef-365affdf8cf2",
+      "comment": "",
+      "command": "open",
+      "target": "/WorkineThor/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5cdbb49e-a0dd-481e-93cd-12316b02c9cf",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "654x720",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2158aab6-a609-42fb-bbdb-25a21c5ac6f1",
+      "comment": "",
+      "command": "click",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae95c287-a325-42ca-9c3c-ad662e770f18",
+      "comment": "",
+      "command": "type",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "carlo"
+    }, {
+      "id": "90c250d7-46bd-46e1-bcc4-7edabd188e57",
+      "comment": "",
+      "command": "type",
+      "target": "id=pass",
+      "targets": [
+        ["id=pass", "id"],
+        ["name=password", "name"],
+        ["css=#pass", "css:finder"],
+        ["xpath=//input[@id='pass']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "conti"
+    }, {
+      "id": "dca3c152-157b-4e26-9346-8c68fd0c2551",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//input[@value='Login']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40a554f7-69c3-4342-81e3-f296787a4d00",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.navbar-right .color-me-black", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'logout')]", "xpath:href"],
+        ["xpath=//ul[2]/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "570f4f80-8d25-42f5-b71e-646bd150ca69",
+      "comment": "",
+      "command": "click",
+      "target": "id=user",
+      "targets": [
+        ["id=user", "id"],
+        ["name=username", "name"],
+        ["css=#user", "css:finder"],
+        ["xpath=//input[@id='user']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "04dc69f4-652e-4934-bdc4-113556afc06f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["ee0130fc-e5e8-4640-9d0c-200b807181e1"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}
